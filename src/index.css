@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-roseGold: #B76E79;
+  --color-cream: #FFFDD0;
+  --color-champagne: #F7E7CE;
+  --color-gold: #D4AF37;
+  
+  --font-cursive: 'Great Vibes', cursive;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    width: 60%;
+    margin: 2rem auto;
+  }
+}
