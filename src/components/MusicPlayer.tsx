@@ -151,7 +151,7 @@ export default function MusicPlayer() {
 
       <audio 
         ref={audioRef}
-        src="song.mp3" 
+        src="song.m4a" 
         loop 
         preload="auto"
         playsInline
