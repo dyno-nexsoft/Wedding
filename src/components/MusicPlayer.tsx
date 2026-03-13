@@ -1,79 +1,104 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Music, Music2, Volume2, VolumeX } from 'lucide-react';
+import { Music2, VolumeX } from 'lucide-react';
 
 export default function MusicPlayer() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(true);
+  const [isAudioLoaded, setIsAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Tự động tắt hint sau 5 giây
-    const timer = setTimeout(() => setShowHint(false), 5000);
-    
-    const startAudio = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current.play().then(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    // Tự động tắt hint sau 8 giây
+    const timer = setTimeout(() => setShowHint(false), 8000);
+
+    const handleCanPlay = () => {
+      setIsAudioLoaded(true);
+    };
+
+    audio.addEventListener('canplaythrough', handleCanPlay);
+
+    const startAudio = async () => {
+      if (audio && !isPlaying) {
+        try {
+          await audio.play();
           setIsPlaying(true);
           setShowHint(false);
           removeListeners();
-        }).catch(err => {
-          console.log("Playback still prevented:", err);
-        });
+        } catch (err) {
+          console.log("Interaction playback still prevented:", err);
+        }
       }
     };
 
     const removeListeners = () => {
       window.removeEventListener('click', startAudio);
-      window.removeEventListener('scroll', startAudio);
       window.removeEventListener('touchstart', startAudio);
+      window.removeEventListener('scroll', startAudio);
     };
 
-    // Thử phát ngay nếu trình duyệt cho phép
-    if (audioRef.current) {
-      audioRef.current.play().then(() => {
+    // Thử phát ngay (thường bị chặn trên mobile)
+    const attemptAutoplay = async () => {
+      try {
+        await audio.play();
         setIsPlaying(true);
-      }).catch(() => {
-        // Nếu bị chặn, đợi tương tác
-        setIsPlaying(false);
-        window.addEventListener('click', startAudio);
-        window.addEventListener('scroll', startAudio);
-        window.addEventListener('touchstart', startAudio);
-      });
-    }
+        setShowHint(false);
+      } catch (err) {
+        console.log("Autoplay prevented, waiting for interaction");
+        // Nếu bị chặn, đợi tương tác của người dùng
+        window.addEventListener('click', startAudio, { once: true });
+        window.addEventListener('touchstart', startAudio, { once: true });
+        window.addEventListener('scroll', startAudio, { once: true });
+      }
+    };
+
+    attemptAutoplay();
 
     return () => {
       clearTimeout(timer);
       removeListeners();
+      audio.removeEventListener('canplaythrough', handleCanPlay);
     };
   }, []);
 
-  const togglePlay = () => {
-    if (audioRef.current) {
+  const togglePlay = async (e: React.MouseEvent | React.TouchEvent) => {
+    // Ngăn chặn nổi bọt để tránh kích hoạt các listener khác nếu có
+    e.stopPropagation();
+    
+    if (!audioRef.current) return;
+
+    try {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play().catch(err => {
-          console.error("Audio playback failed:", err);
-          alert("Vui lòng tương tác với trang web để phát nhạc.");
-        });
+        // Một số trình duyệt di động yêu cầu logic play trực tiếp trong callback click
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          await playPromise;
+          setIsPlaying(true);
+        }
       }
-      setIsPlaying(!isPlaying);
       setShowHint(false);
+    } catch (err) {
+      console.error("Manual playback failed:", err);
     }
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-40">
+    <div className="fixed bottom-6 left-6 z-50">
       <AnimatePresence>
         {showHint && (
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="absolute left-16 bottom-2 bg-white px-4 py-2 rounded-full shadow-lg border border-champagne whitespace-nowrap hidden md:block"
+            className="absolute left-16 bottom-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-roseGold/20 whitespace-nowrap"
           >
-            <p className="text-xs font-serif italic text-roseGold">Phát nhạc lãng mạn nhẹ nhàng ✨</p>
+            <p className="text-xs font-serif italic text-roseGold">Chạm để nghe nhạc đám cưới ✨</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -83,6 +108,7 @@ export default function MusicPlayer() {
         whileTap={{ scale: 0.9 }}
         onClick={togglePlay}
         className={`w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 bg-white border-2 ${isPlaying ? 'border-roseGold text-roseGold' : 'border-stone-200 text-stone-400'}`}
+        aria-label={isPlaying ? "Tạm dừng nhạc" : "Phát nhạc"}
       >
         {isPlaying ? (
           <motion.div
@@ -107,8 +133,9 @@ export default function MusicPlayer() {
       <audio 
         ref={audioRef}
         src="/song.mp3" 
-        autoPlay
         loop 
+        preload="auto"
+        playsInline
       />
     </div>
   );
