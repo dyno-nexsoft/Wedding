@@ -79,7 +79,7 @@ const Calendar: React.FC = () => {
             <h2 className="font-serif text-lg sm:text-2xl uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#b76e79] mb-2">
               Lưu Lại Ngày Vui
             </h2>
-            <p className="font-cursive text-3xl sm:text-4xl text-[#2a2a2a]">{CONFIG.wedding.monthYear}</p>
+            <p className="font-serif text-2xl sm:text-4xl text-[#2a2a2a]">{CONFIG.wedding.monthYear}</p>
           </div>
 
           <div className="grid grid-cols-7 border-t border-b border-[#e6d5c3] py-4 mb-4">

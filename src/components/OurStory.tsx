@@ -21,7 +21,7 @@ export default function OurStory() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-cursive text-roseGold mb-2 leading-tight">Câu Chuyện Của Chúng Tôi</h2>
+          <h2 className="text-3xl sm:text-5xl font-cursive text-roseGold mb-2 leading-tight">Câu Chuyện Của Chúng Tôi</h2>
           <p className="font-serif italic text-gray-500 mb-12">Mọi thứ bắt đầu như thế nào</p>
         </motion.div>
 
