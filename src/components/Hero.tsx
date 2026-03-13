@@ -4,9 +4,9 @@ import { ChevronDown, MailOpen } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function Hero() {
-  const scrollToCalendar = () => {
-    const calendarSection = document.getElementById('calendar');
-    calendarSection?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToNext = () => {
+    const storySection = document.getElementById('story');
+    storySection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -49,7 +49,7 @@ export default function Hero() {
             </h1>
 
             <button
-              onClick={scrollToCalendar}
+              onClick={scrollToNext}
               className="bg-[#b76e79] text-white px-10 py-4 rounded-full font-serif text-lg shadow-lg hover:bg-[#a35d68] transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               Mở Thiệp
@@ -67,7 +67,7 @@ export default function Hero() {
         animate={{ opacity: 0.5 }}
         transition={{ duration: 1, delay: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
-        onClick={scrollToCalendar}
+        onClick={scrollToNext}
       >
         <ChevronDown className="w-8 h-8 text-[#b76e79]" />
       </motion.div>

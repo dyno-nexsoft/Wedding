@@ -8,10 +8,21 @@ export default function EventDetails() {
     const title = event.title;
     const location = event.location;
     const details = `Đám cưới ${CONFIG.wedding.coupleName}`;
-    const startTime = CONFIG.wedding.date.replace(/[-:]/g, '');
-    const endTime = startTime; 
     
-    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&dates=${startTime}/${endTime}`;
+    // Parse base date from wedding date
+    const [datePart] = CONFIG.wedding.date.split('T');
+    
+    // Combine date with event time
+    const startObj = new Date(`${datePart}T${event.time}:00`);
+    const endObj = new Date(startObj.getTime() + 2 * 60 * 60 * 1000);
+    
+    // Format to YYYYMMDDTHHMMSSZ
+    const formatUTC = (date: Date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    const startTimeStr = formatUTC(startObj);
+    const endTimeStr = formatUTC(endObj);
+    
+    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&dates=${startTimeStr}/${endTimeStr}`;
     window.open(googleCalendarUrl, '_blank');
   };
 

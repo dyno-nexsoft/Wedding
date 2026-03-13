@@ -20,11 +20,11 @@ export default function App() {
   return (
     <div className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden">
       <Hero />
-      <Calendar />
       <OurStory />
+      <Gallery />
+      <Calendar />
       <Timeline />
       <EventDetails />
-      <Gallery />
       <DressCode />
       <GiftSection />
       <RSVP />

@@ -117,7 +117,7 @@ const Calendar: React.FC = () => {
 
           <div className="mt-12 flex flex-col items-center">
             <div className="inline-block px-6 py-2 border-l-2 border-r-2 border-[#e6d5c3] font-serif text-lg italic text-[#4a4a4a] mb-8">
-              Thứ Bảy, 17:00
+              {new Intl.DateTimeFormat('vi-VN', { weekday: 'long', hour: '2-digit', minute: '2-digit' }).format(weddingDate)}
             </div>
 
             {/* COUNTDOWN TIMER */}

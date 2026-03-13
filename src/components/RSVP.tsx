@@ -44,108 +44,103 @@ export default function RSVP() {
   };
 
   return (
-    <section id="rsvp" className="py-24 px-6 md:px-12 bg-white flex items-center justify-center">
+    <section id="rsvp" className="py-24 px-6 md:px-12 bg-[#fdfaf7] relative overflow-hidden flex items-center justify-center">
+      {/* Decorative Accents */}
+      <div className="absolute top-0 left-0 w-64 h-64 pointer-events-none opacity-10 rotate-180">
+        <img src={CONFIG.assets.storyAccent} alt="Flower accent" />
+      </div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none opacity-10">
+        <img src={CONFIG.assets.storyAccent} alt="Flower accent" />
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1 }}
-        className="w-full max-w-2xl bg-[#fdfaf7] p-6 sm:p-8 md:p-12 rounded-[2rem] shadow-2xl border border-[#e6d5c3]/50"
+        className="w-full max-w-2xl bg-white/60 backdrop-blur-md p-8 md:p-14 rounded-[3rem] shadow-[0_20px_50px_rgba(183,110,121,0.1)] border border-white relative z-10"
       >
-        <div className="text-center mb-10">
-          <h2 className="text-5xl font-cursive text-[#b76e79] mb-4">Xác Nhận Tham Dự</h2>
-          <p className="font-serif italic text-[#4a4a4a]">Chúng tôi rất mong bạn có thể chung vui trong ngày đặc biệt này!</p>
+        <div className="text-center mb-12">
+          <span className="text-accent font-serif italic text-lg block mb-2">R.S.V.P</span>
+          <h2 className="text-5xl font-cursive text-text-title mb-6">Xác Nhận Tham Dự</h2>
+          <div className="w-20 h-px bg-accent/30 mx-auto mb-6"></div>
+          <p className="font-serif italic text-text-main text-lg">Sự hiện diện của bạn là niềm vinh hạnh cho gia đình chúng tôi</p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-6">
-            <div>
-              <label htmlFor="guestName" className="block text-sm font-semibold uppercase tracking-widest text-stone-600 mb-2">Tên Khách Mời</label>
-              <input 
-                type="text" 
-                id="guestName" 
-                required 
-                placeholder="Họ và tên của bạn"
-                value={formData.guestName}
-                onChange={(e) => setFormData({...formData, guestName: e.target.value})}
-                className="w-full border-0 border-b-2 border-secondary bg-transparent focus:ring-0 focus:border-accent transition-colors py-2 outline-none" 
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div>
+            <label htmlFor="guestName" className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-4">Danh Tính Khách Mời</label>
+            <input 
+              type="text" 
+              id="guestName" 
+              required 
+              placeholder="Vui lòng nhập họ và tên của bạn"
+              value={formData.guestName}
+              onChange={(e) => setFormData({...formData, guestName: e.target.value})}
+              className="w-full border-b-2 border-secondary bg-transparent focus:border-accent transition-all duration-500 py-3 outline-none font-serif text-xl text-text-title placeholder:text-stone-300 placeholder:italic" 
+            />
           </div>
           
-          <div className="py-4">
-            <span className="block text-sm font-semibold uppercase tracking-widest text-stone-600 mb-4">Bạn sẽ tham dự chứ?</span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <label className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer group ${
-                formData.attendance === 'attending' 
-                  ? 'border-[#b76e79] bg-[#b76e79]/5 shadow-sm' 
-                  : 'border-stone-100 bg-white hover:border-[#b76e79]/30'
-              }`}>
-                <div className="flex items-center">
+          <div className="py-2">
+            <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-6">Bạn Sẽ Đến Chung Vui Chứ?</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { id: 'attending', label: 'Sẵn Lòng Tham Dự', sub: 'Tôi chắc chắn sẽ đến' },
+                { id: 'not-attending', label: 'Rất Tiếc Không Thể', sub: 'Hẹn bạn dịp khác nhé' }
+              ].map((option) => (
+                <label key={option.id} className={`relative flex flex-col p-6 rounded-3xl border-2 transition-all duration-500 cursor-pointer overflow-hidden group ${
+                  formData.attendance === option.id 
+                    ? 'border-accent bg-accent/5 shadow-[0_10px_25px_rgba(183,110,121,0.08)]' 
+                    : 'border-secondary/30 bg-white/50 hover:border-accent/40'
+                }`}>
                   <input 
                     type="radio" 
                     name="attendance" 
-                    value="attending" 
+                    value={option.id} 
                     className="hidden"
-                    checked={formData.attendance === 'attending'}
+                    checked={formData.attendance === option.id}
                     onChange={(e) => setFormData({...formData, attendance: e.target.value})}
                   />
-                  <div className={`w-6 h-6 border-2 rounded-full mr-3 flex items-center justify-center transition-all ${
-                    formData.attendance === 'attending' ? 'border-[#b76e79] bg-[#b76e79]' : 'border-stone-300'
-                  }`}>
-                    {formData.attendance === 'attending' && <div className="w-2.5 h-2.5 bg-white rounded-full" />}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      formData.attendance === option.id ? 'border-accent bg-accent' : 'border-secondary'
+                    }`}>
+                      {formData.attendance === option.id && <div className="w-2 h-2 bg-white rounded-full" />}
+                    </div>
                   </div>
-                  <span className={`font-serif text-lg transition-colors ${
-                    formData.attendance === 'attending' ? 'text-[#b76e79] font-bold' : 'text-stone-600'
-                  }`}>Sẵn Lòng Tham Dự</span>
-                </div>
-              </label>
-
-              <label className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer group ${
-                formData.attendance === 'not-attending' 
-                  ? 'border-[#b76e79] bg-[#b76e79]/5 shadow-sm' 
-                  : 'border-stone-100 bg-white hover:border-[#b76e79]/30'
-              }`}>
-                <div className="flex items-center">
-                  <input 
-                    type="radio" 
-                    name="attendance" 
-                    value="not-attending" 
-                    className="hidden"
-                    checked={formData.attendance === 'not-attending'}
-                    onChange={(e) => setFormData({...formData, attendance: e.target.value})}
-                  />
-                  <div className={`w-6 h-6 border-2 rounded-full mr-3 flex items-center justify-center transition-all ${
-                    formData.attendance === 'not-attending' ? 'border-[#b76e79] bg-[#b76e79]' : 'border-stone-300'
-                  }`}>
-                    {formData.attendance === 'not-attending' && <div className="w-2.5 h-2.5 bg-white rounded-full" />}
-                  </div>
-                  <span className={`font-serif text-lg transition-colors ${
-                    formData.attendance === 'not-attending' ? 'text-[#b76e79] font-bold' : 'text-stone-600'
-                  }`}>Rất Tiếc Không Thể</span>
-                </div>
-              </label>
+                  <span className={`font-serif text-xl mb-1 transition-colors ${
+                    formData.attendance === option.id ? 'text-accent font-bold' : 'text-text-title'
+                  }`}>{option.label}</span>
+                  <span className="text-xs text-text-main/60 italic">{option.sub}</span>
+                  
+                  {/* Decorative corner */}
+                  <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full border border-accent/20 transition-all duration-700 ${
+                    formData.attendance === option.id ? 'scale-[4] opacity-10' : 'scale-100 opacity-0'
+                  }`} />
+                </label>
+              ))}
             </div>
           </div>
           
           <div>
-            <label htmlFor="message" className="block text-sm font-semibold uppercase tracking-widest text-stone-600 mb-2">Lời Nhắn Gửi</label>
+            <label htmlFor="message" className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-4">Lời Chúc Tới Đôi Bạn Trẻ</label>
             <textarea 
               id="message" 
-              rows={3} 
-              placeholder="Lưu ý về chế độ ăn uống hoặc lời chúc đến cô dâu chú rể..."
+              rows={4} 
+              placeholder="Gửi gắm yêu thương hoặc lưu ý về thực đơn của bạn..."
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
-              className="w-full border-0 border-b-2 border-secondary bg-transparent focus:ring-0 focus:border-accent transition-colors py-2 outline-none resize-none"
+              className="w-full bg-white/50 border-2 border-secondary/30 rounded-2xl p-5 focus:border-accent/50 focus:bg-white transition-all duration-500 outline-none resize-none font-serif text-lg text-text-title shadow-inner"
             ></textarea>
           </div>
           
-          <div className="pt-6">
+          <div className="pt-4 pb-2">
             <button 
               type="submit" 
-              className="w-full bg-[#b76e79] text-white py-4 rounded-full text-lg font-serif uppercase tracking-[0.2em] shadow-lg hover:bg-[#a35d68] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-accent text-white py-5 rounded-2xl text-lg font-serif uppercase tracking-[0.3em] shadow-[0_15px_30px_rgba(183,110,121,0.25)] hover:bg-[#a35d68] hover:shadow-[0_20px_40px_rgba(183,110,121,0.35)] transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden group relative"
             >
-              Gửi Xác Nhận
+              <span className="relative z-10">Gửi Lời Xác Nhận</span>
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             </button>
           </div>
         </form>
@@ -153,59 +148,71 @@ export default function RSVP() {
 
       <AnimatePresence>
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeModal}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-text-title/80 backdrop-blur-md"
             />
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              className="relative w-full max-w-lg bg-[#fdfaf7] rounded-[3rem] shadow-2xl overflow-hidden border border-white"
             >
-              <div className="p-8 text-center">
-                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle size={48} />
-                </div>
-                <h3 className="text-2xl font-serif text-stone-800 mb-2">Thông tin đã sẵn sàng!</h3>
-                <p className="text-stone-500 mb-8">Bạn có thể sao chép lời nhắn bên dưới và gửi qua Zalo để chúng tôi dễ dàng ghi nhận nhé.</p>
+              <div className="p-10 text-center">
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', damping: 12, delay: 0.2 }}
+                  className="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-8 border border-accent/20"
+                >
+                  <CheckCircle size={56} strokeWidth={1.5} />
+                </motion.div>
                 
-                <div className="bg-[#FFFAF5] border border-secondary rounded-2xl p-4 text-left mb-8 relative group">
-                  <pre className="text-xs text-stone-600 whitespace-pre-wrap font-sans">
+                <h3 className="text-3xl font-cursive text-text-title mb-3">Cảm ơn bạn yêu!</h3>
+                <p className="font-serif text-text-main/80 mb-10 text-lg leading-relaxed">
+                  Thông tin phản hồi đã được chuẩn bị sẵn sàng.<br/>
+                  Bạn vui lòng gửi qua Zalo để chúng mình ghi nhận nhé!
+                </p>
+                
+                <div className="bg-white/80 backdrop-blur-sm border border-secondary rounded-[2rem] p-6 text-left mb-10 relative group shadow-inner">
+                  <div className="absolute -top-3 left-6 px-3 bg-[#fdfaf7] text-accent text-[10px] font-bold uppercase tracking-widest border border-secondary rounded-full">
+                    Nội dung xác nhận
+                  </div>
+                  <pre className="text-sm text-text-main whitespace-pre-wrap font-sans leading-relaxed pt-2">
                     {fullMessage}
                   </pre>
                   <button 
                     onClick={copyToClipboard}
-                    className="absolute top-2 right-2 p-2 bg-white border border-secondary rounded-lg text-stone-400 hover:text-accent hover:border-accent transition-all flex items-center gap-2"
+                    className="absolute bottom-4 right-4 p-3 bg-white border border-secondary rounded-xl text-text-main/40 hover:text-accent hover:border-accent transition-all duration-300 shadow-sm flex items-center gap-2"
                   >
-                    {copied ? <span className="text-[10px] font-bold text-green-500">Đã chép!</span> : <Copy size={16} />}
+                    {copied ? <span className="text-xs font-bold text-green-600">Đã chép!</span> : <Copy size={20} />}
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <button 
                     onClick={closeModal}
-                    className="py-4 border border-secondary rounded-full text-stone-500 font-semibold hover:bg-stone-50 transition-colors"
+                    className="py-5 border border-secondary/50 rounded-2xl text-text-main font-serif tracking-widest uppercase text-sm hover:bg-white transition-all duration-300"
                   >
                     Đóng
                   </button>
                   <button 
                     onClick={openZalo}
-                    className="py-4 bg-accent text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors shadow-lg shadow-accent/20"
+                    className="py-5 bg-accent text-white rounded-2xl font-serif tracking-widest uppercase text-sm flex items-center justify-center gap-2 hover:bg-[#a35d68] transition-all duration-300 shadow-lg shadow-accent/20"
                   >
-                    <ExternalLink size={18} /> Mở Zalo
+                    <ExternalLink size={20} /> Mở Zalo
                   </button>
                 </div>
               </div>
               <button 
                 onClick={closeModal}
-                className="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition-colors"
+                className="absolute top-8 right-8 text-secondary hover:text-accent transition-colors transition-all duration-300"
               >
-                <X size={24} />
+                <X size={32} strokeWidth={1} />
               </button>
             </motion.div>
           </div>
