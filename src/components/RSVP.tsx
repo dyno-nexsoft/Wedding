@@ -5,8 +5,7 @@ import { CONFIG } from '../config';
 export default function RSVP() {
   const [formData, setFormData] = useState({
     guestName: '',
-    phone: '',
-    attendance: '',
+    attendance: 'attending',
     message: ''
   });
 
@@ -16,7 +15,6 @@ export default function RSVP() {
     const attendanceText = formData.attendance === 'attending' ? 'Sẽ tham dự' : 'Rất tiếc không thể tham dự';
     const messageBody = `XÁC NHẬN THĂM DỰ ĐÁM CƯỚI:
 - Tên: ${formData.guestName}
-- SĐT: ${formData.phone}
 - Tham dự: ${attendanceText}
 - Lời nhắn: ${formData.message}`;
 
@@ -31,7 +29,7 @@ export default function RSVP() {
     alert('Thông tin của bạn đã sẵn sàng! Trang sẽ chuyển hướng sang Zalo để bạn gửi tin nhắn xác nhận.');
     window.open(zaloUrl, '_blank');
     
-    setFormData({ guestName: '', phone: '', attendance: '', message: '' });
+    setFormData({ guestName: '', attendance: 'attending', message: '' });
   };
 
   return (
@@ -49,7 +47,7 @@ export default function RSVP() {
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-6">
             <div>
               <label htmlFor="guestName" className="block text-sm font-semibold uppercase tracking-widest text-stone-600 mb-2">Tên Khách Mời</label>
               <input 
@@ -59,17 +57,6 @@ export default function RSVP() {
                 placeholder="Họ và tên của bạn"
                 value={formData.guestName}
                 onChange={(e) => setFormData({...formData, guestName: e.target.value})}
-                className="w-full border-0 border-b-2 border-champagne bg-transparent focus:ring-0 focus:border-roseGold transition-colors py-2 outline-none" 
-              />
-            </div>
-            <div>
-              <label htmlFor="phone" className="block text-sm font-semibold uppercase tracking-widest text-stone-600 mb-2">Số Điện Thoại</label>
-              <input 
-                type="tel" 
-                id="phone" 
-                placeholder="+1 (234) 567 890"
-                value={formData.phone}
-                onChange={(e) => setFormData({...formData, phone: e.target.value})}
                 className="w-full border-0 border-b-2 border-champagne bg-transparent focus:ring-0 focus:border-roseGold transition-colors py-2 outline-none" 
               />
             </div>
