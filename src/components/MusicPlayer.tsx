@@ -5,7 +5,6 @@ import { Music2, VolumeX } from 'lucide-react';
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(true);
-  const [isAudioLoaded, setIsAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -14,12 +13,6 @@ export default function MusicPlayer() {
 
     // Tự động tắt hint sau 8 giây
     const timer = setTimeout(() => setShowHint(false), 8000);
-
-    const handleCanPlay = () => {
-      setIsAudioLoaded(true);
-    };
-
-    audio.addEventListener('canplaythrough', handleCanPlay);
 
     const startAudio = async () => {
       if (audio && !isPlaying) {
@@ -43,6 +36,8 @@ export default function MusicPlayer() {
     // Thử phát ngay (thường bị chặn trên mobile)
     const attemptAutoplay = async () => {
       try {
+        // Một số trình duyệt yêu cầu nạp lại nguồn nếu thay đổi src
+        audio.load();
         await audio.play();
         setIsPlaying(true);
         setShowHint(false);
@@ -60,12 +55,11 @@ export default function MusicPlayer() {
     return () => {
       clearTimeout(timer);
       removeListeners();
-      audio.removeEventListener('canplaythrough', handleCanPlay);
     };
   }, []);
 
   const togglePlay = async (e: React.MouseEvent | React.TouchEvent) => {
-    // Ngăn chặn nổi bọt để tránh kích hoạt các listener khác nếu có
+    e.preventDefault();
     e.stopPropagation();
     
     if (!audioRef.current) return;
@@ -75,7 +69,7 @@ export default function MusicPlayer() {
         audioRef.current.pause();
         setIsPlaying(false);
       } else {
-        // Một số trình duyệt di động yêu cầu logic play trực tiếp trong callback click
+        // Quan trọng: Trên mobile, hành động play() phải nằm trực tiếp trong handler click/touch
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           await playPromise;
@@ -107,6 +101,7 @@ export default function MusicPlayer() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={togglePlay}
+        onTouchEnd={togglePlay}
         className={`w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 bg-white border-2 ${isPlaying ? 'border-roseGold text-roseGold' : 'border-stone-200 text-stone-400'}`}
         aria-label={isPlaying ? "Tạm dừng nhạc" : "Phát nhạc"}
       >
@@ -132,10 +127,11 @@ export default function MusicPlayer() {
 
       <audio 
         ref={audioRef}
-        src="/song.mp3" 
+        src="song.mp3" 
         loop 
         preload="auto"
         playsInline
+        onError={(e) => console.error("Audio error details:", e)}
       />
     </div>
   );
