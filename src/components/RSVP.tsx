@@ -82,16 +82,16 @@ export default function RSVP() {
           </div>
           
           <div className="py-2">
-            <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-6">Bạn Sẽ Đến Chung Vui Chứ?</span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-4">Bạn Sẽ Đến Chung Vui Chứ?</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { id: 'attending', label: 'Sẵn Lòng Tham Dự', sub: 'Tôi chắc chắn sẽ đến' },
-                { id: 'not-attending', label: 'Rất Tiếc Không Thể', sub: 'Hẹn bạn dịp khác nhé' }
+                { id: 'attending', label: 'Sẵn Lòng Tham Dự' },
+                { id: 'not-attending', label: 'Rất Tiếc Không Thể' }
               ].map((option) => (
-                <label key={option.id} className={`relative flex flex-col p-6 rounded-3xl border-2 transition-all duration-500 cursor-pointer overflow-hidden group ${
+                <label key={option.id} className={`relative flex items-center p-3 sm:p-4 rounded-3xl border transition-all duration-500 cursor-pointer overflow-hidden group ${
                   formData.attendance === option.id 
-                    ? 'border-accent bg-accent/5 shadow-[0_10px_25px_rgba(183,110,121,0.08)]' 
-                    : 'border-secondary/30 bg-white/50 hover:border-accent/40'
+                    ? 'border-accent bg-accent/5 shadow-[0_8px_20px_rgba(183,110,121,0.06)]' 
+                    : 'border-secondary/30 bg-white/50 hover:border-accent/30'
                 }`}>
                   <input 
                     type="radio" 
@@ -101,20 +101,17 @@ export default function RSVP() {
                     checked={formData.attendance === option.id}
                     onChange={(e) => setFormData({...formData, attendance: e.target.value})}
                   />
-                  <div className="flex justify-between items-start mb-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-                      formData.attendance === option.id ? 'border-accent bg-accent' : 'border-secondary'
-                    }`}>
-                      {formData.attendance === option.id && <div className="w-2 h-2 bg-white rounded-full" />}
-                    </div>
+                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-500 mr-3 flex-shrink-0 ${
+                    formData.attendance === option.id ? 'border-accent bg-accent' : 'border-secondary'
+                  }`}>
+                    {formData.attendance === option.id && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
                   </div>
-                  <span className={`font-serif text-xl mb-1 transition-colors ${
+                  <span className={`font-serif text-lg transition-colors ${
                     formData.attendance === option.id ? 'text-accent font-bold' : 'text-text-title'
                   }`}>{option.label}</span>
-                  <span className="text-xs text-text-main/60 italic">{option.sub}</span>
                   
                   {/* Decorative corner */}
-                  <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full border border-accent/20 transition-all duration-700 ${
+                  <div className={`absolute -bottom-2 -right-2 w-6 h-6 rounded-full border border-accent/20 transition-all duration-700 ${
                     formData.attendance === option.id ? 'scale-[4] opacity-10' : 'scale-100 opacity-0'
                   }`} />
                 </label>
