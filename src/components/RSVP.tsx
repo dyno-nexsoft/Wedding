@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { CONFIG } from '../config';
 
 export default function RSVP() {
   const [formData, setFormData] = useState({
@@ -11,7 +12,25 @@ export default function RSVP() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Cảm ơn bạn! Xác nhận tham dự của bạn đã được ghi nhận.');
+    
+    const attendanceText = formData.attendance === 'attending' ? 'Sẽ tham dự' : 'Rất tiếc không thể tham dự';
+    const messageBody = `XÁC NHẬN THĂM DỰ ĐÁM CƯỚI:
+- Tên: ${formData.guestName}
+- SĐT: ${formData.phone}
+- Tham dự: ${attendanceText}
+- Lời nhắn: ${formData.message}`;
+
+    // Lưu ý: Zalo không hỗ trợ pre-fill message qua URL như WhatsApp.
+    // Tuy nhiên, chúng ta sẽ mở link Zalo và có thể lưu lời nhắn vào bộ nhớ tạm (nếu muốn) 
+    // hoặc đơn giản là điều hướng đến Zalo của bạn.
+    
+    const zaloUrl = `https://zalo.me/${CONFIG.wedding.rsvpPhoneNumber}`;
+    
+    // Hiện tại Zalo chủ yếu mở profile, khách sẽ cần paste hoặc tự soạn tin nhắn.
+    // Để tiện nhất, chúng ta hiện thông báo rồi mở Zalo.
+    alert('Thông tin của bạn đã sẵn sàng! Trang sẽ chuyển hướng sang Zalo để bạn gửi tin nhắn xác nhận.');
+    window.open(zaloUrl, '_blank');
+    
     setFormData({ guestName: '', phone: '', attendance: '', message: '' });
   };
 

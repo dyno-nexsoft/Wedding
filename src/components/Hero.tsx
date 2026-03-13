@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
+import { CONFIG } from '../config';
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({
@@ -11,7 +12,7 @@ export default function Hero() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("September 24, 2025 14:30:00").getTime();
+    const targetDate = new Date(CONFIG.wedding.date).getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -42,7 +43,7 @@ export default function Hero() {
     <section 
       id="hero" 
       className="relative h-screen w-full flex items-center justify-center overflow-hidden parallax-bg"
-      style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBshBR386_je0Jw1eYyszpDOp-DH9_-OBjIzpVMqQPQXEoJqKKU_srRF9yLdZBx4G-pQTl6DHfuIYdXfUwK9wqxBCxV9jGAt0TUGpNWe8luZIryr6CPx-H5zGQFD0RV5Bkyldd9hXjU3F-d6syLpBJdNFgpbwIGAAkIhPmX9FWohP9iXKQ-ihZ44AeGQ9lvmuclgwBeI9ayZ1N_dVsARVlWaVyOeXpCML38wfgid_6gQanXUhGUMWat_YmZW-oS8g9E_GE6sww-lYM')" }}
+      style={{ backgroundImage: `url('${CONFIG.assets.heroBg}')` }}
     >
       <div className="absolute inset-0 bg-black/30"></div>
       
@@ -62,7 +63,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.2 }}
           className="text-6xl sm:text-7xl md:text-9xl font-cursive mb-6 drop-shadow-lg"
         >
-          Elena & Julian
+          {CONFIG.wedding.coupleName}
         </motion.h1>
         
         <motion.div 
@@ -78,7 +79,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="text-2xl md:text-3xl font-serif italic mb-8"
         >
-          Ngày 24 tháng 9 năm 2025
+          {CONFIG.wedding.dateFormatted}
         </motion.p>
         
         <motion.div 

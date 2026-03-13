@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start-preview",
+            "type": "shell",
+            "command": "npm run build && npm run preview",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "fileLocation": "relative",
+                "pattern": {
+                    "regexp": "^.*$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "vite v",
+                    "endsPattern": "Local:"
+                }
+            }
+        }
+    ]
+}
