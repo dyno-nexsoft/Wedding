@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'motion/react';
 import Hero from './components/Hero';
 import OurStory from './components/OurStory';
 import EventDetails from './components/EventDetails';
@@ -15,22 +16,55 @@ import GiftSection from './components/GiftSection';
 import Timeline from './components/Timeline';
 import Calendar from './components/Calendar';
 import DressCode from './components/DressCode';
+import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
+  const [loading, setLoading] = useState(() => {
+    // Check sessionStorage immediately during initialization to avoid flash
+    return typeof window !== 'undefined' && !sessionStorage.getItem('hasLoaded');
+  });
+
+  useEffect(() => {
+    if (loading) {
+      // First time in this session: show full loading
+      const timer = setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem('hasLoaded', 'true');
+      }, 2000);
+
+      const handleLoad = () => {
+        setLoading(false);
+        sessionStorage.setItem('hasLoaded', 'true');
+      };
+
+      window.addEventListener('load', handleLoad);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('load', handleLoad);
+      };
+    }
+  }, [loading]);
+
   return (
-    <div className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden">
-      <Hero />
-      <OurStory />
-      <Gallery />
-      <Calendar />
-      <Timeline />
-      <EventDetails />
-      <DressCode />
-      <GiftSection />
-      <RSVP />
-      <Footer />
-      <MusicPlayer />
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {loading && <LoadingScreen key="loader" />}
+      </AnimatePresence>
+
+      <div className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden">
+        <Hero />
+        <OurStory />
+        <Gallery />
+        <Calendar />
+        <Timeline />
+        <EventDetails />
+        <DressCode />
+        <GiftSection />
+        <RSVP />
+        <Footer />
+        <MusicPlayer />
+      </div>
+    </>
   );
 }
 
