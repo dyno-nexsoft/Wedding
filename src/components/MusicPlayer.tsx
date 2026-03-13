@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Music2, VolumeX } from 'lucide-react';
+import { Music2, VolumeX, Loader2 } from 'lucide-react';
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [showHint, setShowHint] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -13,6 +14,21 @@ export default function MusicPlayer() {
 
     // Tự động tắt hint sau 8 giây
     const timer = setTimeout(() => setShowHint(false), 8000);
+
+    const handleWaiting = () => setIsLoading(true);
+    const handlePlaying = () => {
+      setIsLoading(false);
+      setIsPlaying(true);
+    };
+    const handleCanPlay = () => setIsLoading(false);
+    const handleLoadStart = () => setIsLoading(true);
+    const handlePause = () => setIsPlaying(false);
+
+    audio.addEventListener('waiting', handleWaiting);
+    audio.addEventListener('playing', handlePlaying);
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('loadstart', handleLoadStart);
+    audio.addEventListener('pause', handlePause);
 
     const startAudio = async () => {
       if (audio && !isPlaying) {
@@ -36,14 +52,12 @@ export default function MusicPlayer() {
     // Thử phát ngay (thường bị chặn trên mobile)
     const attemptAutoplay = async () => {
       try {
-        // Một số trình duyệt yêu cầu nạp lại nguồn nếu thay đổi src
         audio.load();
         await audio.play();
         setIsPlaying(true);
         setShowHint(false);
       } catch (err) {
         console.log("Autoplay prevented, waiting for interaction");
-        // Nếu bị chặn, đợi tương tác của người dùng
         window.addEventListener('click', startAudio, { once: true });
         window.addEventListener('touchstart', startAudio, { once: true });
         window.addEventListener('scroll', startAudio, { once: true });
@@ -55,6 +69,11 @@ export default function MusicPlayer() {
     return () => {
       clearTimeout(timer);
       removeListeners();
+      audio.removeEventListener('waiting', handleWaiting);
+      audio.removeEventListener('playing', handlePlaying);
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('loadstart', handleLoadStart);
+      audio.removeEventListener('pause', handlePause);
     };
   }, []);
 
@@ -69,16 +88,16 @@ export default function MusicPlayer() {
         audioRef.current.pause();
         setIsPlaying(false);
       } else {
-        // Quan trọng: Trên mobile, hành động play() phải nằm trực tiếp trong handler click/touch
+        setIsLoading(true);
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           await playPromise;
-          setIsPlaying(true);
         }
       }
       setShowHint(false);
     } catch (err) {
       console.error("Manual playback failed:", err);
+      setIsLoading(false);
     }
   };
 
@@ -102,10 +121,15 @@ export default function MusicPlayer() {
         whileTap={{ scale: 0.9 }}
         onClick={togglePlay}
         onTouchEnd={togglePlay}
-        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 bg-white border-2 ${isPlaying ? 'border-roseGold text-roseGold' : 'border-stone-200 text-stone-400'}`}
+        disabled={isLoading}
+        className={`w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 bg-white border-2 ${
+          isPlaying ? 'border-roseGold text-roseGold' : 'border-stone-200 text-stone-400'
+        } ${isLoading ? 'opacity-80' : 'opacity-100'}`}
         aria-label={isPlaying ? "Tạm dừng nhạc" : "Phát nhạc"}
       >
-        {isPlaying ? (
+        {isLoading ? (
+          <Loader2 size={24} className="animate-spin text-roseGold" />
+        ) : isPlaying ? (
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -116,7 +140,7 @@ export default function MusicPlayer() {
           <VolumeX size={24} />
         )}
         
-        {isPlaying && (
+        {isPlaying && !isLoading && (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -131,7 +155,10 @@ export default function MusicPlayer() {
         loop 
         preload="auto"
         playsInline
-        onError={(e) => console.error("Audio error details:", e)}
+        onError={(e) => {
+          console.error("Audio error details:", e);
+          setIsLoading(false);
+        }}
       />
     </div>
   );
