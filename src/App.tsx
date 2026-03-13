@@ -10,6 +10,7 @@ import EventDetails from './components/EventDetails';
 import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
+import MusicPlayer from './components/MusicPlayer';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
       <Gallery />
       <RSVP />
       <Footer />
+      <MusicPlayer />
     </div>
   );
 }

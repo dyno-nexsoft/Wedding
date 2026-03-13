@@ -1,8 +1,20 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { BellPlus } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function EventDetails() {
+  const addToCalendar = (event: typeof CONFIG.events[0]) => {
+    const title = event.title;
+    const location = event.location;
+    const details = `Đám cưới ${CONFIG.wedding.coupleName}`;
+    const startTime = CONFIG.wedding.date.replace(/[-:]/g, '');
+    const endTime = startTime; 
+    
+    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&dates=${startTime}/${endTime}`;
+    window.open(googleCalendarUrl, '_blank');
+  };
+
   return (
     <section 
       id="details" 
@@ -32,9 +44,17 @@ export default function EventDetails() {
               <p className="text-lg">{event.location}</p>
               <p className="text-stone-300">{event.address}</p>
             </div>
-            <a href={event.mapLink} className="inline-block border border-champagne px-8 py-3 rounded-full hover:bg-champagne hover:text-stone-800 transition-all duration-300">
-              Xem Bản Đồ
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a href={event.mapLink} target="_blank" rel="noopener noreferrer" className="inline-block border border-champagne px-8 py-3 rounded-full hover:bg-champagne hover:text-stone-800 transition-all duration-300">
+                Xem Bản Đồ
+              </a>
+              <button 
+                onClick={() => addToCalendar(event)}
+                className="inline-flex items-center gap-2 border border-white/30 px-8 py-3 rounded-full hover:bg-white hover:text-stone-800 transition-all duration-300"
+              >
+                <BellPlus size={18} /> Lưu Lịch Hẹn
+              </button>
+            </div>
           </motion.div>
         ))}
       </div>

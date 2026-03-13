@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { CheckCircle, Copy, ExternalLink, X } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function RSVP() {
@@ -9,27 +10,37 @@ export default function RSVP() {
     message: ''
   });
 
+  const [showModal, setShowModal] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const attendanceText = formData.attendance === 'attending' ? 'Sẽ tham dự' : 'Rất tiếc không thể tham dự';
-    const messageBody = `XÁC NHẬN THĂM DỰ ĐÁM CƯỚI:
+    setShowModal(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const attendanceText = formData.attendance === 'attending' ? 'Sẽ tham dự' : 'Rất tiếc không thể tham dự';
+  const fullMessage = `XÁC NHẬN THAM DỰ ĐÁM CƯỚI:
 - Tên: ${formData.guestName}
 - Tham dự: ${attendanceText}
 - Lời nhắn: ${formData.message}`;
 
-    // Lưu ý: Zalo không hỗ trợ pre-fill message qua URL như WhatsApp.
-    // Tuy nhiên, chúng ta sẽ mở link Zalo và có thể lưu lời nhắn vào bộ nhớ tạm (nếu muốn) 
-    // hoặc đơn giản là điều hướng đến Zalo của bạn.
-    
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(fullMessage);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const openZalo = () => {
     const zaloUrl = `https://zalo.me/${CONFIG.wedding.rsvpPhoneNumber}`;
-    
-    // Hiện tại Zalo chủ yếu mở profile, khách sẽ cần paste hoặc tự soạn tin nhắn.
-    // Để tiện nhất, chúng ta hiện thông báo rồi mở Zalo.
-    alert('Thông tin của bạn đã sẵn sàng! Trang sẽ chuyển hướng sang Zalo để bạn gửi tin nhắn xác nhận.');
     window.open(zaloUrl, '_blank');
-    
+    closeModal();
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
     setFormData({ guestName: '', attendance: 'attending', message: '' });
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -114,6 +125,67 @@ export default function RSVP() {
           </div>
         </form>
       </motion.div>
+
+      <AnimatePresence>
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
+            >
+              <div className="p-8 text-center">
+                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle size={48} />
+                </div>
+                <h3 className="text-2xl font-serif text-stone-800 mb-2">Thông tin đã sẵn sàng!</h3>
+                <p className="text-stone-500 mb-8">Bạn có thể sao chép lời nhắn bên dưới và gửi qua Zalo để chúng tôi dễ dàng ghi nhận nhé.</p>
+                
+                <div className="bg-[#FFFAF5] border border-champagne rounded-2xl p-4 text-left mb-8 relative group">
+                  <pre className="text-xs text-stone-600 whitespace-pre-wrap font-sans">
+                    {fullMessage}
+                  </pre>
+                  <button 
+                    onClick={copyToClipboard}
+                    className="absolute top-2 right-2 p-2 bg-white border border-champagne rounded-lg text-stone-400 hover:text-roseGold hover:border-roseGold transition-all flex items-center gap-2"
+                  >
+                    {copied ? <span className="text-[10px] font-bold text-green-500">Đã chép!</span> : <Copy size={16} />}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <button 
+                    onClick={closeModal}
+                    className="py-4 border border-champagne rounded-full text-stone-500 font-semibold hover:bg-stone-50 transition-colors"
+                  >
+                    Đóng
+                  </button>
+                  <button 
+                    onClick={openZalo}
+                    className="py-4 bg-roseGold text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors shadow-lg shadow-roseGold/20"
+                  >
+                    <ExternalLink size={18} /> Mở Zalo
+                  </button>
+                </div>
+              </div>
+              <button 
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

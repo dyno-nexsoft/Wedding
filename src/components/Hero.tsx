@@ -86,7 +86,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
-          className="flex justify-center gap-3 sm:gap-4 md:gap-8 text-center flex-wrap"
+          className="flex justify-center gap-2 sm:gap-4 md:gap-6 text-center"
         >
           {[
             { label: 'Ngày', value: timeLeft.days },
@@ -94,9 +94,14 @@ export default function Hero() {
             { label: 'Phút', value: timeLeft.minutes },
             { label: 'Giây', value: timeLeft.seconds }
           ].map((item, index) => (
-            <div key={index} className="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-lg w-[72px] sm:w-20 md:w-24">
-              <span className="block text-xl sm:text-2xl md:text-3xl font-bold">{item.value}</span>
-              <span className="text-xs uppercase tracking-widest">{item.label}</span>
+            <div key={index} className="relative group">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl w-[65px] sm:w-24 md:w-28 transition-all duration-300 group-hover:bg-white/20 group-hover:border-roseGold/50 shadow-xl">
+                <span className="block text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-1">{item.value}</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-sans text-stone-200">{item.label}</span>
+              </div>
+              {index < 3 && (
+                <div className="absolute top-1/2 -right-1 sm:-right-2 md:-right-3 -translate-y-1/2 text-white/50 text-xl hidden sm:block">:</div>
+              )}
             </div>
           ))}
         </motion.div>

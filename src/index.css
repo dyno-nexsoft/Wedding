@@ -1,15 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-roseGold: #B76E79;
-  --color-cream: #FFFDD0;
-  --color-champagne: #F7E7CE;
-  --color-gold: #D4AF37;
-  
-  --font-cursive: 'Great Vibes', cursive;
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', sans-serif;
+  --color-roseGold: #b76e79;
+  --color-cream: #fffdd0;
+  --color-champagne: #f7e7ce;
+  --color-gold: #d4af37;
+
+  --font-cursive: "Great Vibes", cursive;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fffaf5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #b76e79;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a35d68;
+  }
 }
 
 @layer utilities {
@@ -22,7 +43,7 @@
 
   .gold-divider {
     height: 2px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
     width: 60%;
     margin: 2rem auto;
   }
