@@ -14,7 +14,7 @@ export default function Hero() {
       id="hero" 
       className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden"
       style={{ 
-        backgroundImage: 'url(/bg_1.webp)',
+        backgroundImage: `url(${CONFIG.assets.heroBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
