@@ -30,7 +30,7 @@ export default function App() {
       const timer = setTimeout(() => {
         setLoading(false);
         sessionStorage.setItem('hasLoaded', 'true');
-      }, 2000);
+      }, 3000);
 
       const handleLoad = () => {
         setLoading(false);
