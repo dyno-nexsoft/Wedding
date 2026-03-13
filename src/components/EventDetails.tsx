@@ -44,10 +44,10 @@ export default function EventDetails() {
             transition={{ duration: 1, ease: "easeOut", delay: index * 0.2 }}
             className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md text-center hover:bg-white/10 transition-colors"
           >
-            <h3 className="text-4xl font-cursive mb-6 text-[#e6d5c3]">{event.title}</h3>
+            <h3 className="text-2xl sm:text-4xl font-cursive mb-6 text-[#e6d5c3]">{event.title}</h3>
             <div className="mb-6">
               <p className="text-sm font-sans uppercase tracking-[0.3em] mb-2 text-white/60">Thời Gian</p>
-              <p className="text-xl font-serif">{event.day}</p>
+              <p className="text-lg sm:text-xl font-serif">{event.day}</p>
               <p className="text-lg font-serif">Lúc {event.time}</p>
             </div>
             <div className="mb-10">

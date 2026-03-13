@@ -31,7 +31,7 @@ const GiftSection: React.FC = () => {
             <Gift className="w-8 h-8 text-[#b76e79]" />
           </div>
         </div>
-        <h2 className="font-cursive text-5xl text-[#2a2a2a] mb-4">Gửi Quà Mừng Cưới</h2>
+        <h2 className="font-cursive text-4xl sm:text-5xl text-[#2a2a2a] mb-4">Gửi Quà Mừng Cưới</h2>
         <p className="font-serif italic text-[#4a4a4a] mb-12 max-w-lg mx-auto">
           Sự hiện diện của bạn là món quà lớn nhất đối với chúng mình. 
           Nếu bạn muốn gửi một món quà nhỏ, bạn có thể sử dụng thông tin bên dưới.
@@ -62,7 +62,7 @@ const GiftSection: React.FC = () => {
             >
               <div className="p-6 md:p-8">
                 <div className="flex justify-between items-center mb-6 md:mb-8">
-                  <h3 className="font-cursive text-3xl md:text-4xl text-[#2a2a2a]">Thông Tin Tài Khoản</h3>
+                  <h3 className="font-cursive text-2xl md:text-4xl text-[#2a2a2a] pr-4">Thông Tin Tài Khoản</h3>
                   <button onClick={() => setShowModal(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                     <X className="w-6 h-6 text-gray-400" />
                   </button>
