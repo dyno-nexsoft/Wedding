@@ -14,7 +14,9 @@ export default function Hero() {
       id="hero" 
       className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden"
       style={{ 
-        background: 'linear-gradient(135deg, #fdfaf7 0%, #f8eee4 40%, #eaddca 70%, #d8c3af 100%)' 
+        backgroundImage: 'url(/bg_1.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <div className="absolute inset-0 bg-black/5"></div>
