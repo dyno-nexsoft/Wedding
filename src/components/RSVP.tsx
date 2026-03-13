@@ -145,7 +145,7 @@ export default function RSVP() {
 
       <AnimatePresence>
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+          <div className="fixed inset-0 z-50 flex items-center justify-center sm:p-6 p-0">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -157,25 +157,25 @@ export default function RSVP() {
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
-              className="relative w-full max-w-lg bg-[#fdfaf7] rounded-[3rem] shadow-2xl overflow-hidden border border-white"
+              className="relative w-full h-full sm:h-auto max-w-lg bg-[#fdfaf7] sm:rounded-[3rem] shadow-2xl overflow-y-auto sm:overflow-hidden border-0 sm:border border-white flex flex-col justify-center"
             >
-              <div className="p-10 text-center">
+              <div className="px-6 py-10 sm:p-10 text-center">
                 <motion.div 
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', damping: 12, delay: 0.2 }}
-                  className="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-8 border border-accent/20"
+                  className="w-20 h-20 sm:w-24 sm:h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 border border-accent/20"
                 >
-                  <CheckCircle size={56} strokeWidth={1.5} />
+                  <CheckCircle className="w-10 h-10 sm:w-14 sm:h-14" strokeWidth={1.5} />
                 </motion.div>
                 
-                <h3 className="text-3xl font-cursive text-text-title mb-3">Cảm ơn bạn yêu!</h3>
-                <p className="font-serif text-text-main/80 mb-10 text-lg leading-relaxed">
+                <h3 className="text-2xl sm:text-3xl font-cursive text-text-title mb-2 sm:mb-3">Cảm ơn bạn yêu!</h3>
+                <p className="font-serif text-text-main/80 mb-6 sm:mb-10 text-base sm:text-lg leading-relaxed">
                   Thông tin phản hồi đã được chuẩn bị sẵn sàng.<br/>
                   Bạn vui lòng gửi qua Zalo để chúng mình ghi nhận nhé!
                 </p>
                 
-                <div className="bg-white/80 backdrop-blur-sm border border-secondary rounded-[2rem] p-6 text-left mb-10 relative group shadow-inner">
+                <div className="bg-white/80 backdrop-blur-sm border border-secondary rounded-[2rem] p-5 sm:p-6 text-left mb-8 sm:mb-10 relative group shadow-inner">
                   <div className="absolute -top-3 left-6 px-3 bg-[#fdfaf7] text-accent text-[10px] font-bold uppercase tracking-widest border border-secondary rounded-full">
                     Nội dung xác nhận
                   </div>
@@ -192,25 +192,19 @@ export default function RSVP() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <button 
-                    onClick={closeModal}
-                    className="py-5 border border-secondary/50 rounded-2xl text-text-main font-serif tracking-widest uppercase text-sm hover:bg-white transition-all duration-300"
-                  >
-                    Đóng
-                  </button>
-                  <button 
                     onClick={openZalo}
                     className="py-5 bg-accent text-white rounded-2xl font-serif tracking-widest uppercase text-sm flex items-center justify-center gap-2 hover:bg-[#a35d68] transition-all duration-300 shadow-lg shadow-accent/20"
                   >
                     <ExternalLink size={20} /> Mở Zalo
                   </button>
+                  <button 
+                    onClick={closeModal}
+                    className="py-5 border border-secondary/50 rounded-2xl text-text-main font-serif tracking-widest uppercase text-sm hover:bg-white transition-all duration-300"
+                  >
+                    Đóng
+                  </button>
                 </div>
               </div>
-              <button 
-                onClick={closeModal}
-                className="absolute top-8 right-8 text-secondary hover:text-accent transition-colors transition-all duration-300"
-              >
-                <X size={32} strokeWidth={1} />
-              </button>
             </motion.div>
           </div>
         )}
