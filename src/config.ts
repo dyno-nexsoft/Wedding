@@ -30,35 +30,35 @@ export const CONFIG = {
     {
       title: "Lần Đầu Gặp Gỡ",
       description: "Chúng mình gặp nhau vào một buổi chiều nắng đẹp tại Nha Trang. Giữa tiếng sóng vỗ và làn gió biển, một tình yêu nhẹ nhàng đã bắt đầu nảy nở.",
-      image: "/story_1.webp",
+      image: "story_1.webp",
       reverse: false
     },
     {
       title: "Lời Cầu Hôn",
       description: "Trên đỉnh đồi nhìn xuống vịnh biển lung linh, Nam đã hỏi câu hỏi quan trọng nhất cuộc đời mình. Và Mỹ Hạnh đã mỉm cười đồng ý trong niềm hạnh phúc ngập tràn.",
-      image: "/story_2.webp",
+      image: "story_2.webp",
       reverse: true
     },
     {
       title: "Hành Trình Mới",
       description: "Sau những năm tháng bên nhau, giờ đây chúng mình đã sẵn sàng cho một chương mới của cuộc đời. Cảm ơn bạn đã luôn đồng hành cùng chúng mình!",
-      image: "/story_3.webp",
+      image: "story_3.webp",
       reverse: false
     }
   ],
   assets: {
-    heroBg: "/bg_1.webp",
-    detailsBg: "/bg_2.webp",
-    storyAccent: "/story_0.webp",
+    heroBg: "bg_1.webp",
+    detailsBg: "bg_2.webp",
+    storyAccent: "story_0.webp",
     gallery: [
-      "/gallery_1.webp",
-      "/gallery_2.webp",
-      "/gallery_3.webp",
-      "/gallery_4.webp",
-      "/gallery_5.webp",
-      "/gallery_6.webp",
-      "/gallery_7.webp",
-      "/gallery_8.webp"
+      "gallery_1.webp",
+      "gallery_2.webp",
+      "gallery_3.webp",
+      "gallery_4.webp",
+      "gallery_5.webp",
+      "gallery_6.webp",
+      "gallery_7.webp",
+      "gallery_8.webp"
     ]
   }
 };
