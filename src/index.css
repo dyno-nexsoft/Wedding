@@ -2,10 +2,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-roseGold: #b76e79;
-  --color-cream: #fffdd0;
-  --color-champagne: #f7e7ce;
-  --color-gold: #d4af37;
+  --color-primary: #fdfaf7; /* Cream background */
+  --color-secondary: #e6d5c3; /* Beige/Khaki */
+  --color-accent: #b76e79; /* Rose Gold / Muted Brown */
+  --color-text-main: #4a4a4a; /* Dark stone / muted text */
+  --color-text-title: #2a2a2a; /* Darker for titles */
 
   --font-cursive: "Great Vibes", cursive;
   --font-serif: "Playfair Display", serif;

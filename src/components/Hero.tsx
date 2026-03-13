@@ -1,119 +1,75 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MailOpen } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function Hero() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00'
-  });
-
-  useEffect(() => {
-    const targetDate = new Date(CONFIG.wedding.date).getTime();
-
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeLeft({
-          days: d < 10 ? '0' + d : d.toString(),
-          hours: h < 10 ? '0' + h : h.toString(),
-          minutes: m < 10 ? '0' + m : m.toString(),
-          seconds: s < 10 ? '0' + s : s.toString()
-        });
-      }
-    };
-
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    return () => clearInterval(interval);
-  }, []);
+  const scrollToCalendar = () => {
+    const calendarSection = document.getElementById('calendar');
+    calendarSection?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section 
       id="hero" 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden parallax-bg"
-      style={{ backgroundImage: `url('${CONFIG.assets.heroBg}')` }}
+      className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden"
+      style={{ 
+        background: 'linear-gradient(135deg, #fdfaf7 0%, #f8eee4 40%, #eaddca 70%, #d8c3af 100%)' 
+      }}
     >
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/5"></div>
       
-      <div className="relative z-10 text-center text-white px-4">
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-xl md:text-2xl font-serif mb-4 tracking-[0.3em] uppercase"
-        >
-          Lễ Cưới Của
-        </motion.p>
-        
-        <motion.h1 
+      <div className="relative z-10 text-center px-6 w-full max-w-2xl mx-auto">
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
-          className="text-6xl sm:text-7xl md:text-9xl font-cursive mb-6 drop-shadow-lg"
+          transition={{ duration: 1.5 }}
+          className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-[#e6d5c3] relative overflow-hidden"
         >
-          {CONFIG.wedding.coupleName}
-        </motion.h1>
-        
-        <motion.div 
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="gold-divider"
-        ></motion.div>
-        
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="text-2xl md:text-3xl font-serif italic mb-8"
-        >
-          {CONFIG.wedding.dateFormatted}
-        </motion.p>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="flex justify-center gap-2 sm:gap-4 md:gap-6 text-center"
-        >
-          {[
-            { label: 'Ngày', value: timeLeft.days },
-            { label: 'Giờ', value: timeLeft.hours },
-            { label: 'Phút', value: timeLeft.minutes },
-            { label: 'Giây', value: timeLeft.seconds }
-          ].map((item, index) => (
-            <div key={index} className="relative group">
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-4 rounded-xl w-[65px] sm:w-24 md:w-28 transition-all duration-300 group-hover:bg-white/20 group-hover:border-roseGold/50 shadow-xl">
-                <span className="block text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-1">{item.value}</span>
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-sans text-stone-200">{item.label}</span>
-              </div>
-              {index < 3 && (
-                <div className="absolute top-1/2 -right-1 sm:-right-2 md:-right-3 -translate-y-1/2 text-white/50 text-xl hidden sm:block">:</div>
-              )}
+          {/* Decorative Flap */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#b76e79] to-transparent" />
+          
+          <div className="mb-6 flex justify-center">
+            <div className="w-20 h-20 bg-[#fdfaf7] rounded-full flex items-center justify-center border-2 border-[#e6d5c3]">
+              <MailOpen className="w-10 h-10 text-[#b76e79]" />
             </div>
-          ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            <p className="text-sm md:text-base font-serif tracking-[0.4em] text-[#b76e79] uppercase mb-4 opacity-80">
+              Lời Mời Kết Hôn
+            </p>
+            
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-cursive mb-12 text-[#2a2a2a] leading-tight">
+              {CONFIG.wedding.coupleName}
+            </h1>
+
+            <button
+              onClick={scrollToCalendar}
+              className="bg-[#b76e79] text-white px-10 py-4 rounded-full font-serif text-lg shadow-lg hover:bg-[#a35d68] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              Mở Thiệp
+            </button>
+
+            <div className="mt-10 pt-8 border-t border-[#e6d5c3]/30 text-xs font-sans tracking-[0.3em] text-[#a3a3a3] uppercase">
+              {CONFIG.wedding.dateFormatted}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
       
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
+        animate={{ opacity: 0.5 }}
+        transition={{ duration: 1, delay: 2 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
+        onClick={scrollToCalendar}
       >
-        <ChevronDown className="w-8 h-8 text-white" />
+        <ChevronDown className="w-8 h-8 text-[#b76e79]" />
       </motion.div>
     </section>
   );

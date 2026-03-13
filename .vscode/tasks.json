@@ -18,6 +18,24 @@
                     "endsPattern": "Local:"
                 }
             }
+        },
+        {
+            "label": "start-dev",
+            "type": "shell",
+            "command": "npm run dev",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "fileLocation": "relative",
+                "pattern": {
+                    "regexp": "^.*$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "VITE v",
+                    "endsPattern": "Local:"
+                }
+            }
         }
     ]
 }

@@ -11,6 +11,14 @@
             "url": "http://localhost:4173",
             "webRoot": "${workspaceFolder}",
             "preLaunchTask": "start-preview"
+        },
+        {
+            "name": "Launch Dev",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "start-dev"
         }
     ]
 }

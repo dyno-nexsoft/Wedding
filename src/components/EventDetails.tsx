@@ -27,25 +27,25 @@ export default function EventDetails() {
         {CONFIG.events.map((event, index) => (
           <motion.div 
             key={index}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            className="bg-white/10 border border-white/20 p-8 md:p-12 rounded-2xl backdrop-blur-md text-center"
+            transition={{ duration: 1, ease: "easeOut", delay: index * 0.2 }}
+            className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md text-center hover:bg-white/10 transition-colors"
           >
-            <h3 className="text-4xl font-cursive mb-6 text-champagne">{event.title}</h3>
-            <div className="mb-4">
-              <p className="text-xl font-serif mb-1 uppercase tracking-widest">Thời Gian</p>
-              <p className="text-lg">{event.day}</p>
-              <p className="text-lg">Lúc {event.time}</p>
+            <h3 className="text-4xl font-cursive mb-6 text-[#e6d5c3]">{event.title}</h3>
+            <div className="mb-6">
+              <p className="text-sm font-sans uppercase tracking-[0.3em] mb-2 text-white/60">Thời Gian</p>
+              <p className="text-xl font-serif">{event.day}</p>
+              <p className="text-lg font-serif">Lúc {event.time}</p>
             </div>
-            <div className="mb-8">
-              <p className="text-xl font-serif mb-1 uppercase tracking-widest">Địa Điểm</p>
-              <p className="text-lg">{event.location}</p>
-              <p className="text-stone-300">{event.address}</p>
+            <div className="mb-10">
+              <p className="text-sm font-sans uppercase tracking-[0.3em] mb-2 text-white/60">Địa Điểm</p>
+              <p className="text-xl font-serif mb-1">{event.location}</p>
+              <p className="text-white/70 font-sans">{event.address}</p>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href={event.mapLink} target="_blank" rel="noopener noreferrer" className="inline-block border border-champagne px-8 py-3 rounded-full hover:bg-champagne hover:text-stone-800 transition-all duration-300">
+              <a href={event.mapLink} target="_blank" rel="noopener noreferrer" className="inline-block border border-[#e6d5c3] px-10 py-3 rounded-full text-[#e6d5c3] hover:bg-[#e6d5c3] hover:text-stone-900 transition-all duration-500 font-serif">
                 Xem Bản Đồ
               </a>
               <button 

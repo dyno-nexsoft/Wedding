@@ -7,6 +7,20 @@ export const CONFIG = {
     dateFormatted: "Ngày 20 tháng 06 năm 2026",
     monthYear: "THÁNG 06 NĂM 2026",
     rsvpPhoneNumber: "0392735734",
+    bank: {
+      groom: {
+        name: "Nguyễn Văn Anh",
+        number: "123456789",
+        bankName: "Vietcombank",
+        bankId: "VCB"
+      },
+      bride: {
+        name: "Đoàn Thị Mỹ Hạnh",
+        number: "987654321",
+        bankName: "MB Bank",
+        bankId: "MB"
+      }
+    }
   },
   events: [
     {
@@ -59,6 +73,43 @@ export const CONFIG = {
       "gallery_6.webp",
       "gallery_7.webp",
       "gallery_8.webp"
+    ],
+    calendarBg: "bg_1.webp" // Placeholder
+  },
+  timeline: [
+    {
+      time: "17:00",
+      title: "ĐÓN KHÁCH",
+      description: "Đón tiếp khách mời và chụp ảnh lưu niệm cùng cô dâu chú rể",
+      icon: "camera"
+    },
+    {
+      time: "18:00",
+      title: "LỄ THÀNH HÔN",
+      description: "Nghi lễ chính thức và trao nhẫn cưới",
+      icon: "heart"
+    },
+    {
+      time: "18:30",
+      title: "KHAI TIỆC",
+      description: "Tiệc tối chúc mừng cùng gia đình và bạn bè",
+      icon: "utensils"
+    },
+    {
+      time: "20:00",
+      title: "AFTER PARTY",
+      description: "Âm nhạc và những khoảnh khắc vui vẻ",
+      icon: "music"
+    }
+  ],
+  dressCode: {
+    title: "Trang Phục",
+    description: "Để ngày chung đôi thêm phần trọn vẹn và những bức ảnh kỷ niệm thêm phần hài hòa, quý khách vui lòng lựa chọn trang phục theo các tông màu gợi ý dưới đây:",
+    colors: [
+      { name: "Beige", hex: "#E6D5C3" },
+      { name: "Kem", hex: "#FFFDD0" },
+      { name: "Trắng", hex: "#FFFFFF" },
+      { name: "Nâu Trầm", hex: "#A38B75" }
     ]
   }
 };
