@@ -72,12 +72,18 @@ const GiftSection: React.FC = () => {
                   {/* Groom Account */}
                   <div className="bg-[#fdfaf7] p-5 md:p-6 rounded-2xl border border-[#e6d5c3] relative">
                     <div className="absolute top-4 right-4 text-[10px] font-sans tracking-widest text-[#b76e79] uppercase font-bold">Chú Rể</div>
-                    <h4 className="font-serif text-lg md:text-xl mb-4 text-[#2a2a2a]">{CONFIG.wedding.bank.groom.bankName}</h4>
-                    <div className="space-y-3 text-left">
+                    
+                    <div className="space-y-4 text-left">
                       <div>
                         <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Chủ tài khoản</p>
                         <p className="font-serif font-bold text-[#4a4a4a]">{CONFIG.wedding.bank.groom.name}</p>
                       </div>
+
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Ngân hàng</p>
+                        <p className="font-serif font-bold text-[#b76e79]">{CONFIG.wedding.bank.groom.bankName}</p>
+                      </div>
+
                       <div className="flex justify-between items-end">
                         <div>
                           <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Số tài khoản</p>
@@ -103,12 +109,18 @@ const GiftSection: React.FC = () => {
                   {/* Bride Account */}
                   <div className="bg-[#fdfaf7] p-5 md:p-6 rounded-2xl border border-[#e6d5c3] relative">
                     <div className="absolute top-4 right-4 text-[10px] font-sans tracking-widest text-[#b76e79] uppercase font-bold text-opacity-70">Cô Dâu</div>
-                    <h4 className="font-serif text-lg md:text-xl mb-4 text-[#2a2a2a]">{CONFIG.wedding.bank.bride.bankName}</h4>
-                    <div className="space-y-3 text-left">
+                    
+                    <div className="space-y-4 text-left">
                       <div>
                         <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Chủ tài khoản</p>
                         <p className="font-serif font-bold text-[#4a4a4a]">{CONFIG.wedding.bank.bride.name}</p>
                       </div>
+
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Ngân hàng</p>
+                        <p className="font-serif font-bold text-[#b76e79]">{CONFIG.wedding.bank.bride.bankName}</p>
+                      </div>
+
                       <div className="flex justify-between items-end">
                         <div>
                           <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Số tài khoản</p>
