@@ -58,7 +58,7 @@ const GiftSection: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full md:max-w-2xl bg-white md:rounded-3xl shadow-2xl overflow-hidden h-full md:h-auto md:max-h-[90vh] overflow-y-auto"
+              className="relative w-full md:max-w-2xl bg-white md:rounded-3xl shadow-2xl overflow-hidden h-full md:h-auto md:max-h-[90vh] overflow-y-auto no-scrollbar"
             >
               <div className="p-6 md:p-8">
                 <div className="flex justify-between items-center mb-6 md:mb-8">
