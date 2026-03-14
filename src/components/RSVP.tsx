@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, Copy, ExternalLink, X } from 'lucide-react';
+import { CheckCircle, Copy, ExternalLink, X, Gift, Check } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function RSVP() {
   const [formData, setFormData] = useState({
     guestName: '',
-    attendance: 'attending',
     message: ''
   });
 
   const [showModal, setShowModal] = useState(false);
+  const [showGiftModal, setShowGiftModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,10 +20,8 @@ export default function RSVP() {
     document.body.style.overflow = 'hidden';
   };
 
-  const attendanceText = formData.attendance === 'attending' ? 'Sẽ tham dự' : 'Rất tiếc không thể tham dự';
   const fullMessage = `XÁC NHẬN THAM DỰ ĐÁM CƯỚI:
 - Tên: ${formData.guestName}
-- Tham dự: ${attendanceText}
 - Lời nhắn: ${formData.message}`;
 
   const copyToClipboard = () => {
@@ -37,21 +36,25 @@ export default function RSVP() {
     closeModal();
   };
 
+  const copyToClipboardAccount = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedAccount(text);
+    setTimeout(() => setCopiedAccount(null), 2000);
+  };
+
+  const getVietQRUrl = (bankId: string, accountNo: string, accountName: string) => {
+    const encodedName = encodeURIComponent(accountName.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D"));
+    return `https://img.vietqr.io/image/${bankId}-${accountNo}-compact.png?accountName=${encodedName}`;
+  };
+
   const closeModal = () => {
     setShowModal(false);
-    setFormData({ guestName: '', attendance: 'attending', message: '' });
+    setFormData({ guestName: '', message: '' });
     document.body.style.overflow = 'auto';
   };
 
   return (
     <section id="rsvp" className="py-12 md:py-24 px-6 md:px-12 bg-[#fdfaf7] relative overflow-hidden flex items-center justify-center">
-      {/* Decorative Accents */}
-      <div className="absolute top-0 left-0 w-64 h-64 pointer-events-none opacity-10 rotate-180">
-        <img src={CONFIG.assets.storyAccent} alt="Flower accent" />
-      </div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none opacity-10">
-        <img src={CONFIG.assets.storyAccent} alt="Flower accent" />
-      </div>
 
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
@@ -81,43 +84,6 @@ export default function RSVP() {
             />
           </div>
           
-          <div className="py-2">
-            <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-2 md:mb-4">Bạn Sẽ Đến Chung Vui Chứ?</span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { id: 'attending', label: 'Sẵn Lòng Tham Dự' },
-                { id: 'not-attending', label: 'Rất Tiếc Không Thể' }
-              ].map((option) => (
-                <label key={option.id} className={`relative flex items-center p-3 sm:p-4 rounded-3xl border transition-all duration-500 cursor-pointer overflow-hidden group ${
-                  formData.attendance === option.id 
-                    ? 'border-accent bg-accent/5 shadow-[0_8px_20px_rgba(183,110,121,0.06)]' 
-                    : 'border-secondary/30 bg-white/50 hover:border-accent/30'
-                }`}>
-                  <input 
-                    type="radio" 
-                    name="attendance" 
-                    value={option.id} 
-                    className="hidden"
-                    checked={formData.attendance === option.id}
-                    onChange={(e) => setFormData({...formData, attendance: e.target.value})}
-                  />
-                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-500 mr-3 flex-shrink-0 ${
-                    formData.attendance === option.id ? 'border-accent bg-accent' : 'border-secondary'
-                  }`}>
-                    {formData.attendance === option.id && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
-                  </div>
-                  <span className={`font-serif text-lg transition-colors ${
-                    formData.attendance === option.id ? 'text-accent font-bold' : 'text-text-title'
-                  }`}>{option.label}</span>
-                  
-                  {/* Decorative corner */}
-                  <div className={`absolute -bottom-2 -right-2 w-6 h-6 rounded-full border border-accent/20 transition-all duration-700 ${
-                    formData.attendance === option.id ? 'scale-[4] opacity-10' : 'scale-100 opacity-0'
-                  }`} />
-                </label>
-              ))}
-            </div>
-          </div>
           
           <div>
             <label htmlFor="message" className="block text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-2 md:mb-4">Lời Chúc Tới Đôi Bạn Trẻ</label>
@@ -136,8 +102,19 @@ export default function RSVP() {
               type="submit" 
               className="w-full bg-accent text-white py-3 md:py-5 rounded-2xl text-base md:text-lg font-serif uppercase tracking-[0.1em] md:tracking-[0.3em] shadow-[0_15px_30px_rgba(183,110,121,0.25)] hover:bg-[#a35d68] hover:shadow-[0_20px_40px_rgba(183,110,121,0.35)] transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden group relative"
             >
-              <span className="relative z-10">Gửi Lời Xác Nhận</span>
+              <span className="relative z-10">Sẽ Tham Dự & Gửi Lời Chúc</span>
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            </button>
+          </div>
+
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => setShowGiftModal(true)}
+              className="group inline-flex items-center gap-2 text-accent font-serif italic hover:text-[#a35d68] transition-colors"
+            >
+              <Gift size={20} className="group-hover:animate-bounce" />
+              <span>Gửi quà mừng cưới đến chúng mình</span>
             </button>
           </div>
         </form>
@@ -203,6 +180,115 @@ export default function RSVP() {
                   >
                     Đóng
                   </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showGiftModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowGiftModal(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full md:max-w-2xl bg-white md:rounded-3xl shadow-2xl overflow-hidden h-full md:h-auto md:max-h-[90vh] overflow-y-auto no-scrollbar"
+            >
+              <div className="p-6 md:p-8">
+                <div className="flex justify-between items-center mb-6 md:mb-8">
+                  <h3 className="font-cursive text-2xl md:text-4xl text-[#2a2a2a] pr-4">Thông Tin Tài Khoản</h3>
+                  <button onClick={() => setShowGiftModal(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <X className="w-6 h-6 text-gray-400" />
+                  </button>
+                </div>
+
+                <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
+                  {/* Groom Account */}
+                  <div className="bg-[#fdfaf7] p-5 md:p-6 rounded-2xl border border-[#e6d5c3] relative">
+                    <div className="absolute top-4 right-4 text-[10px] font-sans tracking-widest text-[#b76e79] uppercase font-bold">Chú Rể</div>
+                    
+                    <div className="space-y-4 text-left">
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Chủ tài khoản</p>
+                        <p className="font-serif font-bold text-[#4a4a4a]">{CONFIG.wedding.bank.groom.name}</p>
+                      </div>
+
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Ngân hàng</p>
+                        <p className="font-serif font-bold text-[#b76e79]">{CONFIG.wedding.bank.groom.bankName}</p>
+                      </div>
+
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Số tài khoản</p>
+                          <p className="font-serif font-bold text-lg md:text-xl text-[#b76e79]">{CONFIG.wedding.bank.groom.number}</p>
+                        </div>
+                        <button 
+                          onClick={() => copyToClipboardAccount(CONFIG.wedding.bank.groom.number)}
+                          className="p-2 bg-white rounded-lg border border-[#e6d5c3] text-gray-400 hover:text-[#b76e79] hover:border-[#b76e79] transition-all"
+                        >
+                          {copiedAccount === CONFIG.wedding.bank.groom.number ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-6 flex justify-center">
+                      <img 
+                        src={getVietQRUrl(CONFIG.wedding.bank.groom.bankId, CONFIG.wedding.bank.groom.number, CONFIG.wedding.bank.groom.name)} 
+                        alt="QR chú rể" 
+                        className="w-48 h-48 md:w-44 md:h-44 rounded-lg shadow-sm" 
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bride Account */}
+                  <div className="bg-[#fdfaf7] p-5 md:p-6 rounded-2xl border border-[#e6d5c3] relative">
+                    <div className="absolute top-4 right-4 text-[10px] font-sans tracking-widest text-[#b76e79] uppercase font-bold text-opacity-70">Cô Dâu</div>
+                    
+                    <div className="space-y-4 text-left">
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Chủ tài khoản</p>
+                        <p className="font-serif font-bold text-[#4a4a4a]">{CONFIG.wedding.bank.bride.name}</p>
+                      </div>
+
+                      <div>
+                        <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Ngân hàng</p>
+                        <p className="font-serif font-bold text-[#b76e79]">{CONFIG.wedding.bank.bride.bankName}</p>
+                      </div>
+
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <p className="text-[10px] uppercase text-gray-400 font-sans tracking-wider">Số tài khoản</p>
+                          <p className="font-serif font-bold text-lg md:text-xl text-[#b76e79]">{CONFIG.wedding.bank.bride.number}</p>
+                        </div>
+                        <button 
+                          onClick={() => copyToClipboardAccount(CONFIG.wedding.bank.bride.number)}
+                          className="p-2 bg-white rounded-lg border border-[#e6d5c3] text-gray-400 hover:text-[#b76e79] hover:border-[#b76e79] transition-all"
+                        >
+                          {copiedAccount === CONFIG.wedding.bank.bride.number ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-6 flex justify-center">
+                      <img 
+                        src={getVietQRUrl(CONFIG.wedding.bank.bride.bankId, CONFIG.wedding.bank.bride.number, CONFIG.wedding.bank.bride.name)} 
+                        alt="QR cô dâu" 
+                        className="w-48 h-48 md:w-44 md:h-44 rounded-lg shadow-sm" 
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 text-center pb-8 md:pb-0">
+                  <p className="font-cursive text-2xl text-[#b76e79]">Cảm ơn bạn rất nhiều!</p>
                 </div>
               </div>
             </motion.div>

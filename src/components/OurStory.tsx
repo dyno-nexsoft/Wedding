@@ -7,12 +7,6 @@ export default function OurStory() {
 
   return (
     <section id="story" className="py-24 px-6 md:px-12 bg-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none opacity-15">
-        <img 
-          src={CONFIG.assets.storyAccent} 
-          alt="Flower accent" 
-        />
-      </div>
       
       <div className="max-w-4xl mx-auto text-center">
         <motion.div

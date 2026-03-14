@@ -22,6 +22,15 @@ export const CONFIG = {
       }
     }
   },
+  colors: {
+    primary: "#fdfaf7", // Cream background
+    secondary: "#e6d5c3", // Beige/Khaki
+    accent: "#b76e79", // Rose Gold / Muted Brown
+    text: {
+      main: "#4a4a4a", // Dark stone / muted text
+      title: "#2a2a2a" // Darker for titles
+    }
+  },
   events: [
     {
       title: "Lễ Thành Hôn",
@@ -63,7 +72,6 @@ export const CONFIG = {
   assets: {
     heroBg: "bg_1.webp",
     detailsBg: "bg_2.webp",
-    storyAccent: "story_0.webp",
     gallery: [
       "gallery_1.webp",
       "gallery_2.webp",

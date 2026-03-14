@@ -12,7 +12,6 @@ import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
-import GiftSection from './components/GiftSection';
 import Timeline from './components/Timeline';
 import Calendar from './components/Calendar';
 import DressCode from './components/DressCode';
@@ -59,7 +58,6 @@ export default function App() {
         <Timeline />
         <EventDetails />
         <DressCode />
-        <GiftSection />
         <RSVP />
         <Footer />
         <MusicPlayer />
