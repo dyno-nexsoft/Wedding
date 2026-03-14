@@ -15,7 +15,7 @@ export default function OurStory() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-2xl sm:text-5xl font-cursive text-roseGold mb-2 leading-tight">Hành Trình Yêu Thương</h2>
+          <h2 className="text-4xl sm:text-5xl font-cursive text-roseGold mb-2 leading-tight">Hành Trình Yêu Thương</h2>
           <p className="font-serif italic text-gray-500 mb-12">Nơi tình yêu bắt đầu và lớn lên theo năm tháng</p>
         </motion.div>
 

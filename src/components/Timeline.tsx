@@ -21,7 +21,7 @@ const Timeline: React.FC = () => {
           transition={{ duration: 1 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cursive text-2xl sm:text-5xl text-[#2a2a2a] mb-4">Lịch Trình Tiệc Cưới</h2>
+          <h2 className="font-cursive text-4xl sm:text-5xl text-[#2a2a2a] mb-4">Lịch Trình Tiệc Cưới</h2>
           <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto"></div>
         </motion.div>
 
