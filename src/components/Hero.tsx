@@ -21,12 +21,12 @@ export default function Hero() {
     >
       <div className="absolute inset-0 bg-black/5"></div>
       
-      <div className="relative z-10 text-center px-6 w-full max-w-2xl mx-auto">
+      <div className="relative z-10 text-center px-4 w-full max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5 }}
-          className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-[#e6d5c3] relative overflow-hidden"
+          className="bg-white p-6 md:p-12 rounded-3xl shadow-2xl border border-[#e6d5c3] relative overflow-hidden"
         >
           {/* Decorative Flap */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#b76e79] to-transparent" />
@@ -43,10 +43,10 @@ export default function Hero() {
             transition={{ delay: 0.5, duration: 1 }}
           >
             <p className="text-sm md:text-base font-serif tracking-[0.4em] text-[#b76e79] uppercase mb-4 opacity-80">
-              Lời Mời Kết Hôn
+              TRÂN TRỌNG KÍNH MỜI
             </p>
             
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-cursive mb-12 text-[#2a2a2a] leading-tight">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-cursive mb-12 text-[#2a2a2a] leading-tight">
               {CONFIG.wedding.coupleName}
             </h1>
 

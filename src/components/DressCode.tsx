@@ -4,7 +4,7 @@ import { CONFIG } from '../config';
 
 const DressCode: React.FC = () => {
   return (
-    <section id="dresscode" className="py-24 bg-white text-center px-6">
+    <section id="dresscode" className="py-24 bg-white text-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -12,7 +12,7 @@ const DressCode: React.FC = () => {
         transition={{ duration: 1 }}
         className="max-w-4xl mx-auto"
       >
-        <h2 className="font-cursive text-5xl text-[#2a2a2a] mb-4">{CONFIG.dressCode.title}</h2>
+        <h2 className="font-cursive text-4xl sm:text-5xl text-[#2a2a2a] mb-4">{CONFIG.dressCode.title}</h2>
         <p className="font-serif italic text-[#4a4a4a] mb-12 max-w-lg mx-auto leading-relaxed">
           {CONFIG.dressCode.description}
         </p>

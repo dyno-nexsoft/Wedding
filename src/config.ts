@@ -22,15 +22,6 @@ export const CONFIG = {
       }
     }
   },
-  colors: {
-    primary: "#fdfaf7", // Cream background
-    secondary: "#e6d5c3", // Beige/Khaki
-    accent: "#b76e79", // Rose Gold / Muted Brown
-    text: {
-      main: "#4a4a4a", // Dark stone / muted text
-      title: "#2a2a2a" // Darker for titles
-    }
-  },
   events: [
     {
       title: "Lễ Thành Hôn",
@@ -51,19 +42,19 @@ export const CONFIG = {
   ],
   stories: [
     {
-      title: "Lần Đầu Gặp Gỡ",
+      title: "Duyên Khởi",
       description: "Chúng mình gặp nhau vào một buổi chiều nắng đẹp tại Nha Trang. Giữa tiếng sóng vỗ và làn gió biển, một tình yêu nhẹ nhàng đã bắt đầu nảy nở.",
       image: "story_1.webp",
       reverse: false
     },
     {
-      title: "Lời Cầu Hôn",
+      title: "Lời Hứa Trăm Năm",
       description: "Trên đỉnh đồi nhìn xuống vịnh biển lung linh, Nam đã hỏi câu hỏi quan trọng nhất cuộc đời mình. Và Mỹ Hạnh đã mỉm cười đồng ý trong niềm hạnh phúc ngập tràn.",
       image: "story_2.webp",
       reverse: true
     },
     {
-      title: "Hành Trình Mới",
+      title: "Hạnh Phúc Vẹn Tròn",
       description: "Sau những năm tháng bên nhau, giờ đây chúng mình đã sẵn sàng cho một chương mới của cuộc đời. Cảm ơn bạn đã luôn đồng hành cùng chúng mình!",
       image: "story_3.webp",
       reverse: false
@@ -112,7 +103,7 @@ export const CONFIG = {
   ],
   dressCode: {
     title: "Trang Phục",
-    description: "Để ngày chung đôi thêm phần trọn vẹn và những bức ảnh kỷ niệm thêm phần hài hòa, quý khách vui lòng lựa chọn trang phục theo các tông màu gợi ý dưới đây:",
+    description: "Để ngày chung đôi thêm phần trọn vẹn và những bức ảnh kỷ niệm thêm phần hài hòa, sẽ rất tuyệt vời nếu quý khách lựa chọn trang phục theo các tông màu gợi ý dưới đây:",
     colors: [
       { name: "Beige", hex: "#E6D5C3" },
       { name: "Kem", hex: "#FFFDD0" },

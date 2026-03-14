@@ -13,7 +13,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const Timeline: React.FC = () => {
   return (
     <section id="timeline" className="py-24 bg-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ const Timeline: React.FC = () => {
           transition={{ duration: 1 }}
           className="text-center mb-16"
         >
-          <h2 className="font-cursive text-3xl sm:text-5xl text-[#2a2a2a] mb-4">Lịch Trình Tiệc Cưới</h2>
+          <h2 className="font-cursive text-2xl sm:text-5xl text-[#2a2a2a] mb-4">Lịch Trình Tiệc Cưới</h2>
           <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto"></div>
         </motion.div>
 

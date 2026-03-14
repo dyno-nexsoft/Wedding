@@ -54,18 +54,18 @@ export default function RSVP() {
   };
 
   return (
-    <section id="rsvp" className="py-12 md:py-24 px-6 md:px-12 bg-[#fdfaf7] relative overflow-hidden flex items-center justify-center">
+    <section id="rsvp" className="py-12 md:py-24 px-4 md:px-12 bg-[#fdfaf7] relative overflow-hidden flex items-center justify-center">
 
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1 }}
-        className="w-full max-w-2xl bg-white/60 backdrop-blur-md p-6 md:p-14 rounded-[3rem] shadow-[0_20px_50px_rgba(183,110,121,0.1)] border border-white relative z-10"
+        className="w-full max-w-2xl bg-white/60 backdrop-blur-md p-4 md:p-14 rounded-[3rem] shadow-[0_20px_50px_rgba(183,110,121,0.1)] border border-white relative z-10"
       >
         <div className="text-center mb-6 md:mb-12">
           <span className="text-accent font-serif italic text-lg block mb-2">R.S.V.P</span>
-          <h2 className="text-4xl sm:text-5xl font-cursive text-text-title mb-4 md:mb-6">Xác Nhận Tham Dự</h2>
+          <h2 className="text-3xl sm:text-5xl font-cursive text-text-title mb-4 md:mb-6">Xác Nhận Tham Dự</h2>
           <div className="w-20 h-px bg-accent/30 mx-auto mb-6"></div>
           <p className="font-serif italic text-text-main text-lg">Sự hiện diện của bạn là niềm vinh hạnh cho gia đình chúng tôi</p>
         </div>
@@ -77,7 +77,7 @@ export default function RSVP() {
               type="text" 
               id="guestName" 
               required 
-              placeholder="Vui lòng nhập họ và tên của bạn"
+              placeholder="Xin vui lòng nhập họ và tên của bạn..."
               value={formData.guestName}
               onChange={(e) => setFormData({...formData, guestName: e.target.value})}
               className="w-full border-b-2 border-secondary bg-transparent focus:border-accent transition-all duration-500 py-3 outline-none font-serif text-xl text-text-title placeholder:text-stone-300 placeholder:italic" 
@@ -90,7 +90,7 @@ export default function RSVP() {
             <textarea 
               id="message" 
               rows={4} 
-              placeholder="Gửi gắm yêu thương hoặc lưu ý về thực đơn của bạn..."
+              placeholder="Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
               className="w-full bg-white/50 border-2 border-secondary/30 rounded-2xl p-5 focus:border-accent/50 focus:bg-white transition-all duration-500 outline-none resize-none font-serif text-lg text-text-title shadow-inner"
@@ -102,7 +102,7 @@ export default function RSVP() {
               type="submit" 
               className="w-full bg-accent text-white py-3 md:py-5 rounded-2xl text-base md:text-lg font-serif uppercase tracking-[0.1em] md:tracking-[0.3em] shadow-[0_15px_30px_rgba(183,110,121,0.25)] hover:bg-[#a35d68] hover:shadow-[0_20px_40px_rgba(183,110,121,0.35)] transition-all duration-500 hover:-translate-y-1 active:scale-[0.98] overflow-hidden group relative"
             >
-              <span className="relative z-10">Sẽ Tham Dự & Gửi Lời Chúc</span>
+              <span className="relative z-10">Xác Nhận & Gửi Lời Chúc</span>
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             </button>
           </div>

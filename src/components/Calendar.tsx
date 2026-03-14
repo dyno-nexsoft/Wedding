@@ -62,13 +62,13 @@ const Calendar: React.FC = () => {
 
   return (
     <section id="calendar" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
-      <div className="max-w-2xl mx-auto px-6">
+      <div className="max-w-2xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-[#e6d5c3] relative overflow-hidden"
+          className="bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-[#e6d5c3] relative overflow-hidden"
         >
           {/* Decorative Heart for background */}
           <div className="absolute -top-10 -right-10 opacity-5 pointer-events-none">
@@ -79,7 +79,7 @@ const Calendar: React.FC = () => {
             <h2 className="font-serif text-lg sm:text-2xl uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#b76e79] mb-2">
               Lưu Lại Ngày Vui
             </h2>
-            <p className="font-serif text-2xl sm:text-4xl text-[#2a2a2a]">{CONFIG.wedding.monthYear}</p>
+            <p className="font-serif text-xl sm:text-4xl text-[#2a2a2a]">{CONFIG.wedding.monthYear}</p>
           </div>
 
           <div className="grid grid-cols-7 border-t border-b border-[#e6d5c3] py-4 mb-4">

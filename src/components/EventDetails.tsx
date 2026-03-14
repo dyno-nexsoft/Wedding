@@ -34,7 +34,7 @@ export default function EventDetails() {
     >
       <div className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"></div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 text-white">
+      <div className="relative z-10 max-w-6xl mx-auto px-2 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 text-white">
         {CONFIG.events.map((event, index) => (
           <motion.div 
             key={index}
@@ -42,9 +42,9 @@ export default function EventDetails() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: "easeOut", delay: index * 0.2 }}
-            className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md text-center hover:bg-white/10 transition-colors"
+            className="bg-white/5 border border-white/10 p-6 md:p-12 rounded-3xl backdrop-blur-md text-center hover:bg-white/10 transition-colors"
           >
-            <h3 className="text-3xl sm:text-4xl font-cursive mb-6 text-[#e6d5c3]">{event.title}</h3>
+            <h3 className="text-2xl sm:text-4xl font-cursive mb-6 text-[#e6d5c3]">{event.title}</h3>
             <div className="mb-6">
               <p className="text-sm font-sans uppercase tracking-[0.3em] mb-2 text-white/60">Thời Gian</p>
               <p className="text-sm sm:text-xl font-serif">{event.day}</p>
