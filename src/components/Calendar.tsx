@@ -59,87 +59,146 @@ const Calendar: React.FC = () => {
   }
 
   const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  
+  // Use the first event from the configuration
+  const mainEvent = CONFIG.events[0];
 
   return (
     <section id="calendar" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
-      <div className="max-w-2xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-[#e6d5c3] relative overflow-hidden"
-        >
-          {/* Decorative Heart for background */}
-          <div className="absolute -top-10 -right-10 opacity-5 pointer-events-none">
-            <Heart size={200} fill="#b76e79" />
-          </div>
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="#b76e79" strokeWidth="0.5" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#pattern)" />
+        </svg>
+      </div>
 
-          <div className="text-center mb-8">
-            <h2 className="font-serif text-lg sm:text-2xl uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#b76e79] mb-2">
-              Lưu Lại Ngày Vui
-            </h2>
-            <p className="font-serif text-xl sm:text-4xl text-[#2a2a2a]">{CONFIG.wedding.monthYear}</p>
-          </div>
-
-          <div className="grid grid-cols-7 border-t border-b border-[#e6d5c3] py-4 mb-4">
-            {weekDays.map(day => (
-              <div key={day} className="text-center text-[10px] uppercase font-sans tracking-widest text-gray-400 font-bold">
-                {day}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-7 gap-y-4">
-            {days.map((d, i) => (
-              <div key={i} className="flex items-center justify-center h-10 relative">
-                {d === date ? (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="relative">
-                       <div className="w-10 h-10 border-2 border-[#b76e79] rounded-lg rotate-3 flex items-center justify-center bg-[#b76e79]/10">
-                         <span className="font-serif font-bold text-[#b76e79]">{d}</span>
-                       </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <span className={`font-serif ${d ? 'text-[#4a4a4a]' : 'text-transparent'}`}>
-                    {d}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 flex flex-col items-center">
-            <div className="inline-block px-6 py-2 border-l-2 border-r-2 border-[#e6d5c3] font-serif text-lg italic text-[#4a4a4a] mb-8">
-              {new Intl.DateTimeFormat('vi-VN', { weekday: 'long', hour: '2-digit', minute: '2-digit' }).format(weddingDate)}
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-stretch">
+          
+          {/* Calendar Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="flex-1 w-full bg-white p-8 rounded-[2.5rem] shadow-2xl border border-[#e6d5c3] relative overflow-hidden"
+          >
+            <div className="text-center mb-8">
+              <h2 className="font-serif text-sm uppercase tracking-[0.4em] text-[#b76e79] mb-4">
+                Lịch Cưới
+              </h2>
+              <p className="font-serif text-2xl md:text-3xl text-[#2a2a2a] border-b border-[#e6d5c3] pb-4 mx-auto w-fit">
+                {CONFIG.wedding.monthYear}
+              </p>
             </div>
 
-            {/* COUNTDOWN TIMER */}
-            <div className="flex gap-4 md:gap-8">
-              {[
-                { label: 'Ngày', value: timeLeft.days },
-                { label: 'Giờ', value: timeLeft.hours },
-                { label: 'Phút', value: timeLeft.minutes },
-                { label: 'Giây', value: timeLeft.seconds }
-              ].map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-cursive text-[#b76e79] mb-1">
-                    {item.value}
-                  </div>
-                  <div className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">
-                    {item.label}
-                  </div>
+            <div className="grid grid-cols-7 mb-4">
+              {weekDays.map(day => (
+                <div key={day} className="text-center text-[10px] uppercase font-sans tracking-widest text-gray-400 font-bold py-2">
+                  {day}
                 </div>
               ))}
             </div>
-          </div>
-        </motion.div>
+
+            <div className="grid grid-cols-7 gap-y-2">
+              {days.map((d, i) => (
+                <div key={i} className="flex items-center justify-center h-10 md:h-12 relative">
+                  {d === date ? (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-[#b76e79] rounded-full flex items-center justify-center shadow-lg shadow-[#b76e79]/30">
+                        <span className="font-serif font-bold text-white text-lg">{d}</span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <span className={`font-serif text-sm md:text-base ${d ? 'text-[#4a4a4a]' : 'text-transparent'}`}>
+                      {d}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Merged Info & Countdown Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="w-full lg:w-[400px] bg-white rounded-[2.5rem] shadow-2xl border border-[#e6d5c3] overflow-hidden flex flex-col"
+          >
+            {/* Event Info (Top Section) */}
+            <div className="p-10 flex-1 flex flex-col justify-center text-center relative overflow-hidden">
+              {/* Subtle Decorative Ornament */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 opacity-20 pointer-events-none">
+                 <div className="w-12 h-[1px] bg-[#b76e79]"></div>
+              </div>
+              
+              <Heart className="mx-auto text-[#b76e79] mb-6 opacity-30" size={28} />
+              
+              <h3 className="font-cursive text-4xl text-[#b76e79] mb-4 tracking-tight">{mainEvent?.title}</h3>
+              
+              <div className="space-y-4">
+                <p className="font-serif text-sm uppercase tracking-[0.3em] text-gray-400 font-medium">
+                  {new Intl.DateTimeFormat('vi-VN', { weekday: 'long' }).format(weddingDate)}
+                </p>
+                
+                <div className="text-5xl font-serif text-[#2a2a2a] font-light tracking-tighter">
+                  {new Intl.DateTimeFormat('vi-VN', { hour: '2-digit', minute: '2-digit' }).format(weddingDate)}
+                </div>
+                
+                <div className="pt-8 mt-8 border-t border-[#e6d5c3]/40">
+                  <p className="font-serif text-[#4a4a4a] text-lg italic leading-relaxed">{mainEvent?.location}</p>
+                  <p className="text-[10px] text-gray-400 font-sans mt-3 tracking-[0.2em] uppercase leading-widest">{mainEvent?.address}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Countdown (Bottom Section) - Harmonized Light Theme */}
+            <div className="bg-[#fdfaf7] border-t border-[#e6d5c3]/60 p-10 relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border border-[#e6d5c3]/60 rounded-full shadow-sm">
+                <p className="font-serif text-[9px] uppercase tracking-[0.3em] text-[#b76e79] font-bold">Countdown</p>
+              </div>
+              
+              <div className="flex justify-between items-center gap-4">
+                {[
+                  { label: 'Ngày', value: timeLeft.days },
+                  { label: 'Giờ', value: timeLeft.hours },
+                  { label: 'Phút', value: timeLeft.minutes },
+                  { label: 'Giây', value: timeLeft.seconds }
+                ].map((item, index) => (
+                  <React.Fragment key={index}>
+                    <div className="text-center flex-1">
+                      <motion.div 
+                        key={item.value}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="text-3xl md:text-3xl font-serif font-light text-[#2a2a2a] mb-2"
+                      >
+                        {item.value}
+                      </motion.div>
+                      <div className="text-[8px] uppercase tracking-[0.2em] text-[#b76e79]/60 font-bold">
+                        {item.label}
+                      </div>
+                    </div>
+                    {index < 3 && (
+                      <div className="w-[1px] h-8 bg-[#e6d5c3]/40 self-center"></div>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
