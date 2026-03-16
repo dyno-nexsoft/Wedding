@@ -16,6 +16,14 @@ export default function RSVP() {
 
   const [showModal, setShowModal] = useState(false);
   const [showGiftModal, setShowGiftModal] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Sync body scroll with modal state
   useEffect(() => {
@@ -75,8 +83,8 @@ export default function RSVP() {
             <label htmlFor="message" className="block text-[10px] font-serif font-bold uppercase tracking-[0.4em] text-[#b76e79] mb-4 opacity-70 group-focus-within/field:opacity-100 transition-opacity">Lời Chúc Tới Đôi Bạn Trẻ</label>
             <textarea 
               id="message" 
-              rows={1} 
-              placeholder="Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."
+              rows={isMobile ? 2 : 1} 
+              placeholder={isMobile ? "Gửi gắm những lời chúc tốt đẹp\nhoặc những lưu ý riêng..." : "Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."}
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
               className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none outline-0 resize-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg overflow-hidden"

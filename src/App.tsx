@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import Hero from './components/Hero';
 import OurStory from './components/OurStory';
 import EventDetails from './components/EventDetails';
@@ -50,7 +50,12 @@ export default function App() {
         {loading && <LoadingScreen key="loader" />}
       </AnimatePresence>
 
-      <div className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden">
+      <motion.div 
+        initial={loading ? { opacity: 0, scale: 0.98 } : false}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: loading ? 0.8 : 0 }}
+        className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden"
+      >
         <Hero />
         <OurStory />
         <Gallery />
@@ -61,7 +66,7 @@ export default function App() {
         <RSVP />
         <Footer />
         <MusicPlayer />
-      </div>
+      </motion.div>
     </>
   );
 }

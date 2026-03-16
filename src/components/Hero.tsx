@@ -85,9 +85,9 @@ export default function Hero() {
       <div className="relative z-20 w-full max-w-lg mx-auto flex flex-col items-center -mt-24 md:-mt-32">
         
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0, y: 10, letterSpacing: '0.6em' }}
+          animate={{ opacity: 1, y: 0, letterSpacing: '0.4em' }}
+          transition={{ duration: 1.5, delay: 1 }}
           className="mb-16 md:mb-24"
         >
           <p className="text-xs md:text-sm font-serif tracking-[0.4em] text-[#4a4a4a] uppercase font-bold">
@@ -99,11 +99,17 @@ export default function Hero() {
         {/* Central Envelope Section */}
         <motion.div
           style={{ y: yCard, opacity: opacityCard }}
-          initial={{ opacity: 0, scale: 0.9, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.6 }}
-          className="relative w-full px-6 flex justify-center perspective-[1000px]"
+          initial={{ opacity: 0, scale: 1.2, y: 100, rotateX: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+          transition={{ 
+            duration: 1.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 1.2 
+          }}
+          className="relative w-full px-6 flex justify-center perspective-[1200px]"
         >
+          {/* Subtle Glow Behind Card */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#b76e79]/5 blur-[80px] rounded-full z-0" />
 
 
           {/* The Envelope */}
