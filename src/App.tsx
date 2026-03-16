@@ -12,6 +12,7 @@ import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
+import ScrollToTop from './components/ScrollToTop';
 import Timeline from './components/Timeline';
 import Calendar from './components/Calendar';
 import DressCode from './components/DressCode';
@@ -66,6 +67,7 @@ export default function App() {
         <RSVP />
         <Footer />
         <MusicPlayer />
+        <ScrollToTop />
       </motion.div>
     </>
   );
