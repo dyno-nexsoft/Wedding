@@ -6,14 +6,19 @@ import { CONFIG } from '../config';
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex overflow-hidden lg-screen-container"
+      initial={{ opacity: 1 }}
+      exit={{ 
+        opacity: 1, // Keep container visible but transparent so panels can slide
+        transition: { delay: 2.6 } 
+      }}
+      className="fixed inset-0 z-[10000] flex overflow-hidden pointer-events-none"
     >
-      {/* Left Panel - Groom */}
+      {/* Left Panel - Bride */}
       <motion.div
         initial={{ x: 0 }}
         exit={{ x: '-100%' }}
         transition={{ duration: 1.8, ease: [0.77, 0, 0.175, 1], delay: 0.8 }}
-        className="absolute inset-y-0 left-0 w-1/2 bg-[#fdfaf7] border-r border-[#e6d5c3]/60 z-20 flex items-center justify-end overflow-hidden"
+        className="absolute inset-y-0 left-0 w-[51%] bg-[#fdfaf7] border-r border-[#e6d5c3]/60 z-50 flex items-center justify-end overflow-hidden pointer-events-auto"
       >
         {/* Paper Texture Overlay */}
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }} />
@@ -27,9 +32,9 @@ export default function LoadingScreen() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 0.03, scale: 1 }}
             transition={{ duration: 2 }}
-            className="absolute -top-12 -right-8 text-[12rem] font-serif select-none pointer-events-none"
+            className="absolute -top-12 -right-8 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
           >
-            {CONFIG.wedding.groom.split(' ').pop()?.charAt(0)}
+            {CONFIG.wedding.bride.split(' ').pop()?.charAt(0)}
           </motion.span>
           
           <motion.div
@@ -37,55 +42,55 @@ export default function LoadingScreen() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.4 }}
           >
-            <p className="text-[10px] tracking-[0.4em] text-[#b76e79] mb-4 uppercase font-medium">Chú rể</p>
-            <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] underline-offset-8 decoration-[#b76e79]/30 font-light tracking-wide">
-              {CONFIG.wedding.groom.split(' ').pop()}
-            </h2>
-          </motion.div>
-        </div>
-      </motion.div>
-      
-      {/* Right Panel - Bride */}
-      <motion.div
-        initial={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ duration: 1.8, ease: [0.77, 0, 0.175, 1], delay: 0.8 }}
-        className="absolute inset-y-0 right-0 w-1/2 bg-[#fdfaf7] z-20 flex items-center justify-start overflow-hidden"
-      >
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }} />
-        
-        {/* Subtle Ornament Line */}
-        <div className="absolute left-6 inset-y-24 w-px bg-gradient-to-b from-transparent via-[#b76e79]/20 to-transparent" />
- 
-        <div className="relative ml-12 md:ml-24 text-left">
-          {/* Large Initial Background */}
-          <motion.span 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.03, scale: 1 }}
-            transition={{ duration: 2 }}
-            className="absolute -top-12 -left-8 text-[12rem] font-serif select-none pointer-events-none"
-          >
-            {CONFIG.wedding.bride.split(' ').pop()?.charAt(0)}
-          </motion.span>
- 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.4 }}
-          >
             <p className="text-[10px] tracking-[0.4em] text-[#b76e79] mb-4 uppercase font-medium">Cô dâu</p>
-            <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] font-light tracking-wide">
+            <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] underline-offset-8 decoration-[#b76e79]/30 font-light tracking-wide">
               {CONFIG.wedding.bride.split(' ').pop()}
             </h2>
           </motion.div>
         </div>
       </motion.div>
- 
+      
+      {/* Right Panel - Groom */}
+      <motion.div
+        initial={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ duration: 1.8, ease: [0.77, 0, 0.175, 1], delay: 0.8 }}
+        className="absolute inset-y-0 right-0 w-[51%] bg-[#fdfaf7] z-50 flex items-center justify-start overflow-hidden pointer-events-auto"
+      >
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }} />
+        
+        {/* Subtle Ornament Line */}
+        <div className="absolute left-6 inset-y-24 w-px bg-gradient-to-b from-transparent via-[#b76e79]/20 to-transparent" />
+
+        <div className="relative ml-12 md:mr-24 text-left">
+          {/* Large Initial Background */}
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.03, scale: 1 }}
+            transition={{ duration: 2 }}
+            className="absolute -top-12 -left-8 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
+          >
+            {CONFIG.wedding.groom.split(' ').pop()?.charAt(0)}
+          </motion.span>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+          >
+            <p className="text-[10px] tracking-[0.4em] text-[#b76e79] mb-4 uppercase font-medium">Chú rể</p>
+            <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] font-light tracking-wide">
+              {CONFIG.wedding.groom.split(' ').pop()}
+            </h2>
+          </motion.div>
+        </div>
+      </motion.div>
+
       {/* Central Progress Heart */}
       <motion.div
         exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.5 }}
         transition={{ duration: 1, ease: 'easeInOut' }}
-        className="relative z-30 w-full h-full flex flex-col items-center justify-center pointer-events-none"
+        className="relative z-[60] w-full h-full flex flex-col items-center justify-center pointer-events-none"
       >
         <div className="relative flex flex-col items-center">
           {/* Decorative Circle Ring */}
@@ -94,7 +99,7 @@ export default function LoadingScreen() {
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="absolute w-48 h-48 border border-dashed border-[#b76e79]/10 rounded-full"
           />
- 
+
           {/* Animated Glow Aura */}
           <motion.div
             animate={{ 
@@ -116,7 +121,7 @@ export default function LoadingScreen() {
               transition={{ duration: 2.5, repeat: Infinity }}
               className="absolute inset-0 border-[0.5px] border-[#b76e79]/30 rounded-full"
             />
- 
+
             {/* Background Heart Silhouette */}
             <Heart 
               size={56} 
@@ -125,8 +130,8 @@ export default function LoadingScreen() {
             />
             
             {/* modern Filling Progress Heart with Gradient to avoid square look */}
-            <div className="relative flex items-center justify-center w-14 h-14">
-              <svg width="0" height="0" style={{ position: 'absolute' }}>
+            <div className="relative flex items-center justify-center w-14 h-14 overflow-visible">
+              <svg className="absolute w-0 h-0 invisible">
                 <defs>
                   <linearGradient id="heartGradient" x1="0" y1="1" x2="0" y2="0">
                     <motion.stop 
