@@ -18,7 +18,7 @@ export default function OurStory() {
         >
           {/* Subtle Background Floral Decoration */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 opacity-10 pointer-events-none -z-10">
-            <img src="/floral_accent.png" alt="" className="w-full h-auto" />
+            <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto" />
           </div>
 
           <h2 className="text-4xl sm:text-6xl font-cursive text-[#2a2a2a] mb-6 leading-tight italic opacity-90">Hành Trình Yêu Thương</h2>

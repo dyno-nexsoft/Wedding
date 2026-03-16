@@ -106,12 +106,12 @@ export default function Hero() {
         >
           {/* Floral Decoration - Top Left */}
           <div className="absolute top-[-40px] left-[5%] md:left-[15%] w-24 md:w-32 z-50 pointer-events-none opacity-90 rotate-[-15deg]">
-            <img src="/floral_accent.png" alt="" className="w-full h-auto drop-shadow-sm" />
+            <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
           </div>
 
           {/* Floral Decoration - Bottom Right */}
           <div className="absolute bottom-[-50px] right-[5%] md:right-[15%] w-32 md:w-40 z-50 pointer-events-none opacity-90 rotate-[165deg]">
-            <img src="/floral_accent.png" alt="" className="w-full h-auto drop-shadow-sm" />
+            <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
           </div>
 
           {/* The Envelope */}
@@ -156,7 +156,7 @@ export default function Hero() {
               onClick={scrollToNext}
             >
               <img
-                src="/orange_wax_seal.png"
+                src={CONFIG.assets.waxSeal}
                 alt="Thiệp mời"
                 className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(244,162,97,0.3)] transition-transform duration-500 group-hover:scale-105"
               />

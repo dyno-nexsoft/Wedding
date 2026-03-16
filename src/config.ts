@@ -61,7 +61,9 @@ export const CONFIG = {
       "gallery_5.webp",
       "gallery_6.webp",
     ],
-    calendarBg: "bg_1.webp" // Placeholder
+    calendarBg: "bg_1.webp",
+    waxSeal: "orange_wax_seal.png",
+    floralAccent: "floral_accent.png"
   },
   timeline: [
     {

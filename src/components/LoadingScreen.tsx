@@ -32,41 +32,50 @@ export default function LoadingScreen() {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="relative z-10 flex flex-col items-center"
         >
-          {/* Pulsating Green Wax Seal */}
-          <motion.div
-            animate={{ 
-              scale: [1, 1.05, 1],
-              filter: ["drop-shadow(0 5px 15px rgba(244,162,97,0.2))", "drop-shadow(0 10px 25px rgba(244,162,97,0.4))", "drop-shadow(0 5px 15px rgba(244,162,97,0.2))"]
-            }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-            className="w-24 h-24 mb-8"
-          >
-            <img src="/orange_wax_seal.png" alt="Seal" className="w-full h-full object-contain" />
-          </motion.div>
-          
-          <h2 className="text-3xl md:text-5xl font-cursive text-[#2a2a2a] mb-8 italic opacity-90">
-            {CONFIG.wedding.coupleName}
-          </h2>
-          
-          {/* Minimalist Progress Line */}
-          <div className="w-32 h-[1px] bg-[#e6d5c3]/40 relative overflow-hidden">
-            <motion.div 
-              initial={{ x: "-100%" }}
-              animate={{ x: "100%" }}
+          {/* Heart Progress Animation */}
+          <div className="relative w-24 h-24 mb-12 flex items-center justify-center">
+            {/* Background Heart (The Container) */}
+            <Heart 
+              size={64} 
+              strokeWidth={1.5} 
+              className="text-[#e6d5c3] absolute opacity-40" 
+            />
+            
+            {/* Filling Heart (The Fluid) masked by clip-path */}
+            <motion.div
+              initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
+              animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
               transition={{ 
-                duration: 2.5, 
+                duration: 3, 
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
-              className="absolute inset-0 bg-[#b76e79] w-full"
+              className="absolute inset-0 flex items-center justify-center scale-[0.88]"
+            >
+              <Heart 
+                size={64} 
+                fill="#b76e79" 
+                strokeWidth={0} 
+                className="text-[#b76e79]" 
+              />
+            </motion.div>
+
+            {/* Pulsating Glow */}
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.3, 0.1]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute inset-0 bg-[#b76e79]/10 rounded-full blur-3xl -z-10"
             />
           </div>
           
-          <p className="mt-8 text-[9px] font-serif uppercase tracking-[0.5em] text-[#a3a3a3] font-bold">
+          <h2 className="text-3xl md:text-5xl font-sans text-[#2a2a2a] mb-8 font-extralight tracking-tight opacity-90">
+            {CONFIG.wedding.coupleName}
+          </h2>
+          
+          <p className="text-[10px] font-sans uppercase tracking-[0.5em] text-[#b76e79] font-medium animate-pulse">
             Đang mở lời mời...
           </p>
         </motion.div>

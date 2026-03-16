@@ -32,9 +32,9 @@ const Calendar: React.FC = () => {
             className="w-full bg-[#fdfaf7] p-6 md:p-10 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-[#e6d5c3] relative overflow-visible tactile-card"
           >
             {/* Floral Accessory */}
-            <div className="absolute -top-10 -right-10 w-32 md:w-40 z-20 pointer-events-none rotate-[15deg] opacity-90">
-              <img src="/floral_accent.png" alt="" className="w-full h-auto drop-shadow-sm" />
-            </div>
+            <div className="absolute -top-12 -right-12 w-48 h-48 opacity-40 rotate-12 pointer-events-none">
+          <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-full object-contain" />
+        </div>
 
             <div className="text-center mb-10">
               <h2 className="font-serif text-[10px] md:text-sm uppercase tracking-[0.5em] text-[#b76e79] mb-4 font-bold">
@@ -67,7 +67,7 @@ const Calendar: React.FC = () => {
                     >
                       <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center">
                         <img 
-                          src="/orange_wax_seal.png" 
+                          src={CONFIG.assets.waxSeal} 
                           alt="Special Date" 
                           className="absolute inset-0 w-full h-full object-contain filter drop-shadow-md opacity-90"
                         />
