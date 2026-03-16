@@ -6,7 +6,7 @@ import { CONFIG } from '../config';
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex overflow-hidden lg-screen-container"
+      className="fixed inset-0 z-[9999] flex overflow-hidden lg-screen-container"
     >
       {/* Left Panel - Groom */}
       <motion.div
@@ -56,7 +56,7 @@ export default function LoadingScreen() {
         
         {/* Subtle Ornament Line */}
         <div className="absolute left-6 inset-y-24 w-px bg-gradient-to-b from-transparent via-[#b76e79]/20 to-transparent" />
-
+ 
         <div className="relative ml-12 md:ml-24 text-left">
           {/* Large Initial Background */}
           <motion.span 
@@ -67,7 +67,7 @@ export default function LoadingScreen() {
           >
             {CONFIG.wedding.bride.split(' ').pop()?.charAt(0)}
           </motion.span>
-
+ 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -80,7 +80,7 @@ export default function LoadingScreen() {
           </motion.div>
         </div>
       </motion.div>
-
+ 
       {/* Central Progress Heart */}
       <motion.div
         exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.5 }}
@@ -94,7 +94,7 @@ export default function LoadingScreen() {
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="absolute w-48 h-48 border border-dashed border-[#b76e79]/10 rounded-full"
           />
-
+ 
           {/* Animated Glow Aura */}
           <motion.div
             animate={{ 
@@ -116,7 +116,7 @@ export default function LoadingScreen() {
               transition={{ duration: 2.5, repeat: Infinity }}
               className="absolute inset-0 border-[0.5px] border-[#b76e79]/30 rounded-full"
             />
-
+ 
             {/* Background Heart Silhouette */}
             <Heart 
               size={56} 
@@ -124,32 +124,44 @@ export default function LoadingScreen() {
               className="text-[#e6d5c3] absolute transition-opacity duration-1000" 
             />
             
-            {/* Modern Filling Progress Heart */}
-            <div className="relative">
-              <motion.div
-                initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
-                animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10"
-              >
-                <Heart 
-                  size={56} 
-                  fill="#b76e79" 
-                  strokeWidth={0} 
-                  className="text-[#b76e79] drop-shadow-[0_0_15px_rgba(183,110,121,0.4)]" 
-                />
-              </motion.div>
+            {/* modern Filling Progress Heart with Gradient to avoid square look */}
+            <div className="relative flex items-center justify-center w-14 h-14">
+              <svg width="0" height="0" style={{ position: 'absolute' }}>
+                <defs>
+                  <linearGradient id="heartGradient" x1="0" y1="1" x2="0" y2="0">
+                    <motion.stop 
+                      offset="0%" 
+                      stopColor="#b76e79" 
+                      animate={{ offset: ["0%", "100%", "0%"] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <motion.stop 
+                      offset="0%" 
+                      stopColor="transparent" 
+                      animate={{ offset: ["0%", "100%", "0%"] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                  </linearGradient>
+                </defs>
+              </svg>
               
-              {/* Liquid Wave Effect (CSS Filter) */}
+              <Heart 
+                size={56} 
+                fill="url(#heartGradient)" 
+                strokeWidth={0} 
+                className="text-[#b76e79] drop-shadow-[0_0_15px_rgba(183,110,121,0.4)]" 
+              />
+              
+              {/* Liquid Wave Effect - Subtle Layer */}
               <motion.div 
                 animate={{ 
-                  y: [2, -2, 2],
-                  rotate: [1, -1, 1]
+                  y: [1, -1, 1],
+                  opacity: [0.3, 0.6, 0.3]
                 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 blur-sm opacity-50"
+                className="absolute inset-0 blur-[2px]"
               >
-                <Heart size={56} fill="#b76e79" strokeWidth={0} />
+                <Heart size={56} fill="url(#heartGradient)" strokeWidth={0} className="scale-105 opacity-20" />
               </motion.div>
             </div>
           </div>
