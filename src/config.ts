@@ -5,7 +5,7 @@ export const CONFIG = {
     coupleName: "Hạnh & Anh",
     date: "2026-06-20T17:00:00",
     dateFormatted: "20.06.2026",
-    monthYear: "THÁNG 06 NĂM 2026",
+    monthYear: "Tháng 6 Năm 2026",
     rsvpPhoneNumber: "0392735734",
     bank: {
       groom: {

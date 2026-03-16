@@ -46,11 +46,11 @@ export default function RSVP() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1 }}
-        className="w-full max-w-2xl bg-[#fdfaf7] p-8 md:p-14 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-[#e6d5c3] relative z-10 tactile-card"
+        className="w-full max-w-2xl bg-[#fdfaf7] px-6 py-8 md:p-14 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-[#e6d5c3] relative z-10 tactile-card"
       >
         <div className="text-center mb-10 md:mb-14">
           <span className="text-[#b76e79] font-serif italic text-base md:text-lg block mb-4 uppercase tracking-[0.2em] font-bold opacity-70">R.S.V.P</span>
-          <h2 className="text-4xl sm:text-6xl font-cursive text-[#2a2a2a] mb-6 leading-tight italic opacity-90">Xác Nhận Tham Dự</h2>
+          <h2 className="text-3xl sm:text-6xl font-cursive text-[#2a2a2a] mb-6 leading-tight italic opacity-90">Xác Nhận Tham Dự</h2>
           <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#b76e79]/30 to-transparent mx-auto mb-8 relative">
              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfaf7] px-2 text-[#b76e79] text-[10px]">❦</span>
           </div>
