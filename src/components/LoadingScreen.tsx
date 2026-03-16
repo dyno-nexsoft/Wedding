@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Heart } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function LoadingScreen() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, 25);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ 
-        opacity: 1, // Keep container visible but transparent so panels can slide
+        opacity: 1, 
         transition: { delay: 2.6 } 
       }}
       className="fixed inset-0 z-[10000] flex overflow-hidden pointer-events-none"
@@ -20,19 +35,15 @@ export default function LoadingScreen() {
         transition={{ duration: 1.8, ease: [0.77, 0, 0.175, 1], delay: 0.8 }}
         className="absolute inset-y-0 left-0 w-[51%] bg-[#fdfaf7] border-r border-[#e6d5c3]/60 z-50 flex items-center justify-end overflow-hidden pointer-events-auto"
       >
-        {/* Paper Texture Overlay */}
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }} />
-        
-        {/* Subtle Ornament Line */}
         <div className="absolute right-6 inset-y-24 w-px bg-gradient-to-b from-transparent via-[#b76e79]/20 to-transparent" />
         
-        <div className="relative mr-12 md:mr-24 text-right">
-          {/* Large Initial Background */}
+        <div className="relative mr-20 md:mr-32 text-right">
           <motion.span 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 0.03, scale: 1 }}
             transition={{ duration: 2 }}
-            className="absolute -top-12 -right-8 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
+            className="absolute -top-12 -right-12 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
           >
             {CONFIG.wedding.bride.split(' ').pop()?.charAt(0)}
           </motion.span>
@@ -58,17 +69,14 @@ export default function LoadingScreen() {
         className="absolute inset-y-0 right-0 w-[51%] bg-[#fdfaf7] z-50 flex items-center justify-start overflow-hidden pointer-events-auto"
       >
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }} />
-        
-        {/* Subtle Ornament Line */}
         <div className="absolute left-6 inset-y-24 w-px bg-gradient-to-b from-transparent via-[#b76e79]/20 to-transparent" />
 
-        <div className="relative ml-12 md:mr-24 text-left">
-          {/* Large Initial Background */}
+        <div className="relative ml-20 md:ml-32 text-left">
           <motion.span 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 0.03, scale: 1 }}
             transition={{ duration: 2 }}
-            className="absolute -top-12 -left-8 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
+            className="absolute -top-12 -left-12 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
           >
             {CONFIG.wedding.groom.split(' ').pop()?.charAt(0)}
           </motion.span>
@@ -86,106 +94,41 @@ export default function LoadingScreen() {
         </div>
       </motion.div>
 
-      {/* Central Progress Heart */}
+      {/* Heart Path Reveal Animation */}
       <motion.div
-        exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.5 }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-        className="relative z-[60] w-full h-full flex flex-col items-center justify-center pointer-events-none"
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 z-[60] flex flex-col items-center justify-center pointer-events-none"
       >
-        <div className="relative flex flex-col items-center">
-          {/* Decorative Circle Ring */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute w-48 h-48 border border-dashed border-[#b76e79]/10 rounded-full"
-          />
-
-          {/* Animated Glow Aura */}
-          <motion.div
-            animate={{ 
-              scale: [1, 1.5, 1],
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, 45, 0]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-[#b76e79]/5 rounded-full blur-[80px]"
-          />
-          
-          <div className="relative w-40 h-40 flex items-center justify-center">
-            {/* Pulsing Outer Bloom */}
-            <motion.div
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1]
-              }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-              className="absolute inset-0 border-[0.5px] border-[#b76e79]/30 rounded-full"
-            />
-
-            {/* Background Heart Silhouette */}
-            <Heart 
-              size={56} 
-              strokeWidth={0.5} 
-              className="text-[#e6d5c3] absolute transition-opacity duration-1000" 
-            />
+        <div className="relative w-24 h-24">
+            <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-[0_0_8px_rgba(183,110,121,0.15)]">
+                {/* Animated Drawing Path: Top-Middle -> Down-Left -> Tip -> Up-Right -> Top-Middle */}
+                <motion.path
+                  d="M12 5.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5c0-3.08-2.42-5.5-5.5-5.5c-1.74 0-3.41.81-4.5 2.09z"
+                  fill="none"
+                  stroke="#b76e79"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, fill: "rgba(183, 110, 121, 0)" }}
+                  animate={{ 
+                    pathLength: progress / 100,
+                    fill: progress >= 100 ? "rgba(183, 110, 121, 1)" : "rgba(183, 110, 121, 0)"
+                  }}
+                  transition={{ 
+                    pathLength: { duration: 0.1, ease: "linear" },
+                    fill: { duration: 0.8, ease: "easeIn" }
+                  }}
+                />
+            </svg>
             
-            {/* modern Filling Progress Heart with Gradient to avoid square look */}
-            <div className="relative flex items-center justify-center w-14 h-14 overflow-visible">
-              <svg className="absolute w-0 h-0 invisible">
-                <defs>
-                  <linearGradient id="heartGradient" x1="0" y1="1" x2="0" y2="0">
-                    <motion.stop 
-                      offset="0%" 
-                      stopColor="#b76e79" 
-                      animate={{ offset: ["0%", "100%", "0%"] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                    <motion.stop 
-                      offset="0%" 
-                      stopColor="transparent" 
-                      animate={{ offset: ["0%", "100%", "0%"] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                  </linearGradient>
-                </defs>
-              </svg>
-              
-              <Heart 
-                size={56} 
-                fill="url(#heartGradient)" 
-                strokeWidth={0} 
-                className="text-[#b76e79] drop-shadow-[0_0_15px_rgba(183,110,121,0.4)]" 
-              />
-              
-              {/* Liquid Wave Effect - Subtle Layer */}
-              <motion.div 
-                animate={{ 
-                  y: [1, -1, 1],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 blur-[2px]"
-              >
-                <Heart size={56} fill="url(#heartGradient)" strokeWidth={0} className="scale-105 opacity-20" />
-              </motion.div>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center">
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: 100 }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mb-6"
-            />
-            <motion.p 
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
+            {/* Minimal Heart Pulse in the middle (optional, very light) */}
+            <motion.div
+              animate={{ opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="text-[9px] font-sans uppercase tracking-[0.8em] text-[#b76e79] font-light"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              Chuẩn bị không gian lễ cưới
-            </motion.p>
-          </div>
+               <div className="w-4 h-4 rounded-full bg-[#b76e79]/20 blur-sm" />
+            </motion.div>
         </div>
       </motion.div>
     </motion.div>
