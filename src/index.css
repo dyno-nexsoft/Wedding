@@ -56,13 +56,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: light;
   }
 
   body {
     position: relative;
     background-color: #fdfaf7;
+    color: #5d4d4a;
   }
-
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
