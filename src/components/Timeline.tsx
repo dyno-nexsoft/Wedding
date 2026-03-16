@@ -12,17 +12,19 @@ const iconMap: Record<string, React.ReactNode> = {
 
 const Timeline: React.FC = () => {
   return (
-    <section id="timeline" className="py-24 bg-white relative overflow-hidden">
+    <section id="timeline" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="text-center mb-16"
+          className="text-center mb-16 md:mb-24"
         >
-          <h2 className="font-cursive text-4xl sm:text-5xl text-[#2a2a2a] mb-4">Lịch Trình Tiệc Cưới</h2>
-          <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto"></div>
+          <h2 className="font-cursive text-4xl sm:text-6xl text-[#2a2a2a] mb-6 italic opacity-90">Lịch Trình Tiệc Cưới</h2>
+          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mx-auto relative">
+             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[#b76e79] text-xs">❦</span>
+          </div>
         </motion.div>
 
         <div className="relative">
@@ -42,7 +44,7 @@ const Timeline: React.FC = () => {
                 }`}
               >
                 {/* Icon Circle */}
-                <div className="absolute left-0 md:left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full border-2 border-[#e6d5c3] flex items-center justify-center z-10 shadow-sm text-[#b76e79]">
+                <div className="absolute left-[23px] md:left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full border-2 border-[#e6d5c3] flex items-center justify-center z-10 shadow-sm text-[#b76e79]">
                   {iconMap[item.icon]}
                 </div>
 
@@ -50,12 +52,12 @@ const Timeline: React.FC = () => {
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${
                   index % 2 === 0 ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'
                 }`}>
-                  <div className="bg-[#fdfaf7] p-6 rounded-2xl border border-[#e6d5c3]/30 shadow-sm hover:shadow-md transition-shadow">
-                    <span className="font-sans text-sm tracking-[0.2em] text-[#b76e79] font-bold block mb-1">
+                  <div className="bg-[#fdfaf7] p-4 md:p-6 rounded-2xl border border-[#e6d5c3]/30 shadow-sm hover:shadow-md transition-shadow">
+                    <span className="font-sans text-[10px] md:text-sm tracking-[0.2em] text-[#b76e79] font-bold block mb-1">
                       {item.time}
                     </span>
-                    <h3 className="font-serif text-xl text-[#2a2a2a] mb-2">{item.title}</h3>
-                    <p className="font-sans text-[#4a4a4a] text-sm leading-relaxed text-pretty">
+                    <h3 className="font-serif text-lg md:text-xl text-[#2a2a2a] mb-1.5 md:mb-2">{item.title}</h3>
+                    <p className="font-sans text-[#4a4a4a] text-xs md:text-sm leading-relaxed text-pretty">
                       {item.description}
                     </p>
                   </div>

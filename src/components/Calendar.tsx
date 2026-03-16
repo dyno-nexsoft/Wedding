@@ -9,7 +9,7 @@ const Calendar: React.FC = () => {
   const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
   return (
-    <section id="calendar" className="py-12 bg-[#fdfaf7] relative overflow-hidden">
+    <section id="calendar" className="pt-8 pb-8 md:pt-12 md:pb-12 bg-[#fdfaf7] relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -29,41 +29,53 @@ const Calendar: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="w-full bg-white p-8 rounded-[2.5rem] shadow-xl shadow-[#b76e79]/5 border border-[#e6d5c3] relative overflow-hidden"
+            className="w-full bg-[#fdfaf7] p-6 md:p-10 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-[#e6d5c3] relative overflow-visible tactile-card"
           >
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-sm uppercase tracking-[0.4em] text-[#b76e79] mb-4">
-                Lịch Cưới
-              </h2>
-              <p className="font-serif text-2xl md:text-3xl text-[#2a2a2a] border-b border-[#e6d5c3] pb-4 mx-auto w-fit">
-                {CONFIG.wedding.monthYear}
-              </p>
+            {/* Floral Accessory */}
+            <div className="absolute -top-10 -right-10 w-32 md:w-40 z-20 pointer-events-none rotate-[15deg] opacity-90">
+              <img src="/floral_accent.png" alt="" className="w-full h-auto drop-shadow-sm" />
             </div>
 
-            <div className="grid grid-cols-7 mb-4">
+            <div className="text-center mb-10">
+              <h2 className="font-serif text-[10px] md:text-sm uppercase tracking-[0.5em] text-[#b76e79] mb-4 font-bold">
+                LỊCH CƯỚI
+              </h2>
+              <p className="font-cursive text-3xl md:text-5xl text-[#2a2a2a] pb-4 mx-auto w-fit italic opacity-90">
+                {CONFIG.wedding.monthYear}
+              </p>
+              <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto opacity-50"></div>
+            </div>
+
+            <div className="grid grid-cols-7 mb-6">
               {weekDays.map(day => (
-                <div key={day} className="text-center text-[10px] uppercase font-sans tracking-widest text-gray-400 font-bold py-2">
+                <div key={day} className="text-center text-[10px] uppercase font-serif tracking-widest text-gray-400 font-bold py-2">
                   {day}
                 </div>
               ))}
             </div>
 
-            <div className="grid grid-cols-7 gap-y-2">
+            <div className="grid grid-cols-7 gap-y-4">
               {days.map((d, i) => (
-                <div key={i} className="flex items-center justify-center h-10 md:h-12 relative">
+                <div key={i} className="flex items-center justify-center h-10 md:h-14 relative">
                   {d === date ? (
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+                      initial={{ scale: 0, rotate: -20 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-[#b76e79] rounded-full flex items-center justify-center shadow-lg shadow-[#b76e79]/30">
-                        <span className="font-serif font-bold text-white text-lg">{d}</span>
+                      <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center">
+                        <img 
+                          src="/orange_wax_seal.png" 
+                          alt="Special Date" 
+                          className="absolute inset-0 w-full h-full object-contain filter drop-shadow-md opacity-90"
+                        />
+                        <span className="font-serif font-bold text-white text-lg md:text-xl relative z-10 pt-0.5">{d}</span>
                       </div>
                     </motion.div>
                   ) : (
-                    <span className={`font-serif text-sm md:text-base ${d ? 'text-[#4a4a4a]' : 'text-transparent'}`}>
+                    <span className={`font-serif text-sm md:text-lg ${d ? 'text-[#4a4a4a]' : 'text-transparent'} transition-colors hover:text-[#b76e79]`}>
                       {d}
                     </span>
                   )}

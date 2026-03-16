@@ -32,34 +32,45 @@ export default function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-24 px-6 bg-[#fdfaf7]">
+    <section id="gallery" className="pt-16 pb-8 md:pt-24 md:pb-12 bg-[#fdfaf7] px-4">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1 }}
-        className="max-w-6xl mx-auto text-center mb-16"
+        className="max-w-6xl mx-auto text-center mb-12 md:mb-20"
       >
-        <h2 className="text-5xl font-cursive text-[#b76e79] mb-4">Thư Viện Ảnh</h2>
-        <div className="w-24 h-[1px] bg-[#e6d5c3] mx-auto"></div>
+        <h2 className="text-4xl md:text-6xl font-cursive text-[#2a2a2a] mb-6 italic opacity-90">Thư Viện Ảnh</h2>
+        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mx-auto relative">
+           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfaf7] px-2 text-[#b76e79] text-xs">❦</span>
+        </div>
       </motion.div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
         {images.map((img, index) => (
           <motion.div 
             key={index}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -2 : 2 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.02, rotate: 0, zIndex: 10 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.05 }}
-            className="overflow-hidden h-[24rem] sm:h-[28rem] lg:h-[32rem] shadow-md shadow-[#b76e79]/10 rounded-2xl cursor-pointer border border-[#e6d5c3]/30"
+            transition={{ duration: 0.8 }}
+            className="group relative p-3 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-sm cursor-pointer border border-gray-100/50"
             onClick={() => openLightbox(index)}
           >
-            <img 
-              src={img} 
-              alt={`Ảnh cưới ${index + 1}`} 
-              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
-            />
+            <div className="overflow-hidden h-[24rem] sm:h-[28rem] lg:h-[32rem] relative">
+              <img 
+                src={img} 
+                alt={`Ảnh cưới ${index + 1}`} 
+                className="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" 
+              />
+              {/* Glossy overlay effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+            </div>
+            {/* Subtle photo metadata feel */}
+            <div className="mt-3 text-center">
+               <span className="text-[9px] font-serif uppercase tracking-[0.2em] text-[#b76e79]/40 opacity-60">Khoảnh khắc {index + 1}</span>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -75,7 +86,7 @@ export default function Gallery() {
           >
             <button 
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white hover:text-roseGold transition-colors z-50 p-2"
+              className="absolute top-6 right-6 text-white hover:text-[#b76e79] transition-colors z-50 p-2"
             >
               <X size={32} />
             </button>
@@ -104,7 +115,7 @@ export default function Gallery() {
             >
               <img 
                 src={images[selectedIndex]} 
-                alt={`Wedding Gallery Full ${selectedIndex + 1}`} 
+                alt={`Ảnh cưới ${selectedIndex + 1}`} 
                 className="max-w-full max-h-full object-contain shadow-xl shadow-black/30 rounded-sm"
               />
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 font-serif">

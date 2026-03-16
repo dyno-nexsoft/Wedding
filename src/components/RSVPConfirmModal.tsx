@@ -49,8 +49,9 @@ export const RSVPConfirmModal: React.FC<RSVPConfirmModalProps> = ({
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 30 }}
-        className="relative w-full h-full sm:h-auto max-w-lg bg-[#fdfaf7] sm:rounded-[3rem] shadow-2xl overflow-y-auto sm:overflow-hidden border-0 sm:border border-white flex flex-col justify-center"
+        className="relative w-full h-full sm:h-auto max-w-lg bg-[#fdfaf7] sm:rounded-sm shadow-2xl overflow-y-auto sm:overflow-hidden border-0 sm:border border-[#e6d5c3] flex flex-col justify-center tactile-card"
       >
+        {/* Local Paper Texture for Modal */}
         <div className="px-6 py-10 sm:p-10 text-center">
           <motion.div 
             initial={{ scale: 0 }}
@@ -76,9 +77,9 @@ export const RSVPConfirmModal: React.FC<RSVPConfirmModalProps> = ({
             </pre>
             <button 
               onClick={copyToClipboard}
-              className="absolute bottom-4 right-4 p-3 bg-white border border-[#e6d5c3] rounded-xl text-gray-400 hover:text-[#b76e79] hover:border-[#b76e79] transition-all duration-300 shadow-sm flex items-center gap-2"
+              className="absolute bottom-4 right-4 p-3 bg-white border border-[#e6d5c3] rounded-xl text-[#b76e79]/40 hover:text-[#f4a261] hover:border-[#f4a261] transition-all duration-300 shadow-sm flex items-center gap-2"
             >
-              {copied ? <span className="text-xs font-bold text-green-600">Đã chép!</span> : <Copy size={20} />}
+              {copied ? <span className="text-xs font-bold text-[#f4a261]">Đã chép!</span> : <Copy size={20} />}
             </button>
           </div>
 

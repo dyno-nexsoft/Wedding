@@ -43,9 +43,10 @@
 @theme {
   --color-primary: #fdfaf7; /* Cream background */
   --color-secondary: #e6d5c3; /* Beige/Khaki */
-  --color-accent: #b76e79; /* Rose Gold / Muted Brown */
-  --color-text-main: #4a4a4a; /* Dark stone / muted text */
-  --color-text-title: #2a2a2a; /* Darker for titles */
+  --color-accent: #b76e79; /* Rose Gold / Pink */
+  --color-accent-warm: #f4a261; /* Sunset Orange */
+  --color-text-main: #5d4d4a; /* Warm dark stone */
+  --color-text-title: #3a2a28; /* Deep warm brown */
 
   --font-cursive: "Great Vibes", cursive;
   --font-serif: "Playfair Display", serif;
@@ -56,6 +57,12 @@
   html {
     scroll-behavior: smooth;
   }
+
+  body {
+    position: relative;
+    background-color: #fdfaf7;
+  }
+
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
@@ -82,11 +89,33 @@
   }
 
   .gold-divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #b76e79/40, transparent);
     width: 60%;
     margin: 2rem auto;
+    position: relative;
   }
+
+  .gold-divider::after {
+    content: "❦";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fdfaf7;
+    padding: 0 10px;
+    color: #b76e79;
+    font-size: 14px;
+  }
+
+  .tactile-card {
+    background-color: #fffaf7;
+    border: 1px solid #e6d5c3;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
