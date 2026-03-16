@@ -75,11 +75,11 @@ export default function RSVP() {
             <label htmlFor="message" className="block text-[10px] font-serif font-bold uppercase tracking-[0.4em] text-[#b76e79] mb-4 opacity-70 group-focus-within/field:opacity-100 transition-opacity">Lời Chúc Tới Đôi Bạn Trẻ</label>
             <textarea 
               id="message" 
-              rows={4} 
+              rows={1} 
               placeholder="Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
-              className="w-full bg-[#fdfaf7]/50 border-[1px] border-[#e6d5c3]/50 rounded-sm p-6 focus:border-[#b76e79]/40 focus:bg-white transition-all duration-700 outline-none resize-none font-serif text-lg text-[#2a2a2a] shadow-inner"
+              className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none outline-0 resize-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg overflow-hidden"
             ></textarea>
           </div>
           

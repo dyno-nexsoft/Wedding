@@ -104,18 +104,20 @@ export default function Hero() {
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.6 }}
           className="relative w-full px-6 flex justify-center perspective-[1000px]"
         >
-          {/* Floral Decoration - Top Left */}
-          <div className="absolute top-[-40px] left-[5%] md:left-[15%] w-24 md:w-32 z-50 pointer-events-none opacity-90 rotate-[-15deg]">
-            <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
-          </div>
 
-          {/* Floral Decoration - Bottom Right */}
-          <div className="absolute bottom-[-50px] right-[5%] md:right-[15%] w-32 md:w-40 z-50 pointer-events-none opacity-90 rotate-[165deg]">
-            <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
-          </div>
 
           {/* The Envelope */}
-          <div className="relative w-full max-w-sm aspect-[4/3] bg-[#f9f7f5] rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-visible group">
+          <div className="relative w-full max-w-sm aspect-[4/3] bg-[#f9f7f5] rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden group z-10">
+            {/* Floral Decoration - Top Left inside */}
+            <div className="absolute top-[-8px] left-[-8px] w-24 md:w-32 z-40 pointer-events-none opacity-90">
+              <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
+            </div>
+
+            {/* Floral Decoration - Bottom Right inside */}
+            <div className="absolute bottom-[-8px] right-[-8px] w-32 md:w-40 z-40 pointer-events-none opacity-90 scale-x-[-1] scale-y-[-1]">
+              <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto drop-shadow-sm" />
+            </div>
+
             {/* Couple Names on Envelope Surface */}
             <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-16 z-10 px-6">
               <motion.h1 
