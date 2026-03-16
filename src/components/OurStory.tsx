@@ -29,7 +29,7 @@ export default function OurStory() {
               transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
               className={`flex flex-col ${story.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-8`}
             >
-              <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-[#e6d5c3] flex-shrink-0 shadow-lg">
+              <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-[#e6d5c3] flex-shrink-0 shadow-md shadow-[#b76e79]/10">
                 <img src={story.image} alt={story.title} className="w-full h-full object-cover" />
               </div>
               <div className={`text-center ${story.reverse ? 'md:text-right' : 'md:text-left'} w-full`}>

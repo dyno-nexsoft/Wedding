@@ -22,24 +22,14 @@ export const CONFIG = {
       }
     }
   },
-  events: [
-    {
-      title: "Lễ Thành Hôn",
-      time: "17:00",
-      day: "Thứ Bảy, ngày 20 tháng 06 năm 2026",
-      location: "InterContinental Nha Trang",
-      address: "32-34 Trần Phú, Lộc Thọ, Nha Trang, Khánh Hòa",
-      mapLink: "https://www.google.com/maps/search/?api=1&query=InterContinental+Nha+Trang",
-    },
-    {
-      title: "Tiệc Tối Chúc Mừng",
-      time: "18:30",
-      day: "Thứ Bảy, ngày 20 tháng 06 năm 2026",
-      location: "Sảnh Ballroom - Tầng 2",
-      address: "32-34 Trần Phú, Lộc Thọ, Nha Trang, Khánh Hòa",
-      mapLink: "https://www.google.com/maps/search/?api=1&query=InterContinental+Nha+Trang",
-    }
-  ],
+  event: {
+    title: "Lễ Thành Hôn",
+    time: "17:00",
+    day: "Thứ Bảy, ngày 20 tháng 06 năm 2026",
+    location: "InterContinental Nha Trang",
+    address: "32-34 Trần Phú, Lộc Thọ, Nha Trang, Khánh Hòa",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=InterContinental+Nha+Trang",
+  },
   stories: [
     {
       title: "Duyên Khởi",
@@ -70,8 +60,6 @@ export const CONFIG = {
       "gallery_4.webp",
       "gallery_5.webp",
       "gallery_6.webp",
-      "gallery_7.webp",
-      "gallery_8.webp"
     ],
     calendarBg: "bg_1.webp" // Placeholder
   },

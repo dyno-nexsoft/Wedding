@@ -55,8 +55,8 @@ export default function App() {
         <OurStory />
         <Gallery />
         <Calendar />
-        <Timeline />
         <EventDetails />
+        <Timeline />
         <DressCode />
         <RSVP />
         <Footer />

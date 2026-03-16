@@ -28,7 +28,7 @@ const DressCode: React.FC = () => {
               className="group cursor-default"
             >
               <div 
-                className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-lg mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
+                className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md shadow-[#b76e79]/10 mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
                 style={{ backgroundColor: color.hex }}
               />
               <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">

@@ -44,7 +44,7 @@ export default function Gallery() {
         <div className="w-24 h-[1px] bg-[#e6d5c3] mx-auto"></div>
       </motion.div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
         {images.map((img, index) => (
           <motion.div 
             key={index}
@@ -52,7 +52,7 @@ export default function Gallery() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: index * 0.05 }}
-            className="overflow-hidden h-40 sm:h-48 md:h-64 shadow-lg rounded-xl cursor-pointer border border-[#e6d5c3]/30"
+            className="overflow-hidden h-[24rem] sm:h-[28rem] lg:h-[32rem] shadow-md shadow-[#b76e79]/10 rounded-2xl cursor-pointer border border-[#e6d5c3]/30"
             onClick={() => openLightbox(index)}
           >
             <img 
@@ -105,7 +105,7 @@ export default function Gallery() {
               <img 
                 src={images[selectedIndex]} 
                 alt={`Wedding Gallery Full ${selectedIndex + 1}`} 
-                className="max-w-full max-h-full object-contain shadow-2xl rounded-sm"
+                className="max-w-full max-h-full object-contain shadow-xl shadow-black/30 rounded-sm"
               />
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 font-serif">
                 {selectedIndex + 1} / {images.length}
