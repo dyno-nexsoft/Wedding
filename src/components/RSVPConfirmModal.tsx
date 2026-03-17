@@ -22,7 +22,7 @@ export const RSVPConfirmModal: React.FC<RSVPConfirmModalProps> = ({
 
   const fullMessage = `XÁC NHẬN THAM DỰ ĐÁM CƯỚI:
 - Tên: ${guestName}
-- Lời nhắn: ${message}`;
+- Lời nhắn: ${message || 'Hẹn gặp hai bạn nhé!'}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(fullMessage);
@@ -31,6 +31,7 @@ export const RSVPConfirmModal: React.FC<RSVPConfirmModalProps> = ({
   };
 
   const openZalo = () => {
+    navigator.clipboard.writeText(fullMessage);
     const zaloUrl = `https://zalo.me/${CONFIG.wedding.rsvpPhoneNumber}`;
     window.open(zaloUrl, '_blank');
     onClose();

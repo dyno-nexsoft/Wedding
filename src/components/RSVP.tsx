@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Gift } from 'lucide-react';
+import { Gift, Heart } from 'lucide-react';
 import { CONFIG } from '../config';
 import { RSVPConfirmModal } from './RSVPConfirmModal';
 import { GiftModal } from './GiftModal';
@@ -91,7 +91,7 @@ export default function RSVP() {
             ></textarea>
           </div>
           
-          <div className="pt-6">
+          <div className="pt-4 flex flex-col gap-6">
             <button 
               type="submit" 
               className="w-full relative z-10 bg-[#b76e79] text-white py-4 md:py-5 rounded-full font-serif text-base md:text-lg tracking-[0.2em] uppercase shadow-lg shadow-[#b76e79]/20 hover:bg-[#a35d68] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer overflow-hidden group/btn"
@@ -99,17 +99,26 @@ export default function RSVP() {
               <span className="relative z-10">Gửi Lời Chúc</span>
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />
             </button>
-          </div>
 
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => setShowGiftModal(true)}
-              className="group inline-flex items-center gap-3 text-[#b76e79] font-serif italic hover:text-[#a35d68] transition-all"
-            >
-              <Gift size={22} className="group-hover:rotate-12 transition-transform opacity-70" />
-              <span className="text-sm md:text-base border-b border-transparent group-hover:border-[#b76e79]/30 transition-all">Gửi quà mừng cưới đến chúng mình</span>
-            </button>
+            <div className="relative flex items-center justify-center py-2">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-[#e6d5c3] to-transparent"></div>
+              </div>
+              <div className="relative bg-[#fdfaf7] px-4">
+                <span className="text-[10px] font-serif tracking-[0.4em] text-[#b76e79] opacity-70 whitespace-nowrap">Hoặc</span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setShowGiftModal(true)}
+                className="group inline-flex items-center gap-3 text-[#b76e79] font-serif italic hover:text-[#a35d68] transition-all"
+              >
+                <Gift size={22} className="group-hover:rotate-12 transition-transform opacity-70" />
+                <span className="text-sm md:text-base border-b border-transparent group-hover:border-[#b76e79]/30 transition-all">Gửi quà mừng cưới đến chúng mình</span>
+              </button>
+            </div>
           </div>
         </form>
       </motion.div>
