@@ -107,6 +107,14 @@ export default function Hero() {
               >
                 {CONFIG.wedding.coupleName}
               </motion.h1>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.6 }}
+                transition={{ duration: 1.2, delay: 2.2 }}
+                className="text-[10px] md:text-xs font-serif tracking-[0.5em] text-[#4a4a4a] mt-3 uppercase"
+              >
+                {CONFIG.wedding.dateFormatted}
+              </motion.p>
             </div>
 
             {/* V-Flap SVG (Closed) */}
@@ -151,25 +159,10 @@ export default function Hero() {
               onClick={scrollToNext}
               aria-label="Mở thiệp mời"
               className="absolute inset-0 z-40 bg-transparent cursor-pointer group/env"
-            >
-              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] font-serif text-[#b76e79] opacity-0 group-hover/env:opacity-60 transition-opacity whitespace-nowrap uppercase">
-                Chạm để xem
-              </span>
-            </button>
+            />
           </div>
         </motion.div>
 
-        {/* Date Display at the Bottom */}
-        <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ duration: 1, delay: 2.2 }}
-           className="mt-16 px-4"
-        >
-          <div className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#2a2a2a]/10 tracking-[0.2em] whitespace-nowrap select-none font-light">
-            {CONFIG.wedding.dateFormatted}
-          </div>
-        </motion.div>
       </div>
       
       {/* Elegant Scroll Indicator */}
