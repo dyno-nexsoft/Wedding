@@ -64,11 +64,11 @@ export default function Hero() {
         fetchpriority="high"
       />
       
-      {/* Vignette Overlay — radial gradient for cinematic depth */}
+      {/* Subtler Overlay — reduced mist for better image clarity */}
       <div className="absolute inset-0 z-1" style={{
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, rgba(253,250,247,0.3) 50%, rgba(253,250,247,0.6) 100%)'
+        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(253,250,247,0.1) 40%, rgba(253,250,247,0.3) 100%)'
       }} />
-      <div className="absolute inset-0 bg-white/5 backdrop-blur-[0.5px] z-1" />
+      <div className="absolute inset-0 bg-black/5 z-1" />
 
       {/* Floating Sparkle Particles */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -87,7 +87,7 @@ export default function Hero() {
           className="mb-16 md:mb-24 text-center px-4"
         >
           <p className="text-[10px] md:text-xs font-serif tracking-[0.6em] text-[#4a4a4a] uppercase font-bold whitespace-nowrap">
-            TRÂN TRỌNG KÍNH MỜI:
+            TRÂN TRỌNG KÍNH MỜI
           </p>
         </motion.div>
 

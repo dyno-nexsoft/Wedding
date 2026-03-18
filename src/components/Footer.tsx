@@ -4,7 +4,7 @@ import { CONFIG } from '../config';
 export default function Footer() {
   const initials = `${CONFIG.wedding.bride.split(' ').pop()?.[0]} & ${CONFIG.wedding.groom.split(' ').pop()?.[0]}`;
   return (
-    <footer className="py-16 bg-[#fdfaf7] text-center text-[#a3a3a3] font-serif relative">
+    <footer className="pt-16 pb-32 md:pb-24 bg-[#fdfaf7] text-center text-[#a3a3a3] font-serif relative">
       {/* Decorative top divider */}
       <div className="section-divider mb-8" />
 

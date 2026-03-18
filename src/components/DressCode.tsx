@@ -61,7 +61,7 @@ const DressCode: React.FC = () => {
         {/* Note about participation */}
         <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.5 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.8 }}
           className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#b76e79]/60"

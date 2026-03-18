@@ -50,25 +50,17 @@ export const CONFIG = {
       reverse: false
     }
   ],
+  gallery: [
+    { url: "gallery_1.webp", caption: "Tình Yêu" },
+    { url: "gallery_2.webp", caption: "Kỷ Niệm" },
+    { url: "gallery_3.webp", caption: "Hạnh Phúc" },
+    { url: "gallery_4.webp", caption: "Bên Nhau" },
+    { url: "gallery_5.webp", caption: "Lời Hứa" },
+    { url: "gallery_6.webp", caption: "Mãi Mãi" },
+  ],
   assets: {
     heroBg: "bg_1.webp",
     detailsBg: "bg_2.webp",
-    gallery: [
-      "gallery_1.webp",
-      "gallery_2.webp",
-      "gallery_3.webp",
-      "gallery_4.webp",
-      "gallery_5.webp",
-      "gallery_6.webp",
-    ],
-    galleryCaptions: [
-      "Tình Yêu",
-      "Kỷ Niệm",
-      "Hạnh Phúc",
-      "Bên Nhau",
-      "Lời Hứa",
-      "Mãi Mãi",
-    ],
     calendarBg: "bg_1.webp",
     waxSeal: "orange_wax_seal.png",
     floralAccent: "floral_accent.png"

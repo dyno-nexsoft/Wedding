@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { CalendarPlus, Map, Heart } from 'lucide-react';
 import { CONFIG } from '../config';
 import { useCountdown } from '../hooks/useCountdown';
@@ -119,15 +119,20 @@ export default function EventDetails() {
                   ].map((item, index) => (
                     <React.Fragment key={index}>
                       <div className="text-center flex-1">
-                        <motion.div 
-                          key={item.value}
-                          initial={{ scale: 0.8, opacity: 0, y: -5 }}
-                          animate={{ scale: 1, opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeOut' }}
-                          className="text-2xl md:text-3xl font-serif font-light text-[#2a2a2a] mb-1 md:mb-2"
-                        >
-                          {item.value}
-                        </motion.div>
+                        <div className="h-8 md:h-10 overflow-hidden relative flex flex-col items-center justify-center mb-1">
+                          <AnimatePresence mode="popLayout">
+                            <motion.span
+                              key={item.value}
+                              initial={{ y: 20, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              exit={{ y: -20, opacity: 0 }}
+                              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                              className="text-2xl md:text-3xl font-serif font-light text-[#2a2a2a] block"
+                            >
+                              {item.value}
+                            </motion.span>
+                          </AnimatePresence>
+                        </div>
                         <div className="text-[8px] uppercase tracking-[0.2em] text-[#b76e79]/60 font-bold">
                           {item.label}
                         </div>

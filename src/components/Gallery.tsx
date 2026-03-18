@@ -4,7 +4,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CONFIG } from '../config';
 
 export default function Gallery() {
-  const images = CONFIG.assets.gallery;
+  const items = CONFIG.gallery;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const openLightbox = (index: number) => {
@@ -20,18 +20,16 @@ export default function Gallery() {
   const showNext = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % images.length);
+      setSelectedIndex((selectedIndex + 1) % items.length);
     }
   };
 
   const showPrev = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
+      setSelectedIndex((selectedIndex - 1 + items.length) % items.length);
     }
   };
-
-  const captions = CONFIG.assets.galleryCaptions;
 
   return (
     <section id="gallery" className="pt-16 pb-8 md:pt-24 md:pb-12 bg-[#fdfaf7] px-4">
@@ -49,7 +47,7 @@ export default function Gallery() {
       </motion.div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
-        {images.map((img, index) => (
+        {items.map((item, index) => (
           <motion.div 
             key={index}
             initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -2 : 2 }}
@@ -62,14 +60,14 @@ export default function Gallery() {
           >
             <div className="overflow-hidden h-[24rem] sm:h-[28rem] lg:h-[32rem] relative">
               <img 
-                src={img} 
+                src={item.url} 
                 alt={`Ảnh cưới ${index + 1}`} 
                 className="w-full h-full object-cover grayscale-[0.15] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" 
               />
               {/* Caption overlay — always visible on mobile, hover on desktop */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
                 <span className="text-white/90 font-cursive text-2xl tracking-wide italic translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
-                  {captions[index] ?? `Khoảnh khắc ${index + 1}`}
+                  {item.caption ?? `Khoảnh khắc ${index + 1}`}
                 </span>
               </div>
               {/* Inner shadow for photo depth */}
@@ -118,18 +116,18 @@ export default function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <img 
-                src={images[selectedIndex]} 
+                src={items[selectedIndex].url} 
                 alt={`Ảnh cưới ${selectedIndex + 1}`} 
                 className="max-w-full max-h-full object-contain shadow-xl shadow-black/30 rounded-sm"
               />
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 font-serif">
-                {selectedIndex + 1} / {images.length}
+                {selectedIndex + 1} / {items.length}
               </div>
             </motion.div>
 
             {/* Thumbnail strip at bottom */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-50">
-              {images.map((thumb, i) => (
+              {items.map((item, i) => (
                 <button
                   key={i}
                   onClick={(e) => { e.stopPropagation(); setSelectedIndex(i); }}
@@ -137,7 +135,7 @@ export default function Gallery() {
                     i === selectedIndex ? 'border-[#b76e79] opacity-100 scale-110' : 'border-white/20 opacity-50 hover:opacity-80'
                   }`}
                 >
-                  <img src={thumb} alt="" className="w-full h-full object-cover" />
+                  <img src={item.url} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
