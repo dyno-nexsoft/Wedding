@@ -1,15 +1,45 @@
 import React, { useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ChevronDown, MailOpen } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { CONFIG } from '../config';
+
+/// Floating sparkle particle for dreamy atmosphere
+function SparkleParticle({ delay, x, y, size }: { delay: number; x: string; y: string; size: number }) {
+  return (
+    <motion.div
+      className="absolute rounded-full bg-[#b76e79]/30 pointer-events-none"
+      style={{ left: x, top: y, width: size, height: size }}
+      animate={{
+        opacity: [0, 0.8, 0],
+        scale: [0, 1.2, 0],
+        y: [0, -20, 0],
+      }}
+      transition={{
+        duration: 4,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+  );
+}
 
 export default function Hero() {
   const { scrollY } = useScroll();
   
-  // Parallax transforms - motion handles these efficiently
   const yBackground = useTransform(scrollY, [0, 500], [0, 150]);
   const yCard = useTransform(scrollY, [0, 500], [0, -50]);
   const opacityCard = useTransform(scrollY, [0, 300], [1, 0.8]);
+
+  /// Sparkle positions for dreamy floating effect
+  const sparkles = useMemo(() => [
+    { delay: 0, x: '15%', y: '20%', size: 4 },
+    { delay: 1.2, x: '80%', y: '30%', size: 3 },
+    { delay: 2.4, x: '25%', y: '70%', size: 5 },
+    { delay: 0.8, x: '70%', y: '65%', size: 3 },
+    { delay: 1.8, x: '50%', y: '15%', size: 4 },
+    { delay: 3.0, x: '85%', y: '80%', size: 3 },
+  ], []);
 
   const scrollToNext = () => {
     const storySection = document.getElementById('story');
@@ -34,8 +64,18 @@ export default function Hero() {
         fetchpriority="high"
       />
       
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px] z-1" />
+      {/* Vignette Overlay — radial gradient for cinematic depth */}
+      <div className="absolute inset-0 z-1" style={{
+        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, rgba(253,250,247,0.3) 50%, rgba(253,250,247,0.6) 100%)'
+      }} />
+      <div className="absolute inset-0 bg-white/5 backdrop-blur-[0.5px] z-1" />
+
+      {/* Floating Sparkle Particles */}
+      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+        {sparkles.map((s, i) => (
+          <SparkleParticle key={i} {...s} />
+        ))}
+      </div>
 
       {/* Content Layout */}
       <div className="relative z-20 w-full max-w-lg mx-auto flex flex-col items-center -mt-24 md:-mt-32">
@@ -50,7 +90,6 @@ export default function Hero() {
             TRÂN TRỌNG KÍNH MỜI:
           </p>
         </motion.div>
-
 
         {/* Central Envelope Section */}
         <motion.div
@@ -71,10 +110,9 @@ export default function Hero() {
           {/* Subtle Glow Behind Card */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#b76e79]/5 blur-[80px] rounded-full z-0" />
 
-
           {/* The Envelope */}
-          <div className="relative w-full max-w-sm aspect-[4/3] bg-[#f9f7f5] rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.12)] overflow-hidden group z-10">
-            {/* Floral Decorations with explicit dimensions to prevent CLS */}
+          <div className="relative w-full max-w-sm aspect-[4/3] bg-[#f9f7f5] rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.12)] overflow-hidden group z-10 hover:shadow-[0_25px_70px_rgba(183,110,121,0.15)] transition-shadow duration-700">
+            {/* Floral Decorations */}
             <div className="absolute top-[-8px] left-[-8px] w-24 md:w-32 z-40 pointer-events-none opacity-90">
               <img 
                 src={CONFIG.assets.floralAccent} 
@@ -137,19 +175,25 @@ export default function Hero() {
             <div className="absolute inset-2 border border-[#e6d5c3]/40 z-10 pointer-events-none" />
 
             {/* Green Wax Seal Clasp */}
-            <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+            <div className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-20 h-20 md:w-26 md:h-26 group cursor-pointer relative"
+                className="w-12 h-12 md:w-14 md:h-14 group cursor-pointer relative"
                 onClick={scrollToNext}
               >
+                {/* Pulsing glow behind wax seal */}
+                <motion.div
+                  className="absolute inset-[-4px] rounded-full bg-[#f4a261]/20 blur-md"
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                />
                 <img
                   src={CONFIG.assets.waxSeal}
                   alt="Dấu sáp"
                   width={104}
                   height={104}
-                  className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(244,162,97,0.3)] transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(244,162,97,0.3)] transition-transform duration-500 group-hover:scale-105 relative z-10"
                 />
               </motion.div>
             </div>
@@ -165,7 +209,7 @@ export default function Hero() {
 
       </div>
       
-      {/* Elegant Scroll Indicator */}
+      {/* Elegant Scroll Indicator with pulse ring */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
@@ -177,7 +221,14 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
+          className="relative"
         >
+          {/* Pulse ring behind chevron */}
+          <motion.div
+            className="absolute inset-[-8px] rounded-full border border-[#b76e79]/20"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
           <ChevronDown className="w-5 h-5 text-[#b76e79]" />
         </motion.div>
       </motion.div>

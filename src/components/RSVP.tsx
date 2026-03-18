@@ -1,12 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Gift, Heart } from 'lucide-react';
+import { Gift } from 'lucide-react';
 import { CONFIG } from '../config';
 import { RSVPConfirmModal } from './RSVPConfirmModal';
 import { GiftModal } from './GiftModal';
 
+/// Floating heart particle for romantic background atmosphere
+function FloatingHeart({ delay, x, size }: { delay: number; x: string; size: number }) {
+  return (
+    <motion.div
+      className="absolute bottom-0 text-[#b76e79]/10 pointer-events-none select-none"
+      style={{ left: x, fontSize: size }}
+      animate={{
+        y: [0, -400, -800],
+        x: [0, 15, -15, 0],
+        opacity: [0, 0.6, 0],
+        rotate: [0, 10, -10, 0],
+      }}
+      transition={{
+        duration: 12,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    >
+      ♡
+    </motion.div>
+  );
+}
+
 /**
  * RSVP component handles the registration for the wedding and gift options.
+ * Enhanced with floating hearts, shimmering submit button, and refined focus states.
  */
 export default function RSVP() {
   const [formData, setFormData] = useState({
@@ -25,7 +50,6 @@ export default function RSVP() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Sync body scroll with modal state
   useEffect(() => {
     if (showModal || showGiftModal) {
       document.body.style.overflow = 'hidden';
@@ -49,6 +73,14 @@ export default function RSVP() {
 
   return (
     <section id="rsvp" className="py-16 md:py-24 px-4 md:px-12 bg-[#fdfaf7] relative overflow-hidden flex items-center justify-center font-sans">
+      {/* Floating hearts background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <FloatingHeart delay={0} x="10%" size={20} />
+        <FloatingHeart delay={3} x="85%" size={16} />
+        <FloatingHeart delay={6} x="45%" size={18} />
+        <FloatingHeart delay={9} x="70%" size={14} />
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -68,36 +100,45 @@ export default function RSVP() {
         <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
           <div className="relative group/field">
             <label htmlFor="guestName" className="block text-[10px] font-serif font-bold uppercase tracking-[0.4em] text-[#b76e79] mb-4 opacity-70 group-focus-within/field:opacity-100 transition-opacity">Danh Tính Khách Mời</label>
-            <input 
-              type="text" 
-              id="guestName" 
-              required 
-              placeholder="Xin vui lòng nhập họ và tên của bạn..."
-              value={formData.guestName}
-              onChange={(e) => setFormData({...formData, guestName: e.target.value})}
-              className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg" 
-            />
+            <div className="relative">
+              <input 
+                type="text" 
+                id="guestName" 
+                required 
+                placeholder="Xin vui lòng nhập họ và tên của bạn..."
+                value={formData.guestName}
+                onChange={(e) => setFormData({...formData, guestName: e.target.value})}
+                className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg peer" 
+              />
+              {/* Animated focus underline */}
+              <div className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#b76e79]/60 via-[#b76e79] to-[#b76e79]/60 peer-focus:w-full peer-focus:left-0 transition-all duration-500" />
+            </div>
           </div>
           
           <div className="relative group/field">
             <label htmlFor="message" className="block text-[10px] font-serif font-bold uppercase tracking-[0.4em] text-[#b76e79] mb-4 opacity-70 group-focus-within/field:opacity-100 transition-opacity">Lời Chúc Tới Đôi Bạn Trẻ</label>
-            <textarea 
-              id="message" 
-              rows={isMobile ? 2 : 1} 
-              placeholder={isMobile ? "Gửi gắm những lời chúc tốt đẹp\nhoặc những lưu ý riêng..." : "Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."}
-              value={formData.message}
-              onChange={(e) => setFormData({...formData, message: e.target.value})}
-              className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none outline-0 resize-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg overflow-hidden"
-            ></textarea>
+            <div className="relative">
+              <textarea 
+                id="message" 
+                rows={isMobile ? 2 : 1} 
+                placeholder={isMobile ? "Gửi gắm những lời chúc tốt đẹp\nhoặc những lưu ý riêng..." : "Gửi gắm những lời chúc tốt đẹp hoặc những lưu ý riêng..."}
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                className="w-full border-b-[1px] border-[#e6d5c3] bg-transparent focus:border-[#b76e79] transition-all duration-700 py-3 outline-none outline-0 resize-none font-serif text-xl md:text-2xl text-[#2a2a2a] placeholder:text-stone-300 placeholder:italic placeholder:text-base md:placeholder:text-lg overflow-hidden peer"
+              ></textarea>
+              {/* Animated focus underline */}
+              <div className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-gradient-to-r from-[#b76e79]/60 via-[#b76e79] to-[#b76e79]/60 peer-focus:w-full peer-focus:left-0 transition-all duration-500" />
+            </div>
           </div>
           
           <div className="pt-4 flex flex-col gap-6">
             <button 
               type="submit" 
-              className="w-full relative z-10 bg-[#b76e79] text-white py-4 md:py-5 rounded-full font-serif text-base md:text-lg tracking-[0.2em] uppercase shadow-lg shadow-[#b76e79]/20 hover:bg-[#a35d68] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer overflow-hidden group/btn"
+              className="w-full relative z-10 bg-[#b76e79] text-white py-4 md:py-5 rounded-full font-serif text-base md:text-lg tracking-[0.2em] uppercase shadow-lg shadow-[#b76e79]/20 hover:bg-[#a35d68] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer overflow-hidden group/btn hover:shadow-xl hover:shadow-[#b76e79]/30"
             >
               <span className="relative z-10">Gửi Lời Chúc</span>
-              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />
+              {/* Shimmer highlight effect */}
+              <div className="absolute inset-0 shimmer-btn" />
             </button>
 
             <div className="relative flex items-center justify-center py-2">

@@ -61,6 +61,14 @@ export const CONFIG = {
       "gallery_5.webp",
       "gallery_6.webp",
     ],
+    galleryCaptions: [
+      "Tình Yêu",
+      "Kỷ Niệm",
+      "Hạnh Phúc",
+      "Bên Nhau",
+      "Lời Hứa",
+      "Mãi Mãi",
+    ],
     calendarBg: "bg_1.webp",
     waxSeal: "orange_wax_seal.png",
     floralAccent: "floral_accent.png"

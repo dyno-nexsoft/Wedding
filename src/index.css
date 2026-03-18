@@ -81,6 +81,40 @@
   }
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.08); }
+  56% { transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 @layer utilities {
   .parallax-bg {
     background-attachment: fixed;
@@ -115,6 +149,57 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
+  }
+
+  .glass-card {
+    background: rgba(255, 250, 247, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(230, 213, 195, 0.4);
+    box-shadow: 0 8px 32px rgba(183, 110, 121, 0.06);
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.2), transparent);
+  }
+
+  .section-divider::after {
+    content: "✦";
+    position: relative;
+    background: #fdfaf7;
+    padding: 0 16px;
+    color: rgba(183, 110, 121, 0.3);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+  }
+
+  .shimmer-btn {
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+      110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 75%
+    );
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-heartbeat {
+    animation: heartbeat 2s ease-in-out infinite;
   }
 
   .no-scrollbar::-webkit-scrollbar {

@@ -28,8 +28,23 @@ const Timeline: React.FC = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Vertical Line */}
+          {/* Static vertical connector line between icons */}
           <div className="absolute left-[23px] md:left-1/2 top-0 bottom-0 w-[2px] bg-[#f3e8dd] -translate-x-1/2" />
+
+          {/* Gradient Progress Line (animated overlay) */}
+          <div className="absolute left-[23px] md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 overflow-hidden">
+            <motion.div
+              className="w-full h-full"
+              style={{
+                background: 'linear-gradient(to bottom, transparent, #e6d5c3 15%, #b76e79 50%, #e6d5c3 85%, transparent)',
+                transformOrigin: 'top',
+              }}
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+            />
+          </div>
 
           <div className="space-y-12">
             {CONFIG.timeline.map((item, index) => (
@@ -43,17 +58,33 @@ const Timeline: React.FC = () => {
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                {/* Icon Circle */}
-                <div className="absolute left-[23px] md:left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full border-2 border-[#e6d5c3] flex items-center justify-center z-10 shadow-sm text-[#b76e79]">
-                  {iconMap[item.icon]}
-                </div>
+                {/* Icon Circle with entrance pulse */}
+                <motion.div 
+                  className="absolute left-[23px] md:left-1/2 -translate-x-1/2 z-10"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.2, type: 'spring', stiffness: 200 }}
+                >
+                  <div className="w-12 h-12 bg-white rounded-full border-2 border-[#e6d5c3] flex items-center justify-center shadow-sm text-[#b76e79] relative">
+                    {iconMap[item.icon]}
+                    {/* Pulse ring on entrance */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border border-[#b76e79]/20"
+                      initial={{ scale: 1, opacity: 0.4 }}
+                      whileInView={{ scale: 1.8, opacity: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 + index * 0.2, duration: 1, ease: 'easeOut' }}
+                    />
+                  </div>
+                </motion.div>
 
                 {/* Content Area */}
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${
                   index % 2 === 0 ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'
                 }`}>
-                  <div className="bg-[#fdfaf7] p-4 md:p-6 rounded-2xl border border-[#e6d5c3]/30 shadow-sm hover:shadow-md transition-shadow">
-                    <span className="font-sans text-[10px] md:text-sm tracking-[0.2em] text-[#b76e79] font-bold block mb-1">
+                  <div className="bg-[#fdfaf7] p-4 md:p-6 rounded-2xl border border-[#e6d5c3]/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500 group/card">
+                    <span className="font-sans text-[10px] md:text-sm tracking-[0.2em] text-[#b76e79] font-bold block mb-1 group-hover/card:tracking-[0.3em] transition-all duration-300">
                       {item.time}
                     </span>
                     <h3 className="font-serif text-lg md:text-xl text-[#2a2a2a] mb-1.5 md:mb-2">{item.title}</h3>

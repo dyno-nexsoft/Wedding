@@ -66,6 +66,12 @@ const Calendar: React.FC = () => {
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center">
+                        {/* Shimmer glow around wedding date */}
+                        <motion.div
+                          className="absolute inset-[-6px] rounded-full bg-[#f4a261]/15 blur-md"
+                          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                        />
                         <img 
                           src={CONFIG.assets.waxSeal} 
                           alt="Special Date" 
@@ -75,8 +81,10 @@ const Calendar: React.FC = () => {
                       </div>
                     </motion.div>
                   ) : (
-                    <span className={`font-serif text-sm md:text-lg ${d ? 'text-[#4a4a4a]' : 'text-transparent'} transition-colors hover:text-[#b76e79]`}>
+                    <span className={`font-serif text-sm md:text-lg ${d ? 'text-[#4a4a4a] cursor-default' : 'text-transparent'} transition-colors duration-300 hover:text-[#b76e79] relative group/day`}>
                       {d}
+                      {/* Hover dot under day */}
+                      {d && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#b76e79]/0 group-hover/day:bg-[#b76e79]/40 transition-colors duration-300" />}
                     </span>
                   )}
                 </div>
@@ -91,4 +99,3 @@ const Calendar: React.FC = () => {
 
 
 export default Calendar;
-

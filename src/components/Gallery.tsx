@@ -31,6 +31,8 @@ export default function Gallery() {
     }
   };
 
+  const captions = CONFIG.assets.galleryCaptions;
+
   return (
     <section id="gallery" className="pt-16 pb-8 md:pt-24 md:pb-12 bg-[#fdfaf7] px-4">
       <motion.div 
@@ -54,22 +56,24 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.02, rotate: 0, zIndex: 10 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8 }}
-            className="group relative p-3 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-sm cursor-pointer border border-gray-100/50"
+            transition={{ duration: 0.8, delay: index * 0.1 }}
+            className="group relative p-3 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-sm cursor-pointer border border-gray-100/50 hover:shadow-[0_20px_50px_rgba(183,110,121,0.12)] transition-shadow duration-500"
             onClick={() => openLightbox(index)}
           >
             <div className="overflow-hidden h-[24rem] sm:h-[28rem] lg:h-[32rem] relative">
               <img 
                 src={img} 
                 alt={`Ảnh cưới ${index + 1}`} 
-                className="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" 
+                className="w-full h-full object-cover grayscale-[0.15] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" 
               />
-              {/* Glossy overlay effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
-            </div>
-            {/* Subtle photo metadata feel */}
-            <div className="mt-3 text-center">
-               <span className="text-[9px] font-serif uppercase tracking-[0.2em] text-[#b76e79]/40 opacity-60">Khoảnh khắc {index + 1}</span>
+              {/* Caption overlay — always visible on mobile, hover on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
+                <span className="text-white/90 font-cursive text-2xl tracking-wide italic translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
+                  {captions[index] ?? `Khoảnh khắc ${index + 1}`}
+                </span>
+              </div>
+              {/* Inner shadow for photo depth */}
+              <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.05)] pointer-events-none" />
             </div>
           </motion.div>
         ))}
@@ -93,14 +97,14 @@ export default function Gallery() {
 
             <button 
               onClick={showPrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2 bg-white/10 rounded-full backdrop-blur-sm"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20"
             >
               <ChevronLeft size={40} />
             </button>
 
             <button 
               onClick={showNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2 bg-white/10 rounded-full backdrop-blur-sm"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20"
             >
               <ChevronRight size={40} />
             </button>
@@ -122,6 +126,21 @@ export default function Gallery() {
                 {selectedIndex + 1} / {images.length}
               </div>
             </motion.div>
+
+            {/* Thumbnail strip at bottom */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+              {images.map((thumb, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setSelectedIndex(i); }}
+                  className={`w-12 h-12 rounded-sm overflow-hidden border-2 transition-all duration-300 ${
+                    i === selectedIndex ? 'border-[#b76e79] opacity-100 scale-110' : 'border-white/20 opacity-50 hover:opacity-80'
+                  }`}
+                >
+                  <img src={thumb} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
