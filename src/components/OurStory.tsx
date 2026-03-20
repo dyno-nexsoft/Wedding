@@ -6,9 +6,9 @@ export default function OurStory() {
   const stories = CONFIG.stories;
 
   return (
-    <section id="story" className="py-16 md:py-24 px-4 md:px-12 bg-white relative overflow-hidden">
+    <section id="story" className="py-16 md:py-24 px-4 md:px-8 lg:px-12 bg-white relative overflow-hidden">
       
-      <div className="max-w-4xl mx-auto text-center w-full">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto text-center w-full">
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
@@ -28,43 +28,98 @@ export default function OurStory() {
           <p className="font-serif italic text-base sm:text-lg text-gray-500 mb-16 opacity-80">Nơi tình yêu bắt đầu và lớn lên theo năm tháng</p>
         </motion.div>
 
-        {/* Timeline connector */}
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#e6d5c3]/50 to-transparent hidden md:block" />
+        {/* SVG Defs for Curved Timeline */}
+        <svg className="w-0 h-0 absolute pointer-events-none">
+          <defs>
+            <linearGradient id="wave-grad-top" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0" />
+              <stop offset="20%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0.8" />
+            </linearGradient>
+            <linearGradient id="wave-grad-bottom" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="80%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="wave-grad-mid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0.8" />
+            </linearGradient>
+          </defs>
+        </svg>
 
-          <div className="space-y-12 md:space-y-16">
+        {/* Timeline connector */}
+        <div className="relative mt-8 md:mt-16 w-full">
+          <div className="relative z-10 py-4 flex flex-col">
             {stories.map((story, index) => (
               <motion.div 
                 key={index}
-                initial={{ opacity: 0, x: story.reverse ? 50 : -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: "easeOut", delay: index * 0.15 }}
-                className={`flex flex-col ${story.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-6 md:gap-10 relative`}
+                transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+                className="flex w-full items-center relative group min-h-[140px] md:min-h-[220px] py-12 md:py-20"
               >
-                {/* Connection heart dot */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center z-10">
+                {/* Mobile Curved Vine Line (Background) */}
+                <div className="absolute top-0 bottom-0 left-12 w-[60px] -translate-x-1/2 pointer-events-none md:hidden z-0">
+                  <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path 
+                      d={story.reverse 
+                          ? "M 10 0 C 10 40, 90 60, 90 100" 
+                          : "M 90 0 C 90 40, 10 60, 10 100"} 
+                      fill="none" 
+                      stroke={index === 0 ? "url(#wave-grad-top)" : index === stories.length - 1 ? "url(#wave-grad-bottom)" : "url(#wave-grad-mid)"}
+                      strokeWidth="2" 
+                      vectorEffect="non-scaling-stroke" 
+                    />
+                  </svg>
+                </div>
+
+                {/* Desktop Curved Wavy Line (Background) */}
+                <div className="absolute inset-0 pointer-events-none hidden md:block w-full h-full z-0">
+                  <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path 
+                      d={story.reverse 
+                          ? "M 50 0 C 80 20, 80 80, 50 100" 
+                          : "M 50 0 C 20 20, 20 80, 50 100"} 
+                      fill="none" 
+                      stroke={index === 0 ? "url(#wave-grad-top)" : index === stories.length - 1 ? "url(#wave-grad-bottom)" : "url(#wave-grad-mid)"}
+                      strokeWidth="2" 
+                      vectorEffect="non-scaling-stroke" 
+                    />
+                  </svg>
+                </div>
+
+                {/* Timeline Image Node (Replaces Dot) */}
+                <div className={`absolute left-12 ${story.reverse ? 'md:left-[72.5%]' : 'md:left-[27.5%]'} top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-20 pointer-events-none transition-all duration-700`}>
                   <motion.div 
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
+                    initial={{ scale: 0, rotate: -15 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5 + index * 0.15, type: 'spring' }}
-                    className="w-5 h-5 rounded-full bg-white border-2 border-[#b76e79]/30 flex items-center justify-center"
+                    transition={{ delay: 0.2 + index * 0.15, type: 'spring', stiffness: 200, damping: 15 }}
+                    className="relative flex items-center justify-center pointer-events-auto"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#b76e79]/40" />
+                    {/* Glowing pulse behind image */}
+                    <div className="absolute inset-[-8px] md:inset-[-12px] rounded-full bg-[#b76e79]/15 animate-[ping_4s_ease-in-out_infinite]" />
+                    
+                    {/* Main Image Node */}
+                    <div className="w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-[3px] md:border-4 border-white ring-4 ring-[#e6d5c3]/40 shadow-xl shadow-[#b76e79]/10 relative group/img cursor-pointer bg-[#fffAf9]">
+                      <img src={story.image} alt={story.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" />
+                      <div className="absolute inset-0 bg-[#b76e79]/0 group-hover/img:bg-[#b76e79]/10 transition-colors duration-500 rounded-full" />
+                    </div>
                   </motion.div>
                 </div>
 
-                {/* Image with hover effect */}
-                <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-[#e6d5c3] flex-shrink-0 shadow-md shadow-[#b76e79]/10 group/img relative">
-                  <img src={story.image} alt={story.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" />
-                  <div className="absolute inset-0 bg-[#b76e79]/0 group-hover/img:bg-[#b76e79]/10 transition-colors duration-500 rounded-full" />
-                </div>
-
-                {/* Story text card with glass effect */}
-                <div className={`text-center ${story.reverse ? 'md:text-right' : 'md:text-left'} w-full glass-card rounded-2xl p-5 md:p-6`}>
-                  <h3 className="text-lg md:text-2xl font-serif text-[#b76e79] mb-2">{story.title}</h3>
-                  <p className="text-[#4a4a4a] text-sm md:text-base leading-relaxed">{story.description}</p>
+                {/* Left/Right Text Content (Zigzag on Desktop, Left-aligned on Mobile) */}
+                <div className={`w-full md:w-[60%] flex flex-col justify-center py-4 md:py-8 relative z-10
+                  ${story.reverse 
+                      ? 'pl-[7.5rem] pr-4 md:pl-0 md:pr-16 lg:pr-24 md:mr-auto md:text-right text-left' 
+                      : 'pl-[7.5rem] pr-4 md:pr-0 md:pl-16 lg:pl-24 md:ml-auto md:text-left text-left'}
+                `}>
+                  <div className="glass-card rounded-[2rem] p-5 md:p-8 shadow-sm border border-[#e6d5c3]/30 bg-white/80 backdrop-blur-md transition-all duration-300 hover:shadow-md hover:border-[#b76e79]/30">
+                    <h3 className="text-xl md:text-[1.75rem] font-serif text-[#b76e79] mb-3 md:mb-5 leading-tight">{story.title}</h3>
+                    <p className="text-[#4a4a4a] text-sm md:text-[1.05rem] leading-relaxed opacity-90">{story.description}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
