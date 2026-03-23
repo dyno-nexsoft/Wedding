@@ -1,11 +1,21 @@
 export const CONFIG = {
   wedding: {
-    bride: "Đoàn Thị Mỹ Hạnh",
-    groom: "Nguyễn Văn Anh",
+    bride: {
+      họ: "Đoàn Thị Mỹ",
+      tên: "Hạnh"
+    },
+    groom: {
+      họ: "Nguyễn Văn",
+      tên: "Anh"
+    },
     coupleName: "Hạnh & Anh",
-    date: "2026-06-20T17:00:00",
-    dateFormatted: "20.06.2026",
-    monthYear: "Tháng 6 Năm 2026",
+    date: {
+      năm: 2026,
+      tháng: 6,
+      ngày: 20,
+      giờ: 17,
+      phút: 0
+    },
     rsvpPhoneNumber: "0392735734",
     bank: {
       groom: {
@@ -24,8 +34,6 @@ export const CONFIG = {
   },
   event: {
     title: "Lễ Thành Hôn",
-    time: "17:00",
-    day: "Thứ Bảy, ngày 20 tháng 06 năm 2026",
     location: "InterContinental Nha Trang",
     address: "32-34 Trần Phú, Lộc Thọ, Nha Trang, Khánh Hòa",
     mapLink: "https://www.google.com/maps/search/?api=1&query=InterContinental+Nha+Trang",

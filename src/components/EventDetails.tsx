@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { CalendarPlus, Map, Heart } from 'lucide-react';
 import { CONFIG } from '../config';
 import { useCountdown } from '../hooks/useCountdown';
-import { generateGoogleCalendarUrl } from '../utils/weddingUtils';
+import { generateGoogleCalendarUrl, getVietnameseWeekday } from '../utils/weddingUtils';
 
 /**
  * EventDetails component displays the main wedding event information
@@ -73,11 +73,11 @@ export default function EventDetails() {
                 
                 <div className="space-y-3 md:space-y-4">
                   <p className="font-serif text-[10px] md:text-sm uppercase tracking-[0.3em] text-gray-400 font-medium">
-                    {event.day.split(',')[0]}
+                    {getVietnameseWeekday(CONFIG.wedding.date)}
                   </p>
                   
                   <div className="text-4xl md:text-5xl font-serif text-[#2a2a2a] font-light tracking-tighter">
-                    {event.time}
+                    {String(CONFIG.wedding.date.giờ).padStart(2, '0')}:{String(CONFIG.wedding.date.phút).padStart(2, '0')}
                   </div>
                   
                   <div className="pt-6 mt-6 md:pt-8 md:mt-8 border-t border-[#e6d5c3]/40">

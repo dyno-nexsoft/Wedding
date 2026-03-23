@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
+import { toJSDate } from '../utils/weddingUtils';
 
 /**
  * useCountdown hook calculates and updates the time remaining until a target date.
- * @param targetDate - The target date string (ISO format).
+ * @param targetDate - The target date string (ISO format) or date object.
  * @returns An object containing formatted days, hours, minutes, and seconds.
  */
-export function useCountdown(targetDate: string) {
+export function useCountdown(targetDate: any) {
   const [timeLeft, setTimeLeft] = useState({
     days: '00',
     hours: '00',
@@ -14,7 +15,8 @@ export function useCountdown(targetDate: string) {
   });
 
   const calculateTimeLeft = useCallback(() => {
-    const target = new Date(targetDate).getTime();
+    const dateObj = (targetDate?.năm) ? toJSDate(targetDate) : new Date(targetDate);
+    const target = dateObj.getTime();
     const now = new Date().getTime();
     const difference = target - now;
 

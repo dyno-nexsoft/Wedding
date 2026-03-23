@@ -151,7 +151,7 @@ export default function Hero() {
                 transition={{ duration: 1.2, delay: 2.2 }}
                 className="text-[10px] md:text-xs font-serif tracking-[0.5em] text-[#4a4a4a] mt-3 uppercase"
               >
-                {CONFIG.wedding.dateFormatted}
+                {String(CONFIG.wedding.date.ngày).padStart(2, '0')}.{String(CONFIG.wedding.date.tháng).padStart(2, '0')}.{CONFIG.wedding.date.năm}
               </motion.p>
             </div>
 

@@ -5,13 +5,13 @@ import { getCalendarGrid } from '../utils/weddingUtils';
 
 const Calendar: React.FC = () => {
   const days = getCalendarGrid(CONFIG.wedding.date);
-  const date = new Date(CONFIG.wedding.date).getDate();
+  const date = CONFIG.wedding.date.ngày;
   const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
   return (
     <section id="calendar" className="pt-8 pb-8 md:pt-12 md:pb-12 bg-[#fdfaf7] relative overflow-hidden">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
             <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="#b76e79" strokeWidth="0.5" />
@@ -41,7 +41,7 @@ const Calendar: React.FC = () => {
                 LỊCH CƯỚI
               </h2>
               <p className="font-cursive text-3xl md:text-5xl text-[#2a2a2a] pb-4 mx-auto w-fit italic opacity-90">
-                {CONFIG.wedding.monthYear}
+                Tháng {CONFIG.wedding.date.tháng} Năm {CONFIG.wedding.date.năm}
               </p>
               <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto opacity-50"></div>
             </div>

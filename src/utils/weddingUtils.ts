@@ -4,11 +4,16 @@
 
 export interface WeddingEvent {
   title: string;
-  time: string;
-  day: string;
   location: string;
   address: string;
   mapLink: string;
+}
+
+/**
+ * Helper to convert Vietnamese date object to JS Date
+ */
+export function toJSDate(date: { năm: number; tháng: number; ngày: number; giờ: number; phút: number }): Date {
+  return new Date(date.năm, date.tháng - 1, date.ngày, date.giờ, date.phút);
 }
 
 /**
@@ -16,26 +21,23 @@ export interface WeddingEvent {
  * 
  * @param event - The event details.
  * @param coupleName - The names of the couple.
- * @param baseDate - The reference wedding date string (ISO format).
+ * @param baseDate - The reference wedding date object.
  * @returns A Google Calendar template URL string.
  */
 export function generateGoogleCalendarUrl(
   event: WeddingEvent,
   coupleName: string,
-  baseDate: string
+  baseDate: { năm: number; tháng: number; ngày: number; giờ: number; phút: number }
 ): string {
   const title = event.title;
   const location = event.location;
   const details = `Đám cưới ${coupleName}`;
   
-  // Parse base date from wedding date to ensure same year/month/day
-  const [datePart] = baseDate.split('T');
-  
   // Combine date with event time
-  const startObj = new Date(`${datePart}T${event.time}:00`);
+  const startObj = toJSDate(baseDate);
   const endObj = new Date(startObj.getTime() + 2 * 60 * 60 * 1000); // Default 2 hours
   
-  // Format to YYYYMMDDTHHMMSSZ
+  // Format to YYYYMMDDTHHMMSSZ (UTC)
   const formatUTC = (date: Date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
   
   const startTimeStr = formatUTC(startObj);
@@ -47,11 +49,11 @@ export function generateGoogleCalendarUrl(
 /**
  * Generates a calendar grid for a given date.
  * 
- * @param dateStr - The date string (ISO format).
+ * @param dateObjOrData - The Date object or wedding date object.
  * @returns An array containing nulls for padding and numbers for the days of the month.
  */
-export function getCalendarGrid(dateStr: string) {
-  const dateObj = new Date(dateStr);
+export function getCalendarGrid(dateObjOrData: any) {
+  const dateObj = (dateObjOrData.năm) ? toJSDate(dateObjOrData) : new Date(dateObjOrData);
   const year = dateObj.getFullYear();
   const month = dateObj.getMonth();
   
@@ -74,11 +76,11 @@ export function getCalendarGrid(dateStr: string) {
 /**
  * Formats a date string into a Vietnamese weekday name.
  * 
- * @param date - The Date object or date string.
+ * @param date - The Date object or date object from config.
  * @returns The Vietnamese weekday string (e.g., "Thứ Bảy").
  */
-export function getVietnameseWeekday(date: Date | string): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
+export function getVietnameseWeekday(date: any): string {
+  const dateObj = (date?.năm) ? toJSDate(date) : (typeof date === 'string' ? new Date(date) : date);
   return new Intl.DateTimeFormat('vi-VN', { weekday: 'long' }).format(dateObj);
 }
 
