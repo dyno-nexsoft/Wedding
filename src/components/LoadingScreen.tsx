@@ -45,7 +45,7 @@ export default function LoadingScreen() {
             transition={{ duration: 2 }}
             className="absolute -top-12 -right-12 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
           >
-            {CONFIG.wedding.bride.tên.charAt(0)}
+            {CONFIG.wedding.bride.firstName.charAt(0)}
           </motion.span>
           
           <motion.div
@@ -55,7 +55,7 @@ export default function LoadingScreen() {
           >
             <p className="text-[10px] tracking-[0.4em] text-[#b76e79] mb-4 uppercase font-medium">Cô dâu</p>
             <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] underline-offset-8 decoration-[#b76e79]/30 font-light tracking-wide">
-              {CONFIG.wedding.bride.tên}
+              {CONFIG.wedding.bride.firstName}
             </h2>
           </motion.div>
         </div>
@@ -78,7 +78,7 @@ export default function LoadingScreen() {
             transition={{ duration: 2 }}
             className="absolute -top-12 -left-12 text-[12rem] font-serif select-none pointer-events-none text-[#b76e79]"
           >
-            {CONFIG.wedding.groom.tên.charAt(0)}
+            {CONFIG.wedding.groom.firstName.charAt(0)}
           </motion.span>
 
           <motion.div
@@ -88,7 +88,7 @@ export default function LoadingScreen() {
           >
             <p className="text-[10px] tracking-[0.4em] text-[#b76e79] mb-4 uppercase font-medium">Chú rể</p>
             <h2 className="text-3xl md:text-5xl font-serif text-[#2a2a2a] font-light tracking-wide">
-              {CONFIG.wedding.groom.tên}
+              {CONFIG.wedding.groom.firstName}
             </h2>
           </motion.div>
         </div>

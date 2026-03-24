@@ -15,7 +15,7 @@ export function useCountdown(targetDate: any) {
   });
 
   const calculateTimeLeft = useCallback(() => {
-    const dateObj = (targetDate?.năm) ? toJSDate(targetDate) : new Date(targetDate);
+    const dateObj = (targetDate?.year) ? toJSDate(targetDate) : new Date(targetDate);
     const target = dateObj.getTime();
     const now = new Date().getTime();
     const difference = target - now;

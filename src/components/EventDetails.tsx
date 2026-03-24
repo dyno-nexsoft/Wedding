@@ -14,7 +14,7 @@ export default function EventDetails() {
   const event = CONFIG.event;
 
   const handleAddToCalendar = () => {
-    const url = generateGoogleCalendarUrl(event, CONFIG.wedding.coupleName, CONFIG.wedding.date);
+    const url = generateGoogleCalendarUrl(event, `${CONFIG.wedding.bride.firstName} & ${CONFIG.wedding.groom.firstName}`, CONFIG.wedding.date);
     window.open(url, '_blank');
   };
 
@@ -77,7 +77,7 @@ export default function EventDetails() {
                   </p>
                   
                   <div className="text-4xl md:text-5xl font-serif text-[#2a2a2a] font-light tracking-tighter">
-                    {String(CONFIG.wedding.date.giờ).padStart(2, '0')}:{String(CONFIG.wedding.date.phút).padStart(2, '0')}
+                    {String(CONFIG.wedding.date.hour).padStart(2, '0')}:{String(CONFIG.wedding.date.minute).padStart(2, '0')}
                   </div>
                   
                   <div className="pt-6 mt-6 md:pt-8 md:mt-8 border-t border-[#e6d5c3]/40">
@@ -123,9 +123,9 @@ export default function EventDetails() {
                           <AnimatePresence mode="popLayout">
                             <motion.span
                               key={item.value}
-                              initial={{ y: 20, opacity: 0 }}
+                              initial={{ y: -20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
-                              exit={{ y: -20, opacity: 0 }}
+                              exit={{ y: 20, opacity: 0 }}
                               transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                               className="text-2xl md:text-3xl font-serif font-light text-[#2a2a2a] block"
                             >

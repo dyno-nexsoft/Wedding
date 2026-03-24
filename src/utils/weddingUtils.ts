@@ -12,8 +12,8 @@ export interface WeddingEvent {
 /**
  * Helper to convert Vietnamese date object to JS Date
  */
-export function toJSDate(date: { năm: number; tháng: number; ngày: number; giờ: number; phút: number }): Date {
-  return new Date(date.năm, date.tháng - 1, date.ngày, date.giờ, date.phút);
+export function toJSDate(date: { year: number; month: number; day: number; hour: number; minute: number }): Date {
+  return new Date(date.year, date.month - 1, date.day, date.hour, date.minute);
 }
 
 /**
@@ -27,7 +27,7 @@ export function toJSDate(date: { năm: number; tháng: number; ngày: number; gi
 export function generateGoogleCalendarUrl(
   event: WeddingEvent,
   coupleName: string,
-  baseDate: { năm: number; tháng: number; ngày: number; giờ: number; phút: number }
+  baseDate: { year: number; month: number; day: number; hour: number; minute: number }
 ): string {
   const title = event.title;
   const location = event.location;
@@ -53,7 +53,7 @@ export function generateGoogleCalendarUrl(
  * @returns An array containing nulls for padding and numbers for the days of the month.
  */
 export function getCalendarGrid(dateObjOrData: any) {
-  const dateObj = (dateObjOrData.năm) ? toJSDate(dateObjOrData) : new Date(dateObjOrData);
+  const dateObj = (dateObjOrData.year) ? toJSDate(dateObjOrData) : new Date(dateObjOrData);
   const year = dateObj.getFullYear();
   const month = dateObj.getMonth();
   
@@ -80,7 +80,7 @@ export function getCalendarGrid(dateObjOrData: any) {
  * @returns The Vietnamese weekday string (e.g., "Thứ Bảy").
  */
 export function getVietnameseWeekday(date: any): string {
-  const dateObj = (date?.năm) ? toJSDate(date) : (typeof date === 'string' ? new Date(date) : date);
+  const dateObj = (date?.year) ? toJSDate(date) : (typeof date === 'string' ? new Date(date) : date);
   return new Intl.DateTimeFormat('vi-VN', { weekday: 'long' }).format(dateObj);
 }
 

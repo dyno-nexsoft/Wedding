@@ -143,7 +143,7 @@ export default function Hero() {
                 transition={{ duration: 1.2, delay: 2 }}
                 className="text-2xl sm:text-3xl md:text-4xl font-cursive text-[#2a2a2a] leading-tight text-center italic"
               >
-                {CONFIG.wedding.coupleName}
+                {CONFIG.wedding.bride.firstName} & {CONFIG.wedding.groom.firstName}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -151,7 +151,7 @@ export default function Hero() {
                 transition={{ duration: 1.2, delay: 2.2 }}
                 className="text-[10px] md:text-xs font-serif tracking-[0.5em] text-[#4a4a4a] mt-3 uppercase"
               >
-                {String(CONFIG.wedding.date.ngày).padStart(2, '0')}.{String(CONFIG.wedding.date.tháng).padStart(2, '0')}.{CONFIG.wedding.date.năm}
+                {String(CONFIG.wedding.date.day).padStart(2, '0')}.{String(CONFIG.wedding.date.month).padStart(2, '0')}.{CONFIG.wedding.date.year}
               </motion.p>
             </div>
 

@@ -5,7 +5,7 @@ import { getCalendarGrid } from '../utils/weddingUtils';
 
 const Calendar: React.FC = () => {
   const days = getCalendarGrid(CONFIG.wedding.date);
-  const date = CONFIG.wedding.date.ngày;
+  const date = CONFIG.wedding.date.day;
   const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
   return (
@@ -41,7 +41,7 @@ const Calendar: React.FC = () => {
                 LỊCH CƯỚI
               </h2>
               <p className="font-cursive text-3xl md:text-5xl text-[#2a2a2a] pb-4 mx-auto w-fit italic opacity-90">
-                Tháng {CONFIG.wedding.date.tháng} Năm {CONFIG.wedding.date.năm}
+                Tháng {CONFIG.wedding.date.month} Năm {CONFIG.wedding.date.year}
               </p>
               <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto opacity-50"></div>
             </div>

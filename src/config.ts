@@ -1,25 +1,24 @@
 export const CONFIG = {
   wedding: {
     bride: {
-      họ: "Đoàn Thị Mỹ",
-      tên: "Hạnh"
+      lastName: "Đoàn Thị Mỹ",
+      firstName: "Hạnh"
     },
     groom: {
-      họ: "Nguyễn Văn",
-      tên: "Anh"
+      lastName: "Nguyễn Hữu",
+      firstName: "Tín"
     },
-    coupleName: "Hạnh & Anh",
     date: {
-      năm: 2026,
-      tháng: 6,
-      ngày: 20,
-      giờ: 17,
-      phút: 0
+      year: 2026,
+      month: 6,
+      day: 6,
+      hour: 17,
+      minute: 0
     },
     rsvpPhoneNumber: "0392735734",
     bank: {
       groom: {
-        name: "Nguyễn Văn Anh",
+        name: "Nguyễn Hữu Tín",
         number: "123456789",
         bankName: "Vietcombank",
         bankId: "VCB"
@@ -47,7 +46,7 @@ export const CONFIG = {
     },
     {
       title: "Lời Hứa Trăm Năm",
-      description: "Trên đỉnh đồi nhìn xuống vịnh biển lung linh, Nam đã hỏi câu hỏi quan trọng nhất cuộc đời mình. Và Mỹ Hạnh đã mỉm cười đồng ý trong niềm hạnh phúc ngập tràn.",
+      description: "Trên đỉnh đồi nhìn xuống vịnh biển lung linh, Tín đã hỏi câu hỏi quan trọng nhất cuộc đời mình. Và Mỹ Hạnh đã mỉm cười đồng ý trong niềm hạnh phúc ngập tràn.",
       image: "story_2.webp",
       reverse: true
     },
