@@ -67,8 +67,6 @@ export const CONFIG = {
   ],
   assets: {
     heroBg: "bg_1.webp",
-    detailsBg: "bg_2.webp",
-    calendarBg: "bg_1.webp",
     waxSeal: "orange_wax_seal.png",
     floralAccent: "floral_accent.png"
   },
