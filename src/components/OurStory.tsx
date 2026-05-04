@@ -59,9 +59,9 @@ export default function OurStory() {
             <img src={CONFIG.assets.floralAccent} alt="" className="w-full h-auto" />
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-cursive text-[#2a2a2a] mb-6 leading-tight italic opacity-90">Hành Trình Yêu Thương</h2>
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mx-auto mb-8 relative">
-             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[#b76e79] text-xs">❦</span>
+          <h2 className="text-4xl sm:text-6xl font-cursive text-text-title mb-6 leading-tight italic opacity-90">Hành Trình Yêu Thương</h2>
+          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto mb-8 relative">
+             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-accent text-xs">❦</span>
           </div>
           <p className="font-serif italic text-base sm:text-lg text-gray-500 mb-16 opacity-80">Nơi tình yêu bắt đầu và lớn lên theo năm tháng</p>
         </motion.div>
@@ -70,18 +70,18 @@ export default function OurStory() {
         <svg className="w-0 h-0 absolute pointer-events-none">
           <defs>
             <linearGradient id="wave-grad-top" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0" />
-              <stop offset="20%" stopColor="#e6d5c3" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="0%" stopColor="var(--color-secondary)" stopOpacity="0" />
+              <stop offset="20%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
             </linearGradient>
             <linearGradient id="wave-grad-bottom" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0.8" />
-              <stop offset="80%" stopColor="#e6d5c3" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
+              <stop offset="80%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="var(--color-secondary)" stopOpacity="0" />
             </linearGradient>
             <linearGradient id="wave-grad-mid" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#e6d5c3" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#e6d5c3" stopOpacity="0.8" />
+              <stop offset="0%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="var(--color-secondary)" stopOpacity="0.8" />
             </linearGradient>
           </defs>
         </svg>
@@ -150,13 +150,13 @@ export default function OurStory() {
                         delay: index * 1.2, 
                         ease: "easeInOut" 
                       }}
-                      className="absolute inset-[-8px] md:inset-[-12px] rounded-full bg-[#b76e79]/20" 
+                      className="absolute inset-[-8px] md:inset-[-12px] rounded-full bg-accent/20" 
                     />
                     
                     {/* Main Image Node */}
-                    <div className="w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-[3px] md:border-4 border-white ring-4 ring-[#e6d5c3]/40 shadow-xl shadow-[#b76e79]/10 relative group/img cursor-pointer bg-[#fffAf9]">
+                    <div className="w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden border-[3px] md:border-4 border-white ring-4 ring-secondary/40 shadow-xl shadow-accent/10 relative group/img cursor-pointer bg-[#fffAf9]">
                       <img src={story.image} alt={story.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" />
-                      <div className="absolute inset-0 bg-[#b76e79]/0 group-hover/img:bg-[#b76e79]/10 transition-colors duration-500 rounded-full" />
+                      <div className="absolute inset-0 bg-accent/0 group-hover/img:bg-accent/10 transition-colors duration-500 rounded-full" />
                     </div>
                   </motion.div>
                 </div>
@@ -168,8 +168,8 @@ export default function OurStory() {
                       : 'pl-[7.5rem] pr-4 md:pr-0 md:pl-16 lg:pl-24 md:ml-auto md:text-left text-left'}
                 `}>
                    <div className="p-0 transition-all duration-300">
-                    <h3 className="text-xl md:text-[1.75rem] font-serif text-[#b76e79] mb-3 md:mb-5 leading-tight">{story.title}</h3>
-                    <p className="text-[#4a4a4a] text-sm md:text-[1.05rem] leading-relaxed opacity-90">{story.description}</p>
+                    <h3 className="text-xl md:text-[1.75rem] font-serif text-accent mb-3 md:mb-5 leading-tight">{story.title}</h3>
+                    <p className="text-text-main text-sm md:text-[1.05rem] leading-relaxed opacity-90">{story.description}</p>
                   </div>
                 </div>
               </motion.div>

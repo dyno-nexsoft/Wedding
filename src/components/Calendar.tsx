@@ -9,12 +9,12 @@ const Calendar: React.FC = () => {
   const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
   return (
-    <section id="calendar" className="pt-8 pb-8 md:pt-12 md:pb-12 bg-[#fdfaf7] relative overflow-hidden">
+    <section id="calendar" className="pt-8 pb-8 md:pt-12 md:pb-12 bg-primary relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-            <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="#b76e79" strokeWidth="0.5" />
+            <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="var(--color-accent)" strokeWidth="0.5" />
           </pattern>
           <rect width="100%" height="100%" fill="url(#pattern)" />
         </svg>
@@ -29,7 +29,7 @@ const Calendar: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="w-full bg-[#fdfaf7] p-6 md:p-10 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-[#e6d5c3] relative overflow-visible tactile-card"
+            className="w-full bg-primary p-6 md:p-10 rounded-sm shadow-[0_15px_50px_rgba(0,0,0,0.08)] border border-secondary relative overflow-visible tactile-card"
           >
             {/* Floral Accessory */}
             <div className="absolute -top-12 -right-12 w-48 h-48 opacity-40 rotate-12 pointer-events-none">
@@ -37,13 +37,13 @@ const Calendar: React.FC = () => {
         </div>
 
             <div className="text-center mb-10">
-              <h2 className="font-serif text-[10px] md:text-sm uppercase tracking-[0.5em] text-[#b76e79] mb-4 font-bold">
+              <h2 className="font-serif text-[10px] md:text-sm uppercase tracking-[0.5em] text-accent mb-4 font-bold">
                 LỊCH CƯỚI
               </h2>
-              <p className="font-cursive text-3xl md:text-5xl text-[#2a2a2a] pb-4 mx-auto w-fit italic opacity-90">
+              <p className="font-cursive text-3xl md:text-5xl text-text-title pb-4 mx-auto w-fit italic opacity-90">
                 Tháng {CONFIG.wedding.date.month} Năm {CONFIG.wedding.date.year}
               </p>
-              <div className="w-16 h-[1px] bg-[#e6d5c3] mx-auto opacity-50"></div>
+              <div className="w-16 h-[1px] bg-secondary mx-auto opacity-50"></div>
             </div>
 
             <div className="grid grid-cols-7 mb-6">
@@ -68,7 +68,7 @@ const Calendar: React.FC = () => {
                       <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center">
                         {/* Shimmer glow around wedding date */}
                         <motion.div
-                          className="absolute inset-[-6px] rounded-full bg-[#f4a261]/15 blur-md"
+                          className="absolute inset-[-6px] rounded-full bg-accent-warm/15 blur-md"
                           animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
                           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                         />
@@ -81,10 +81,10 @@ const Calendar: React.FC = () => {
                       </div>
                     </motion.div>
                   ) : (
-                    <span className={`font-serif text-sm md:text-lg ${d ? 'text-[#4a4a4a] cursor-default' : 'text-transparent'} transition-colors duration-300 hover:text-[#b76e79] relative group/day`}>
+                    <span className={`font-serif text-sm md:text-lg ${d ? 'text-text-main cursor-default' : 'text-transparent'} transition-colors duration-300 hover:text-accent relative group/day`}>
                       {d}
                       {/* Hover dot under day */}
-                      {d && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#b76e79]/0 group-hover/day:bg-[#b76e79]/40 transition-colors duration-300" />}
+                      {d && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent/0 group-hover/day:bg-accent/40 transition-colors duration-300" />}
                     </span>
                   )}
                 </div>

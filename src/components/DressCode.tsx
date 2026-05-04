@@ -12,8 +12,8 @@ const DressCode: React.FC = () => {
         transition={{ duration: 1 }}
         className="max-w-4xl mx-auto"
       >
-        <h2 className="font-cursive text-3xl sm:text-5xl text-[#2a2a2a] mb-4">{CONFIG.dressCode.title}</h2>
-        <p className="font-serif italic text-sm md:text-base text-[#4a4a4a] mb-12 max-w-lg mx-auto leading-relaxed px-2">
+        <h2 className="font-cursive text-3xl sm:text-5xl text-text-title mb-4">{CONFIG.dressCode.title}</h2>
+        <p className="font-serif italic text-sm md:text-base text-text-main mb-12 max-w-lg mx-auto leading-relaxed px-2">
           {CONFIG.dressCode.description}
         </p>
 
@@ -38,7 +38,7 @@ const DressCode: React.FC = () => {
                   transition={{ delay: 0.5 + index * 0.15, duration: 1.2, ease: 'easeOut' }}
                 />
                 <div 
-                  className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md shadow-[#b76e79]/10 transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#b76e79]/15 relative overflow-hidden"
+                  className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-md shadow-accent/10 transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/15 relative overflow-hidden"
                   style={{ backgroundColor: color.hex }}
                 >
                   {/* Subtle fabric-like texture overlay */}
@@ -48,7 +48,7 @@ const DressCode: React.FC = () => {
                   />
                 </div>
               </div>
-              <span className="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-[#b76e79]/50 font-bold group-hover:text-[#b76e79]/80 transition-colors duration-300">
+              <span className="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-accent/50 font-bold group-hover:text-accent/80 transition-colors duration-300">
                 {color.name}
               </span>
             </motion.div>
@@ -56,7 +56,7 @@ const DressCode: React.FC = () => {
         </div>
 
         {/* Decorative divider */}
-        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/20 to-transparent mx-auto mt-12 mb-8" />
+        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent mx-auto mt-12 mb-8" />
 
         {/* Note about participation */}
         <motion.p
@@ -64,7 +64,7 @@ const DressCode: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#b76e79]/60"
+          className="font-sans text-[10px] uppercase tracking-[0.4em] text-accent/60"
         >
           Sự hiện diện của bạn là niềm vinh hạnh của chúng tôi
         </motion.p>

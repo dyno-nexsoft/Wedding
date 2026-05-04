@@ -32,7 +32,7 @@ export default function Gallery() {
   };
 
   return (
-    <section id="gallery" className="pt-16 pb-8 md:pt-24 md:pb-12 bg-[#fdfaf7] px-4">
+    <section id="gallery" className="pt-16 pb-8 md:pt-24 md:pb-12 bg-primary px-4">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -40,9 +40,9 @@ export default function Gallery() {
         transition={{ duration: 1 }}
         className="max-w-6xl mx-auto text-center mb-12 md:mb-20"
       >
-        <h2 className="text-4xl md:text-6xl font-cursive text-[#2a2a2a] mb-6 italic opacity-90">Thư Viện Ảnh</h2>
-        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mx-auto relative">
-           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfaf7] px-2 text-[#b76e79] text-xs">❦</span>
+        <h2 className="text-4xl md:text-6xl font-cursive text-text-title mb-6 italic opacity-90">Thư Viện Ảnh</h2>
+        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto relative">
+           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary px-2 text-accent text-xs">❦</span>
         </div>
       </motion.div>
       
@@ -88,7 +88,7 @@ export default function Gallery() {
           >
             <button 
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white hover:text-[#b76e79] transition-colors z-50 p-2"
+              className="absolute top-6 right-6 text-white hover:text-accent transition-colors z-50 p-2"
             >
               <X size={32} />
             </button>
@@ -132,7 +132,7 @@ export default function Gallery() {
                   key={i}
                   onClick={(e) => { e.stopPropagation(); setSelectedIndex(i); }}
                   className={`w-12 h-12 rounded-sm overflow-hidden border-2 transition-all duration-300 ${
-                    i === selectedIndex ? 'border-[#b76e79] opacity-100 scale-110' : 'border-white/20 opacity-50 hover:opacity-80'
+                    i === selectedIndex ? 'border-accent opacity-100 scale-110' : 'border-white/20 opacity-50 hover:opacity-80'
                   }`}
                 >
                   <img src={item.url} alt="" className="w-full h-full object-cover" />

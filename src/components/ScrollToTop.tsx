@@ -48,7 +48,7 @@ export default function ScrollToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white border-2 border-[#b76e79] text-[#b76e79] shadow-lg flex items-center justify-center transition-colors hover:bg-[#b76e79]/5"
+          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white border-2 border-accent text-accent shadow-lg flex items-center justify-center transition-colors hover:bg-accent/5"
           aria-label="Cuộn lên đầu trang"
         >
           <motion.div
@@ -65,7 +65,7 @@ export default function ScrollToTop() {
               opacity: [0.1, 0.3, 0.1]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 rounded-full bg-[#b76e79]/10 blur-sm -z-10"
+            className="absolute inset-0 rounded-full bg-accent/10 blur-sm -z-10"
           />
         </motion.button>
       )}

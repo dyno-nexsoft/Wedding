@@ -55,7 +55,7 @@ export default function App() {
         initial={loading ? { opacity: 0, scale: 0.98 } : false}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: loading ? 0.8 : 0 }}
-        className="bg-[#fdfaf7] text-[#4a4a4a] font-sans overflow-x-hidden"
+        className="bg-primary text-text-main font-sans overflow-x-hidden"
       >
         <Hero />
         <OurStory />

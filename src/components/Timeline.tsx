@@ -21,9 +21,9 @@ const Timeline: React.FC = () => {
           transition={{ duration: 1 }}
           className="text-center mb-16 md:mb-24"
         >
-          <h2 className="font-cursive text-4xl sm:text-6xl text-[#2a2a2a] mb-6 italic opacity-90">Lịch Trình Tiệc Cưới</h2>
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79]/40 to-transparent mx-auto relative">
-             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-[#b76e79] text-xs">❦</span>
+          <h2 className="font-cursive text-4xl sm:text-6xl text-text-title mb-6 italic opacity-90">Lịch Trình Tiệc Cưới</h2>
+          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent mx-auto relative">
+             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-accent text-xs">❦</span>
           </div>
         </motion.div>
 
@@ -36,7 +36,7 @@ const Timeline: React.FC = () => {
             <motion.div
               className="w-full h-full"
               style={{
-                background: 'linear-gradient(to bottom, transparent, #e6d5c3 15%, #b76e79 50%, #e6d5c3 85%, transparent)',
+                background: 'linear-gradient(to bottom, transparent, var(--color-secondary) 15%, var(--color-accent) 50%, var(--color-secondary) 85%, transparent)',
                 transformOrigin: 'top',
               }}
               initial={{ scaleY: 0 }}
@@ -66,11 +66,11 @@ const Timeline: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.2, type: 'spring', stiffness: 200 }}
                 >
-                  <div className="w-12 h-12 bg-white rounded-full border-2 border-[#e6d5c3] flex items-center justify-center shadow-sm text-[#b76e79] relative">
+                  <div className="w-12 h-12 bg-white rounded-full border-2 border-secondary flex items-center justify-center shadow-sm text-accent relative">
                     {iconMap[item.icon]}
                     {/* Pulse ring on entrance */}
                     <motion.div
-                      className="absolute inset-0 rounded-full border border-[#b76e79]/20"
+                      className="absolute inset-0 rounded-full border border-accent/20"
                       initial={{ scale: 1, opacity: 0.4 }}
                       whileInView={{ scale: 1.8, opacity: 0 }}
                       viewport={{ once: true }}
@@ -83,12 +83,12 @@ const Timeline: React.FC = () => {
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${
                   index % 2 === 0 ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'
                 }`}>
-                  <div className="bg-[#fdfaf7] p-4 md:p-6 rounded-2xl border border-[#e6d5c3]/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500 group/card">
-                    <span className="font-sans text-[10px] md:text-sm tracking-[0.2em] text-[#b76e79] font-bold block mb-1 group-hover/card:tracking-[0.3em] transition-all duration-300">
+                  <div className="bg-primary p-4 md:p-6 rounded-2xl border border-secondary/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-500 group/card">
+                    <span className="font-sans text-[10px] md:text-sm tracking-[0.2em] text-accent font-bold block mb-1 group-hover/card:tracking-[0.3em] transition-all duration-300">
                       {item.time}
                     </span>
-                    <h3 className="font-serif text-lg md:text-xl text-[#2a2a2a] mb-1.5 md:mb-2">{item.title}</h3>
-                    <p className="font-sans text-[#4a4a4a] text-xs md:text-sm leading-relaxed text-pretty">
+                    <h3 className="font-serif text-lg md:text-xl text-text-title mb-1.5 md:mb-2">{item.title}</h3>
+                    <p className="font-sans text-text-main text-xs md:text-sm leading-relaxed text-pretty">
                       {item.description}
                     </p>
                   </div>

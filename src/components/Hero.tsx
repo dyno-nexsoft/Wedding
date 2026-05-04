@@ -7,7 +7,7 @@ import { CONFIG } from '../config';
 function SparkleParticle({ delay, x, y, size }: { delay: number; x: string; y: string; size: number }) {
   return (
     <motion.div
-      className="absolute rounded-full bg-[#b76e79]/30 pointer-events-none"
+      className="absolute rounded-full bg-accent/30 pointer-events-none"
       style={{ left: x, top: y, width: size, height: size }}
       animate={{
         opacity: [0, 0.8, 0],
@@ -49,7 +49,7 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="relative h-screen min-h-[600px] w-full flex items-center justify-center overflow-hidden bg-[#fdfaf7]"
+      className="relative h-screen min-h-[600px] w-full flex items-center justify-center overflow-hidden bg-primary"
     >
       {/* Optimized Background Image (LCP) */}
       <motion.img 
@@ -86,7 +86,7 @@ export default function Hero() {
           transition={{ duration: 1.5, delay: 1 }}
           className="mb-16 md:mb-24 text-center px-4"
         >
-          <p className="text-[10px] md:text-xs font-serif tracking-[0.6em] text-[#4a4a4a] uppercase font-bold whitespace-nowrap">
+          <p className="text-[10px] md:text-xs font-serif tracking-[0.6em] text-text-main uppercase font-bold whitespace-nowrap">
             TRÂN TRỌNG KÍNH MỜI
           </p>
         </motion.div>
@@ -108,7 +108,7 @@ export default function Hero() {
           className="relative w-full px-6 flex justify-center perspective-[1200px]"
         >
           {/* Subtle Glow Behind Card */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#b76e79]/5 blur-[80px] rounded-full z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/5 blur-[80px] rounded-full z-0" />
 
           {/* The Envelope */}
           <div className="relative w-full max-w-sm aspect-[4/3] bg-[#f9f7f5] rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.12)] overflow-hidden group z-10 hover:shadow-[0_25px_70px_rgba(183,110,121,0.15)] transition-shadow duration-700">
@@ -141,7 +141,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.8 }}
                 transition={{ duration: 1.2, delay: 2 }}
-                className="text-2xl sm:text-3xl md:text-4xl font-cursive text-[#2a2a2a] leading-tight text-center italic"
+                className="text-2xl sm:text-3xl md:text-4xl font-cursive text-text-title leading-tight text-center italic"
               >
                 {CONFIG.wedding.bride.firstName} & {CONFIG.wedding.groom.firstName}
               </motion.h1>
@@ -149,7 +149,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.6 }}
                 transition={{ duration: 1.2, delay: 2.2 }}
-                className="text-[10px] md:text-xs font-serif tracking-[0.5em] text-[#4a4a4a] mt-3 uppercase"
+                className="text-[10px] md:text-xs font-serif tracking-[0.5em] text-text-main mt-3 uppercase"
               >
                 {String(CONFIG.wedding.date.day).padStart(2, '0')}.{String(CONFIG.wedding.date.month).padStart(2, '0')}.{CONFIG.wedding.date.year}
               </motion.p>
@@ -164,15 +164,15 @@ export default function Hero() {
               >
                 <path 
                   d="M0 0 L50 48 L100 0 Z" 
-                  fill="#fdfaf7" 
-                  stroke="#e6d5c3" 
+                  fill="var(--color-primary)" 
+                  stroke="var(--color-secondary)" 
                   strokeWidth="0.2"
                 />
               </svg>
             </div>
 
             {/* Side Folds / Internal Borders */}
-            <div className="absolute inset-2 border border-[#e6d5c3]/40 z-10 pointer-events-none" />
+            <div className="absolute inset-2 border border-secondary/40 z-10 pointer-events-none" />
 
             {/* Green Wax Seal Clasp */}
             <div className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
@@ -184,7 +184,7 @@ export default function Hero() {
               >
                 {/* Pulsing glow behind wax seal */}
                 <motion.div
-                  className="absolute inset-[-4px] rounded-full bg-[#f4a261]/20 blur-md"
+                  className="absolute inset-[-4px] rounded-full bg-accent-warm/20 blur-md"
                   animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 />
@@ -217,7 +217,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-30"
         onClick={scrollToNext}
       >
-        <span className="text-[10px] uppercase tracking-[0.4em] text-[#b76e79] font-bold">Cuộn Xuống</span>
+        <span className="text-[10px] uppercase tracking-[0.4em] text-accent font-bold">Cuộn Xuống</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -225,11 +225,11 @@ export default function Hero() {
         >
           {/* Pulse ring behind chevron */}
           <motion.div
-            className="absolute inset-[-8px] rounded-full border border-[#b76e79]/20"
+            className="absolute inset-[-8px] rounded-full border border-accent/20"
             animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
           />
-          <ChevronDown className="w-5 h-5 text-[#b76e79]" />
+          <ChevronDown className="w-5 h-5 text-accent" />
         </motion.div>
       </motion.div>
     </section>

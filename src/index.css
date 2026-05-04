@@ -41,12 +41,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #fdfaf7; /* Cream background */
-  --color-secondary: #e6d5c3; /* Beige/Khaki */
-  --color-accent: #b76e79; /* Rose Gold / Pink */
-  --color-accent-warm: #f4a261; /* Sunset Orange */
-  --color-text-main: #5d4d4a; /* Warm dark stone */
-  --color-text-title: #3a2a28; /* Deep warm brown */
+  --color-primary: #fcf4f4; /* Light warm pink/white background */
+  --color-secondary: #f8e1e1; /* Soft pink/red */
+  --color-accent: #c91c22; /* Traditional Wedding Red */
+  --color-accent-warm: #d4af37; /* Wedding Gold */
+  --color-text-main: #4a1c1c; /* Dark warm red-brown for text */
+  --color-text-title: #a71920; /* Deep red for titles */
 
   --font-cursive: "Great Vibes", cursive;
   --font-serif: "Playfair Display", serif;
@@ -61,8 +61,8 @@
 
   body {
     position: relative;
-    background-color: #fdfaf7;
-    color: #5d4d4a;
+    background-color: var(--color-primary, #fcf4f4);
+    color: var(--color-text-main, #4a1c1c);
   }
 
   /* Custom Scrollbar */
@@ -70,14 +70,14 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #fffaf5;
+    background: #fff2f2;
   }
   ::-webkit-scrollbar-thumb {
-    background: #b76e79;
+    background: #c91c22;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #a35d68;
+    background: #a71920;
   }
 }
 
@@ -125,7 +125,7 @@
 
   .gold-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #b76e79/40, transparent);
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-accent) 40%, transparent), transparent);
     width: 60%;
     margin: 2rem auto;
     position: relative;
@@ -137,26 +137,26 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: #fdfaf7;
+    background: var(--color-primary);
     padding: 0 10px;
-    color: #b76e79;
+    color: var(--color-accent);
     font-size: 14px;
   }
 
   .tactile-card {
-    background-color: #fffaf7;
-    border: 1px solid #e6d5c3;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-secondary);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
   }
 
   .glass-card {
-    background: rgba(255, 250, 247, 0.6);
+    background: rgba(252, 244, 244, 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(230, 213, 195, 0.4);
-    box-shadow: 0 8px 32px rgba(183, 110, 121, 0.06);
+    border: 1px solid rgba(248, 225, 225, 0.4);
+    box-shadow: 0 8px 32px rgba(201, 28, 34, 0.06);
   }
 
   .section-divider {
@@ -174,15 +174,15 @@
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(201, 28, 34, 0.2), transparent);
   }
 
   .section-divider::after {
     content: "✦";
     position: relative;
-    background: #fdfaf7;
+    background: var(--color-primary);
     padding: 0 16px;
-    color: rgba(183, 110, 121, 0.3);
+    color: rgba(201, 28, 34, 0.3);
     font-size: 10px;
     letter-spacing: 0.5em;
   }

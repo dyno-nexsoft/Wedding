@@ -100,10 +100,10 @@ export const CONFIG = {
     title: "Trang Phục",
     description: "Để ngày chung đôi thêm phần trọn vẹn và những bức ảnh kỷ niệm thêm phần hài hòa, sẽ rất tuyệt vời nếu quý khách lựa chọn trang phục theo các tông màu gợi ý dưới đây:",
     colors: [
-      { name: "Beige", hex: "#E6D5C3" },
-      { name: "Kem", hex: "#FFFDD0" },
+      { name: "Đỏ Đô", hex: "#A71920" },
+      { name: "Đỏ Tươi", hex: "#C91C22" },
       { name: "Trắng", hex: "#FFFFFF" },
-      { name: "Nâu Trầm", hex: "#A38B75" }
+      { name: "Vàng Đồng", hex: "#D4AF37" }
     ]
   }
 };
